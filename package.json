@@ -21,15 +21,18 @@
     "registry": "http://npm.finntech.no/"
   },
   "dependencies": {
-    "@podium/podlet-client": "^1.2.0",
-    "express": "^4.16.2"
+    "@podium/podlet-client": "^1.2.0"
   },
   "devDependencies": {
     "eslint": "^4.14.0",
     "eslint-config-finn": "^3.0.0",
     "eslint-config-finn-prettier": "^3.0.1",
     "jest": "^22.0.4",
-    "prettier": "1.9.2"
+    "prettier": "1.9.2",
+    "express": "^4.16.2",
+    "hbs": "^4.0.1",
+    "@finn-no/fiaas-logger": "^1.4.4",
+    "prom-client": "^10.2.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
