@@ -1,6 +1,6 @@
 {
   "name": "@podium/layout",
-  "version": "1.0.0",
+  "version": "2.0.0-beta.1",
   "main": "lib/layout.js",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
@@ -21,7 +21,8 @@
     "registry": "http://npm.finntech.no/"
   },
   "dependencies": {
-    "@podium/podlet-client": "^1.2.0"
+    "@podium/podlet-client": "^2.0.0-beta.2",
+    "@podium/context": "^2.0.0-beta.2"
   },
   "devDependencies": {
     "eslint": "^4.14.0",
@@ -30,9 +31,7 @@
     "jest": "^22.0.4",
     "prettier": "1.9.2",
     "express": "^4.16.2",
-    "hbs": "^4.0.1",
-    "@finn-no/fiaas-logger": "^1.4.4",
-    "prom-client": "^10.2.2"
+    "hbs": "^4.0.1"
   },
   "jest": {
     "coveragePathIgnorePatterns": [

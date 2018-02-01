@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    {{#each css}}
+        <link href="{{this}}" media="all" rel="stylesheet" />
+    {{/each}}
+    <title>{{podlets.title}}</title>
+</head>
+<body>
+
+{{{podlets.example}}}
+
+{{#each js}}
+    <script src="{{this}}"></script>
+{{/each}}
+</body>
+</html>
