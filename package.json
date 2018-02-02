@@ -21,7 +21,7 @@
     "registry": "http://npm.finntech.no/"
   },
   "dependencies": {
-    "@podium/podlet-client": "^2.0.0-beta.2",
+    "@podium/podlet-client": "^2.0.0-beta.3",
     "@podium/context": "^2.0.0-beta.2"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
     "eslint-config-finn": "^3.0.0",
     "eslint-config-finn-prettier": "^3.0.1",
     "jest": "^22.0.4",
-    "prettier": "1.9.2",
+    "prettier": "1.10.2",
     "express": "^4.16.2",
     "hbs": "^4.0.1"
   },
