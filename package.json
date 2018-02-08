@@ -22,13 +22,13 @@
   },
   "dependencies": {
     "@podium/podlet-client": "^2.0.0-beta.3",
-    "@podium/context": "^2.0.0-beta.2"
+    "@podium/context": "^2.0.0-beta.3"
   },
   "devDependencies": {
-    "eslint": "^4.14.0",
+    "eslint": "^4.17.0",
     "eslint-config-finn": "^3.0.0",
     "eslint-config-finn-prettier": "^3.0.1",
-    "jest": "^22.0.4",
+    "jest": "^22.2.1",
     "prettier": "1.10.2",
     "express": "^4.16.2",
     "hbs": "^4.0.1"

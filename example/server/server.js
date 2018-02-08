@@ -10,7 +10,7 @@ const layout = new Layout('demo', {
 
 const example = layout.client.register({
     name: 'example',
-    uri: 'http://localhost:8000/manifest.json',
+    uri: 'http://localhost:7100/manifest.json',
     throwable: true,
 });
 
@@ -22,13 +22,13 @@ app.set('views', path.resolve(__dirname, './views/'));
 app.use(layout.middleware());
 
 app.get('/', (req, res, next) => {
-    const ctx = res.podium.context;
+    const ctx = res.locals.podium.context;
     Promise
         .all([
             example.fetch(ctx),
         ])
         .then((result) => {
-            res.locals.content = {
+            res.locals = {
                 title: 'Podium - Layout',
                 podlets: {
                     example: result[0],
@@ -39,9 +39,9 @@ app.get('/', (req, res, next) => {
             next(error);
         });
 }, (req, res) => {
-    res.locals.content.css = layout.client.css();
-    res.locals.content.js = layout.client.js();
-    res.status(200).render('layout', res.locals.content);
+    res.locals.css = layout.client.css();
+    res.locals.js = layout.client.js();
+    res.status(200).render('layout', res.locals);
 });
 
 app.use((error, req, res, next) => {
