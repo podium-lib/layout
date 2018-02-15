@@ -23,7 +23,9 @@
   "dependencies": {
     "@podium/podlet-client": "^2.0.0-beta.5",
     "@podium/context": "^2.0.0-beta.3",
-    "@podium/proxy": "^2.0.0-beta.3"
+    "@podium/metrics": "^1.0.0",
+    "@podium/proxy": "^2.0.0-beta.3",
+    "readable-stream": "^2.3.4"
   },
   "devDependencies": {
     "eslint": "^4.18.0",
