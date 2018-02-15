@@ -3,7 +3,7 @@
 const express = require('express');
 const Layout = require('../../');
 const path = require('path');
-
+const http = require('http');
 const layout = new Layout('demo', {
     logger: console
 });
@@ -22,6 +22,9 @@ app.set('views', path.resolve(__dirname, './views/'));
 app.use(layout.middleware());
 
 app.get('/', (req, res, next) => {
+    console.log('res', res instanceof(http.ServerResponse));
+    console.log('req', req instanceof(http.ServerResponse));
+
     const ctx = res.locals.podium.context;
     Promise
         .all([
