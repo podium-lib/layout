@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link href="assets/grid.css" media="all" rel="stylesheet" />
     {{#each css}}
         <link href="{{this}}" media="all" rel="stylesheet" />
     {{/each}}
@@ -11,10 +12,30 @@
 </head>
 <body>
 
-{{{podlets.example}}}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            header
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            Left
+        </div>
+        <div class="col-8">
+            Right
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{{podlets.example}}}
+        </div>
+    </div>
+</div>
 
 {{#each js}}
     <script src="{{this}}"></script>
 {{/each}}
+
 </body>
 </html>

@@ -22,9 +22,6 @@ app.set('views', path.resolve(__dirname, './views/'));
 app.use(layout.middleware());
 
 app.get('/', (req, res, next) => {
-    console.log('res', res instanceof(http.ServerResponse));
-    console.log('req', req instanceof(http.ServerResponse));
-
     const ctx = res.locals.podium.context;
     Promise
         .all([
@@ -46,6 +43,8 @@ app.get('/', (req, res, next) => {
     res.locals.js = layout.client.js();
     res.status(200).render('layout', res.locals);
 });
+
+app.use('/assets', express.static('assets'));
 
 app.use((error, req, res, next) => {
     console.error(error);
