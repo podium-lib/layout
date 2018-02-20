@@ -8,10 +8,25 @@ const layout = new Layout('demo', {
     logger: console
 });
 
-const example = layout.client.register({
-    name: 'example',
+const content = layout.client.register({
+    name: 'content',
     uri: 'http://localhost:7100/manifest.json',
-    throwable: true,
+    // throwable: true,
+});
+
+const header = layout.client.register({
+    name: 'header',
+    uri: 'http://localhost:7200/header/manifest.json'
+});
+
+const menu = layout.client.register({
+    name: 'menu',
+    uri: 'http://localhost:7200/menu/manifest.json'
+});
+
+const footer = layout.client.register({
+    name: 'footer',
+    uri: 'http://localhost:7200/footer/manifest.json'
 });
 
 const app = express();
@@ -19,19 +34,32 @@ const app = express();
 app.set('view engine', 'hbs');
 app.set('views', path.resolve(__dirname, './views/'));
 
+/*
+app.use((req, res, next) => {
+    res.locals.locale = 'nb-NO';
+    next();
+});
+*/
+
 app.use(layout.middleware());
 
 app.get('/', (req, res, next) => {
     const ctx = res.locals.podium.context;
     Promise
         .all([
-            example.fetch(ctx),
+            content.fetch(ctx),
+            header.fetch(ctx),
+            menu.fetch(ctx),
+            footer.fetch(ctx),
         ])
         .then((result) => {
             res.locals = {
                 title: 'Podium - Layout',
                 podlets: {
-                    example: result[0],
+                    content: result[0],
+                    header: result[1],
+                    menu: result[2],
+                    footer: result[3],
                 }
             };
             next();
