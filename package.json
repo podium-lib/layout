@@ -32,8 +32,8 @@
     "eslint-config-finn": "^3.0.0",
     "eslint-config-finn-prettier": "^3.0.1",
     "jest": "^22.4.2",
-    "prettier": "1.10.2",
-    "express": "^4.16.2",
+    "prettier": "^1.11.1",
+    "express": "^4.16.3",
     "hbs": "^4.0.1",
     "brakes": "^2.6.0",
     "prom-client": "^10.2.2"
