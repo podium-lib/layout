@@ -24,7 +24,7 @@
     "@podium/context": "^2.0.0-beta.5",
     "@podium/metrics": "^2.0.0",
     "@podium/podlet-client": "^2.0.0-beta.7",
-    "@podium/proxy": "^2.0.0-beta.3",
+    "@podium/proxy": "^2.0.0-beta.4",
     "readable-stream": "^2.3.4"
   },
   "devDependencies": {
@@ -36,7 +36,8 @@
     "express": "^4.16.3",
     "hbs": "^4.0.1",
     "brakes": "^2.6.0",
-    "prom-client": "^10.2.2"
+    "prom-client": "^10.2.2",
+    "brakes-prometheus": "^0.2.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
