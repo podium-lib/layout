@@ -23,7 +23,7 @@
   "dependencies": {
     "@podium/context": "^2.0.0-beta.5",
     "@podium/metrics": "^2.0.0",
-    "@podium/podlet-client": "^2.0.0-beta.7",
+    "@podium/podlet-client": "^2.0.0-beta.8",
     "@podium/proxy": "^2.0.0-beta.4",
     "readable-stream": "^2.3.4"
   },
