@@ -8,6 +8,9 @@
     {{#each css}}
         <link href="{{this}}" media="all" rel="stylesheet" />
     {{/each}}
+    {{#each js}}
+        <script src="{{this}}"></script>
+    {{/each}}
     <title>{{title}}</title>
 </head>
 <body>
@@ -32,10 +35,6 @@
         </div>
     </div>
 </div>
-
-{{#each js}}
-    <script src="{{this}}"></script>
-{{/each}}
 
 </body>
 </html>

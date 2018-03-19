@@ -12,21 +12,25 @@ const content = layout.client.register({
     name: 'content',
     uri: 'http://localhost:7100/manifest.json',
     // throwable: true,
+    resolveCss: true,
 });
 
 const header = layout.client.register({
     name: 'header',
-    uri: 'http://localhost:7200/header/manifest.json'
+    uri: 'http://localhost:7200/header/manifest.json',
+    resolveCss: true,
 });
 
 const menu = layout.client.register({
     name: 'menu',
-    uri: 'http://localhost:7200/menu/manifest.json'
+    uri: 'http://localhost:7200/menu/manifest.json',
+    resolveCss: true,
 });
 
 const footer = layout.client.register({
     name: 'footer',
-    uri: 'http://localhost:7200/footer/manifest.json'
+    uri: 'http://localhost:7200/footer/manifest.json',
+    resolveCss: true,
 });
 
 const app = express();
