@@ -24,7 +24,7 @@
     "@podium/context": "^2.0.0-beta.7",
     "@podium/metrics": "^3.0.1",
     "@podium/podlet-client": "^2.0.0-beta.14",
-    "@podium/proxy": "^2.1.0-beta.8",
+    "@podium/proxy": "^2.1.0-beta.9",
     "readable-stream": "^2.3.6"
   },
   "devDependencies": {
