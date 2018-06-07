@@ -1,6 +1,6 @@
 {
   "name": "@podium/layout",
-  "version": "2.0.0-beta.15",
+  "version": "2.0.0-beta.16",
   "main": "lib/layout.js",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
@@ -21,10 +21,10 @@
     "registry": "http://npm.finntech.no/"
   },
   "dependencies": {
-    "@podium/context": "^2.0.0-beta.7",
-    "@podium/metrics": "^3.0.1",
-    "@podium/podlet-client": "^2.0.0-beta.14",
-    "@podium/proxy": "^2.1.0-beta.9",
+    "@podium/context": "2.0.0-beta.7",
+    "@podium/metrics": "3.0.1",
+    "@podium/podlet-client": "2.0.0-beta.14",
+    "@podium/proxy": "2.1.0-beta.9",
     "readable-stream": "^2.3.6"
   },
   "devDependencies": {
