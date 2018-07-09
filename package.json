@@ -25,6 +25,7 @@
     "@podium/context": "2.0.0",
     "@podium/metrics": "3.0.1",
     "@podium/proxy": "2.1.0",
+    "abslog": "^2.0.0",
     "readable-stream": "^2.3.6"
   },
   "devDependencies": {
