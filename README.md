@@ -19,7 +19,7 @@ Build a simple Layout server with Express including one podlet:
 const express = require('express');
 const Layout = require('@podium/layout');
 
-const layout = new Layout('my-layout');
+const layout = new Layout({ name: 'myLayout' });
 const podlet = layout.client.register({
     name: 'myPodlet',
     uri: 'http://localhost:7100/manifest.json',
@@ -90,3 +90,30 @@ const layout = new Layout({
 Under the hood [abslog](https://github.com/trygve-lie/abslog) is used to
 abstract out logging. Please see [abslog](https://github.com/trygve-lie/abslog)
 for further details.
+
+
+## API
+
+The Layout instance has the following API:
+
+
+### .middleware()
+
+A connect compatible middleware which takes care of multiple operations needed for
+a Layout to fully work.
+
+It does:
+
+ * Runs [context parsers](https://github.schibsted.io/Podium/context) on incomming requests and creates a  object on the `res.locals.podium.context` which can be passed on to the client requesting content from each podlet.
+ * Mounts the [proxy](https://github.schibsted.io/Podium/proxy) so each podlet can do transparent proxy requests if needed.
+
+This middleware should be mounted before defining any routes.
+
+Example
+
+```js
+const app = express();
+app.use(layout.middleware());
+```
+
+Returns an Array of internal middleware performing the tasks described above.
