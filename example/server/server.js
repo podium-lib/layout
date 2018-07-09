@@ -4,8 +4,9 @@ const express = require('express');
 const Layout = require('../../');
 const path = require('path');
 const http = require('http');
-const layout = new Layout('demo', {
-    logger: console
+const layout = new Layout({
+    logger: console,
+    name: 'demo',
 });
 
 const content = layout.client.register({
