@@ -6,7 +6,7 @@ const PodiumLayout = require('../../');
 const CustomLayout = class CustomLayout extends PodiumLayout {
     constructor(name) {
         super(name, {
-            logger: console
+            logger: console,
         });
 
         this.context.register('custom', new CustomContext());
@@ -15,6 +15,6 @@ const CustomLayout = class CustomLayout extends PodiumLayout {
     get [Symbol.toStringTag]() {
         return 'CustomLayout';
     }
-}
+};
 
 module.exports = CustomLayout;
