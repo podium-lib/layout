@@ -57,10 +57,12 @@ const layout = new Layout(options);
 
 ### options
 
-| option         | default   | type     | required |
-| -------------- | --------- | -------- | -------- |
-| name           | `null`    | `string` | `true`   |
-| logger         | `console` | `object` | `false`  |
+| option         | default   | type     | required | details                                                |
+| -------------- | --------- | -------- | -------- | ------------------------------------------------------ |
+| name           | `null`    | `string` | `true`   | Name that the layout identifies itself by              |
+| pathname       | `/`       | `string` | `false`  | Pathname of where a Layout is mounted in a http server |
+| logger         | `null`    | `object` | `false`  | A logger which conform to a log4j interface            |
+
 
 #### name
 
