@@ -46,7 +46,6 @@ app.listen(7000);
 ```
 
 
-
 ## Constructor
 
 Create a new Layout instance.
@@ -72,7 +71,50 @@ Example
 
 ```js
 const layout = new Layout({
-    name: 'myLayoutName';
+    name: 'myLayoutName',
+});
+```
+
+#### pathname
+
+Pathname of where a Layout is mounted in a http server. It is important that
+this value match with where the entry point of a route are in a http server
+since this value is used to mount the proxy and tell podlets, through the
+context, where they are mounted and where the proxy is mounted.
+
+The default value for `pathname` is `/` so if the layout is mounted on "root",
+this is perfectly fine:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+});
+
+app.use(layout.middleware());
+
+app.get('/', (req, res, next) => {
+    [ ... ]
+});
+```
+
+But if the layout is mouned on ex `/foo` one should do like this:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/foo',
+});
+
+app.use('/foo', layout.middleware());
+
+app.get('/foo', (req, res, next) => {
+    [ ... ]
+});
+
+app.get('/foo/:id', (req, res, next) => {
+    [ ... ]
 });
 ```
 
@@ -85,7 +127,8 @@ Example
 
 ```js
 const layout = new Layout({
-    logger: console;
+    name: 'myLayout',
+    logger: console,
 });
 ```
 
