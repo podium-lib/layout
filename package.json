@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@podium/client": "2.2.0",
-    "@podium/context": "2.2.0",
+    "@podium/context": "2.2.1",
     "@podium/metrics": "3.0.1",
     "@podium/proxy": "2.2.0",
     "@podium/schemas": "2.1.1",
