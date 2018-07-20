@@ -5,11 +5,11 @@
 Module for building a Layout server. A Layout server is mainly responsible for fetching html content
 from podlets and stiching these into a layout which form and renders a full web page.
 
-To do so a Layout instance provide a three core features:
+To do so a Layout instance provides three core features:
 
- * It provides the @podium/client to fetch content from podlets
- * It provides the @podium/context to set request bound information on the requests from the layout to podlets when fetching their content
- * It provides @podium/proxy making it possible to publicly expose data endpoints in a podlet or in any backend service
+ * `@podium/client` used to fetch content from podlets
+ * `@podium/context` used to set request bound information on the requests from the layout to podlets when fetching their content
+ * `@podium/proxy` making it possible to publicly expose data endpoints in a podlet or in any backend service
 
 A Layout can be used together with any connect middleware compatible http framework, like Express.js,
 and any templating language of your choice.
@@ -44,9 +44,10 @@ const app = express();
 app.use(layout.middleware());
 
 app.get('/', (req, res, next) => {
+    const ctx = res.locals.podium.context;
     Promise
         .all([
-            podlet.fetch(),
+            podlet.fetch(ctx),
         ])
         .then((result) => {
             res.status(200).send(`
@@ -290,7 +291,7 @@ const podlet = layout.client.register({
     uri: 'http://localhost:7100/manifest.json',
 });
 
-podlet.fetch().then(result => {
+podlet.fetch({}).then(result => {
     console.log(result);
 })
 ```
