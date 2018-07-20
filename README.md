@@ -138,7 +138,7 @@ app.get('/foo/:id', (req, res, next) => {
 
 There is also a helper method for retrieving the set `pathname` which can
 be used to get the pathname from the Layout object when defining routes.
-See XXXXXXXXXXXXXXX for further details.
+See [`.pathname()`](#pathname-1) for further details.
 
 #### logger
 
