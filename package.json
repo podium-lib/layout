@@ -1,6 +1,6 @@
 {
   "name": "@podium/layout",
-  "version": "2.3.0",
+  "version": "2.4.1",
   "main": "lib/layout.js",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
@@ -22,9 +22,13 @@
   },
   "dependencies": {
     "@podium/client": "2.2.0",
-    "@podium/context": "2.0.0",
+    "@podium/context": "2.2.1",
     "@podium/metrics": "3.0.1",
-    "@podium/proxy": "2.1.0",
+    "@podium/proxy": "2.2.0",
+    "@podium/schemas": "2.1.1",
+    "abslog": "^2.0.0",
+    "joi": "^13.4.0",
+    "lodash.merge": "^4.6.1",
     "readable-stream": "^2.3.6"
   },
   "devDependencies": {
