@@ -1,6 +1,6 @@
 {
   "name": "@podium/layout",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "main": "lib/layout.js",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
