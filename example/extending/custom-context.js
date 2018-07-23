@@ -5,7 +5,7 @@ const CustomContextParser = class CustomContextParser {
         return 'CustomContextParser';
     }
 
-    parse(req) {
+    parse() {
         return new Promise(resolve => {
             resolve('custom-context-value');
         });

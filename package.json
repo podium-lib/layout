@@ -32,7 +32,7 @@
     "readable-stream": "^2.3.6"
   },
   "devDependencies": {
-    "eslint": "^5.0.1",
+    "eslint": "^5.2.0",
     "eslint-config-finn": "^3.0.0",
     "eslint-config-finn-prettier": "^3.0.1",
     "express": "^4.16.3",
