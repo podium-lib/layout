@@ -21,24 +21,24 @@
     "registry": "http://npm.finntech.no/"
   },
   "dependencies": {
-    "@podium/client": "2.2.0",
-    "@podium/context": "2.2.1",
+    "@podium/client": "2.2.1",
+    "@podium/context": "2.2.2",
     "@podium/metrics": "3.0.1",
     "@podium/proxy": "2.2.0",
     "@podium/schemas": "2.1.1",
-    "abslog": "^2.0.0",
-    "joi": "^13.4.0",
+    "abslog": "^2.2.0",
+    "joi": "^13.6.0",
     "lodash.merge": "^4.6.1",
-    "readable-stream": "^2.3.6"
+    "readable-stream": "^3.0.3"
   },
   "devDependencies": {
-    "eslint": "^5.2.0",
-    "eslint-config-finn": "^3.0.0",
-    "eslint-config-finn-prettier": "^3.0.1",
+    "eslint": "^5.5.0",
+    "eslint-config-finn": "^3.0.1",
+    "eslint-config-finn-prettier": "^3.0.2",
     "express": "^4.16.3",
     "hbs": "^4.0.1",
-    "jest": "^23.2.0",
-    "prettier": "^1.13.7"
+    "jest": "^23.6.0",
+    "prettier": "^1.14.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
