@@ -24,7 +24,7 @@
     "@podium/client": "2.2.1",
     "@podium/context": "2.2.2",
     "@podium/metrics": "3.0.1",
-    "@podium/proxy": "2.2.0",
+    "@podium/proxy": "2.3.0",
     "@podium/schemas": "2.1.1",
     "abslog": "^2.2.0",
     "joi": "^13.6.0",
