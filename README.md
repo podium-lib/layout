@@ -2,29 +2,27 @@
 
 [![Build Status](https://travis.schibsted.io/Podium/layout.svg?token=qt273uGfEz64UyWuNHJ1&branch=master)](https://travis.schibsted.io/Podium/layout)
 
-Module for building a Layout server. A Layout server is mainly responsible for fetching html content
-from podlets and stiching these into a layout which form and renders a full web page.
+Module for building a Layout server. A Layout server is mainly responsible for fetching HTML content
+from podlets and stitching these fragments into an full HTML page (called a layout in Podium speak).
 
-To do so a Layout instance provides three core features:
+To do this, a Layout instance provides three core features:
 
- * `@podium/client` used to fetch content from podlets
- * `@podium/context` used to set request bound information on the requests from the layout to podlets when fetching their content
- * `@podium/proxy` making it possible to publicly expose data endpoints in a podlet or in any backend service
+-   `@podium/client` used to fetch content from podlets
+-   `@podium/context` used to set request bound information on the requests from the layout to podlets when fetching their content
+-   `@podium/proxy` makes it possible to publicly expose data endpoints in a podlet or in any backend service
 
-A Layout can be used together with any connect middleware compatible http framework, like Express.js,
-and any templating language of your choice.
-
+A Layout can be used together with any connect middleware compatible HTTP framework (eg. Express.js)
+and any templating language of your choosing (or none if you prefer).
 
 ## Installation
 
 ```bash
-$ npm i @podium/layout
+$ npm install @podium/layout
 ```
-
 
 ## Simple usage
 
-Build a simple Layout server with Express including one podlet:
+Build a simple Layout server with a single podlet using Express js
 
 ```js
 const express = require('express');
@@ -32,7 +30,7 @@ const Layout = require('@podium/layout');
 
 const layout = new Layout({
     name: 'myLayout',
-    pathname: '/'
+    pathname: '/',
 });
 
 const podlet = layout.client.register({
@@ -45,22 +43,17 @@ app.use(layout.middleware());
 
 app.get('/', (req, res, next) => {
     const ctx = res.locals.podium.context;
-    Promise
-        .all([
-            podlet.fetch(ctx),
-        ])
-        .then((result) => {
-            res.status(200).send(`
+    Promise.all([podlet.fetch(ctx)]).then(result => {
+        res.status(200).send(`
                 <html><body>
                     <section>${result[0]}</section>
                 </body></html>
             `);
-        });
+    });
 });
 
 app.listen(7000);
 ```
-
 
 ## Constructor
 
@@ -72,18 +65,18 @@ const layout = new Layout(options);
 
 ### options
 
-| option         | default   | type     | required | details                                                             |
-| -------------- | --------- | -------- | -------- | ------------------------------------------------------------------- |
-| name           | `null`    | `string` | `true`   | Name that the layout identifies itself by                           |
-| pathname       | `null`    | `string` | `true`   | Pathname of where a Layout is mounted in a http server              |
-| logger         | `null`    | `object` | `false`  | A logger which conform to a log4j interface                         |
-| context        | `null`    | `object` | `false`  | Options to be passed on to the internal @podium/context constructor |
-| client         | `null`    | `object` | `false`  | Options to be passed on to the internal @podium/cleint constructor  |
-| proxy          | `null`    | `object` | `false`  | Options to be passed on to the internal @podium/proxy constructor   |
+| option   | default | type     | required | details                                                             |
+| -------- | ------- | -------- | -------- | ------------------------------------------------------------------- |
+| name     | `null`  | `string` | `true`   | Name that the layout identifies itself by                           |
+| pathname | `null`  | `string` | `true`   | Pathname of where a Layout is mounted in a http server              |
+| logger   | `null`  | `object` | `false`  | A logger which conform to a log4j interface                         |
+| context  | `null`  | `object` | `false`  | Options to be passed on to the internal @podium/context constructor |
+| client   | `null`  | `object` | `false`  | Options to be passed on to the internal @podium/client constructor  |
+| proxy    | `null`  | `object` | `false`  | Options to be passed on to the internal @podium/proxy constructor   |
 
 #### name
 
-Name that the layout identifies itself by. The name value must be in camelCase
+Name that the layout identifies itself by. The name value must be in camelCase.
 
 Example:
 
@@ -96,12 +89,10 @@ const layout = new Layout({
 
 #### pathname
 
-Pathname of where a Layout is mounted in a http server. It is important that
-this value match with where the entry point of a route are in a http server
-since this value is used to mount the proxy and tell podlets, through the
-context, where they are mounted and where the proxy is mounted.
+The Pathname of where the Layout is mounted into the HTTP server. It is important that this value matches where the entry point of a route is in the HTTP server
+since this value is used to mount the proxy and tell podlets (through the context) where they are mounted and where the proxy is mounted.
 
-If the layout is mounted on "root", set `pathname` to `/`:
+If the layout is mounted at the server "root", set `pathname` to `/`:
 
 ```js
 const app = express();
@@ -117,7 +108,7 @@ app.get('/', (req, res, next) => {
 });
 ```
 
-If the layout is mouned on ex `/foo` one should do like this:
+If the layout is mouned at `/foo`, set pathname to `/foo` and mount middleware and routes at or under `/foo`
 
 ```js
 const app = express();
@@ -164,8 +155,8 @@ for further details.
 
 Options to be passed on to the internal @podium/context constructor.
 
-Please see [@podium/context constructor](https://github.schibsted.io/Podium/context#constructor)
-for which options which can be set.
+Please see the [@podium/context constructor](https://github.schibsted.io/Podium/context#constructor)
+for which options can be set.
 
 Example of setting the `debug` context to default `true`:
 
@@ -175,9 +166,9 @@ const layout = new Layout({
     pathname: '/foo',
     context: {
         debug: {
-            enabled: true
-        }
-    }
+            enabled: true,
+        },
+    },
 });
 ```
 
@@ -196,7 +187,7 @@ const layout = new Layout({
     pathname: '/foo',
     client: {
         retries: 6,
-    }
+    },
 });
 ```
 
@@ -215,7 +206,7 @@ const layout = new Layout({
     pathname: '/foo',
     proxy: {
         timeout: 30000,
-    }
+    },
 });
 ```
 
@@ -223,16 +214,15 @@ const layout = new Layout({
 
 The Layout instance has the following API:
 
-
 ### .middleware()
 
 A connect compatible middleware which takes care of multiple operations needed for
 a Layout to fully work.
 
-It does:
+What it does:
 
- * Runs [context parsers](https://github.schibsted.io/Podium/context) on incomming requests and creates a object on the `res.locals.podium.context` which can be passed on to the client requesting content from each podlet.
- * Mounts the [proxy](https://github.schibsted.io/Podium/proxy) so each podlet can do transparent proxy requests if needed.
+-   Runs [context parsers](https://github.schibsted.io/Podium/context) on incomming requests and creates an object on the response at `res.locals.podium.context` which can be passed on to the client when requesting content from podlets.
+-   Mounts the [proxy](https://github.schibsted.io/Podium/proxy) so that each podlet can do transparent proxy requests if needed.
 
 This middleware should be mounted before defining any routes.
 
@@ -245,12 +235,11 @@ app.use(layout.middleware());
 
 Returns an Array of internal middleware performing the tasks described above.
 
-
 ### .pathname()
 
 A helper method to retrieve the `pathname` set on the constructor. This can be
-handy to use in defining routes since the `pathname` set on the constructor
-must match what one define as root in each route in a http router.
+handy to use in defining routes since the `pathname` set in the constructor
+must match whatever is defined as root in each route in a HTTP router.
 
 Example:
 
@@ -275,7 +264,7 @@ app.get(`${layout.pathname()}/bar/:id`, (req, res, next) => {
 
 ### .client
 
-Property that exposes an instance of the @podium/client for fetching content
+A property that exposes an instance of the @podium/client for fetching content
 from podlets.
 
 Example of registering a podlet and fetching it:
@@ -283,7 +272,7 @@ Example of registering a podlet and fetching it:
 ```js
 const layout = new Layout({
     name: 'myLayout',
-    pathname: '/'
+    pathname: '/',
 });
 
 const podlet = layout.client.register({
@@ -293,16 +282,15 @@ const podlet = layout.client.register({
 
 podlet.fetch({}).then(result => {
     console.log(result);
-})
+});
 ```
 
 Please see the [@podium/client module](https://github.schibsted.io/Podium/client)
 for full documentation.
 
-
 ### .context
 
-Property that exposes an instance of the @podium/context used to create a
+A property that exposes an instance of the @podium/context used to create a
 context.
 
 Example of registering a custom third party context parser to the context:
@@ -312,7 +300,7 @@ const Parser = require('my-custom-parser');
 
 const layout = new Layout({
     name: 'myLayout',
-    pathname: '/'
+    pathname: '/',
 });
 
 layout.context.register('customParser', new Parser('someConfig'));
@@ -321,11 +309,9 @@ layout.context.register('customParser', new Parser('someConfig'));
 Please see the [@podium/context module](https://github.schibsted.io/Podium/context)
 for full documentation.
 
-
 ### .metrics
 
-Property that exposes an metric stream. This stream does join all
-internal metrics streams into one stream resulting in all metrics
+Property that exposes a metric stream. This stream joins all internal metrics streams into one stream resulting in all metrics
 from all sub modules being exposed here.
 
 Please see the [@podium/metrics module](https://github.schibsted.io/Podium/metrics)
