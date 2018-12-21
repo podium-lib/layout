@@ -84,6 +84,7 @@ app.get(
 
 app.use(`${layout.pathname()}/assets`, express.static('assets'));
 
+// eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {
     console.error(error);
     res.status(500).send(
