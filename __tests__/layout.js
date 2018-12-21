@@ -105,6 +105,7 @@ test('Layout() - metrics properly decorated', async done => {
         name: 'myLayout',
         pathname: '/',
     });
+    expect(layout.pathname()).toBe('/');
 
     app.use(layout.middleware());
 
