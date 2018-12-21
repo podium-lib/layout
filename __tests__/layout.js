@@ -1,6 +1,29 @@
 'use strict';
 
+const Podlet = require('@podium/podlet');
+const stoppable = require('stoppable');
 const Layout = require('../');
+const express = require('express');
+const request = require('supertest');
+const stream = require('readable-stream');
+
+const destObjectStream = done => {
+    const arr = [];
+
+    const dStream = new stream.Writable({
+        objectMode: true,
+        write(chunk, encoding, callback) {
+            arr.push(chunk);
+            callback();
+        },
+    });
+
+    dStream.on('finish', () => {
+        done(arr);
+    });
+
+    return dStream;
+};
 
 /**
  * Constructor
@@ -52,4 +75,64 @@ test('Layout() - invalid value given to "name" argument - should throw', () => {
     }).toThrowError(
         'The value, "foo bar", for the required argument "pathname" on the Layout constructor is not defined or not valid.'
     );
+});
+
+test('Layout() - metrics properly decorated', async done => {
+    expect.hasAssertions();
+
+    // podlet
+    const podletApp = express();
+
+    const podlet = new Podlet({
+        name: 'myPodlet',
+        version: '1.0.0',
+        pathname: '/',
+        development: false,
+    });
+    podletApp.use(podlet.middleware());
+    podletApp.get('/manifest.json', (req, res) => {
+        res.send(podlet);
+    });
+    podletApp.get('/', (req, res) => {
+        res.send('this is podlet content');
+    });
+    const s1 = stoppable(podletApp.listen(4002), 0);
+
+    // layout
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    app.use(layout.middleware());
+
+    const podletClient = layout.client.register({
+        uri: 'http://localhost:4002/manifest.json',
+        name: 'myPodlet',
+    });
+
+    app.get('/', async (req, res) => {
+        const response = await podletClient.fetch(res.locals.podium.context);
+        res.send(response);
+    });
+
+    layout.metrics.pipe(
+        destObjectStream(arr => {
+            expect(arr[0].meta.layout).toBe('myLayout');
+            expect(arr[0].meta.podlet).toBe('myPodlet');
+            done();
+        })
+    );
+
+    const s2 = stoppable(app.listen(4001), 0);
+
+    const result = await request('http://localhost:4001').get('/');
+
+    expect(result.text).toBe('this is podlet content');
+
+    layout.metrics.push(null);
+    s1.stop();
+    s2.stop();
 });

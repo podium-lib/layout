@@ -24,6 +24,7 @@
     "@podium/client": "2.2.2",
     "@podium/context": "2.2.2",
     "@podium/metrics": "3.0.1",
+    "@podium/podlet": "^3.0.0-alpha.2",
     "@podium/proxy": "2.3.0",
     "@podium/schemas": "2.1.1",
     "abslog": "^2.2.3",
@@ -38,7 +39,9 @@
     "express": "^4.16.4",
     "hbs": "^4.0.1",
     "jest": "^23.6.0",
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "stoppable": "^1.1.0",
+    "supertest": "^3.3.0"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
