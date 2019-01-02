@@ -25,15 +25,15 @@
     "@podium/context": "2.2.2",
     "@podium/metrics": "3.0.1",
     "@podium/podlet": "^3.0.0-alpha.2",
-    "@podium/proxy": "2.3.0",
+    "@podium/proxy": "2.4.0",
     "@podium/schemas": "2.1.1",
     "abslog": "^2.2.3",
-    "joi": "^14.3.0",
+    "joi": "^14.3.1",
     "lodash.merge": "^4.6.1",
-    "readable-stream": "^3.0.3"
+    "readable-stream": "^3.1.1"
   },
   "devDependencies": {
-    "eslint": "^5.5.0",
+    "eslint": "^5.11.1",
     "eslint-config-finn": "^3.0.1",
     "eslint-config-finn-prettier": "^3.0.2",
     "express": "^4.16.4",
