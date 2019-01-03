@@ -12,6 +12,7 @@ The latest version of this document is always available in [releases][releases-u
 -   Fixes to @podium/client fallback metrics (updated to 2.2.3)
 -   Updated readable stream to 3.1.1
 -   Updated joi to 14.3.1
+-   Replaced @podium/metrics with @metrics/client@2.2.0
 
 ## [2.4.5] - 2018-12-21
 

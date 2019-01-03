@@ -21,9 +21,9 @@
     "registry": "http://npm.finntech.no/"
   },
   "dependencies": {
+    "@metrics/client": "^2.2.0",
     "@podium/client": "^2.2.3",
     "@podium/context": "2.2.2",
-    "@podium/metrics": "3.0.1",
     "@podium/podlet": "^3.0.0-alpha.2",
     "@podium/proxy": "2.4.0",
     "@podium/schemas": "2.1.1",
