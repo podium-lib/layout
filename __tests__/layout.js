@@ -96,6 +96,11 @@ test('Layout() - metrics properly decorated', async done => {
     podletApp.get('/', (req, res) => {
         res.send('this is podlet content');
     });
+    podletApp.get(podlet.proxy({ target: '/api', name: 'api' }), (req, res) => {
+        res.send({
+            version: '1.0.0',
+        });
+    });
     const s1 = stoppable(podletApp.listen(4002), 0);
 
     // layout
@@ -123,6 +128,10 @@ test('Layout() - metrics properly decorated', async done => {
         destObjectStream(arr => {
             expect(arr[0].meta.layout).toBe('myLayout');
             expect(arr[0].meta.podlet).toBe('myPodlet');
+            expect(arr[3].name).toBe('podium_proxy_request');
+            expect(arr[3].meta.podlet).toBe('myPodlet');
+            expect(arr[3].meta.proxy).toBe('api');
+            expect(arr[3].meta.layout).toBe('myLayout');
             done();
         })
     );
@@ -130,8 +139,12 @@ test('Layout() - metrics properly decorated', async done => {
     const s2 = stoppable(app.listen(4001), 0);
 
     const result = await request('http://localhost:4001').get('/');
+    const apiResponse = await request('http://localhost:4001').get(
+        '/podium-resource/myPodlet/api'
+    );
 
     expect(result.text).toBe('this is podlet content');
+    expect(apiResponse.body).toEqual({ version: '1.0.0' });
 
     layout.metrics.push(null);
     s1.stop();
