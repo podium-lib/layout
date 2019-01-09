@@ -1,8 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
+
 'use strict';
 
 const express = require('express');
-const Layout = require('../../');
 const path = require('path');
+const Layout = require('../../');
 
 const layout = new Layout({
     pathname: '/foo',
@@ -79,7 +82,7 @@ app.get(
         res.locals.css = layout.client.css();
         res.locals.js = layout.client.js();
         res.status(200).render('layout', res.locals);
-    }
+    },
 );
 
 app.use(`${layout.pathname()}/assets`, express.static('assets'));
@@ -88,7 +91,7 @@ app.use(`${layout.pathname()}/assets`, express.static('assets'));
 app.use((error, req, res, next) => {
     console.error(error);
     res.status(500).send(
-        '<html><body><h1>Internal server error</h1></body></html>'
+        '<html><body><h1>Internal server error</h1></body></html>',
     );
 });
 
