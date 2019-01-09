@@ -1,7 +1,5 @@
 # @podium/layout
 
-[![Build Status](https://travis.schibsted.io/Podium/layout.svg?token=qt273uGfEz64UyWuNHJ1&branch=master)](https://travis.schibsted.io/Podium/layout)
-
 Module for building a Layout server. A Layout server is mainly responsible for fetching HTML content
 from podlets and stitching these fragments into an full HTML page (called a layout in Podium speak).
 
@@ -155,7 +153,7 @@ for further details.
 
 Options to be passed on to the internal @podium/context constructor.
 
-Please see the [@podium/context constructor](https://github.schibsted.io/Podium/context#constructor)
+Please see the [@podium/context constructor](https://github.com/podium-lib/context#constructor)
 for which options can be set.
 
 Example of setting the `debug` context to default `true`:
@@ -176,7 +174,7 @@ const layout = new Layout({
 
 Options to be passed on to the internal @podium/client constructor.
 
-Please see [@podium/client constructor](https://github.schibsted.io/Podium/client#constructor)
+Please see [@podium/client constructor](https://github.com/podium-lib/client#constructor)
 for which options which can be set.
 
 Example of setting the `retries` on the client to `6`:
@@ -195,7 +193,7 @@ const layout = new Layout({
 
 Options to be passed on to the internal @podium/proxy constructor.
 
-Please see [@podium/proxy constructor](https://github.schibsted.io/Podium/proxy#constructor)
+Please see [@podium/proxy constructor](https://github.com/podium-lib/proxy#constructor)
 for which options which can be set.
 
 Example of setting the `timeout` on the proxy to 30 seconds:
@@ -221,8 +219,8 @@ a Layout to fully work.
 
 What it does:
 
--   Runs [context parsers](https://github.schibsted.io/Podium/context) on incomming requests and creates an object on the response at `res.locals.podium.context` which can be passed on to the client when requesting content from podlets.
--   Mounts the [proxy](https://github.schibsted.io/Podium/proxy) so that each podlet can do transparent proxy requests if needed.
+-   Runs [context parsers](https://github.com/podium-lib/context) on incomming requests and creates an object on the response at `res.locals.podium.context` which can be passed on to the client when requesting content from podlets.
+-   Mounts the [proxy](https://github.com/podium-lib/proxy) so that each podlet can do transparent proxy requests if needed.
 
 This middleware should be mounted before defining any routes.
 
@@ -285,7 +283,7 @@ podlet.fetch({}).then(result => {
 });
 ```
 
-Please see the [@podium/client module](https://github.schibsted.io/Podium/client)
+Please see the [@podium/client module](https://github.com/podium-lib/client)
 for full documentation.
 
 ### .context
@@ -306,7 +304,7 @@ const layout = new Layout({
 layout.context.register('customParser', new Parser('someConfig'));
 ```
 
-Please see the [@podium/context module](https://github.schibsted.io/Podium/context)
+Please see the [@podium/context module](https://github.com/podium-lib/context)
 for full documentation.
 
 ### .metrics
@@ -314,5 +312,5 @@ for full documentation.
 Property that exposes a metric stream. This stream joins all internal metrics streams into one stream resulting in all metrics
 from all sub modules being exposed here.
 
-Please see the [@podium/metrics module](https://github.schibsted.io/Podium/metrics)
+Please see the [@podium/metrics module](https://github.com/podium-lib/metrics)
 for full documentation.

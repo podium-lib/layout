@@ -5,7 +5,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
-    "url": "git@github.schibsted.io:Podium/layout.git"
+    "url": "git@github.com:podium-lib/layout.git"
   },
   "files": [
     "lib"
@@ -17,16 +17,13 @@
     "test:verbose": "jest --verbose",
     "test:coverage": "jest --coverage"
   },
-  "publishConfig": {
-    "registry": "http://npm.finntech.no/"
-  },
   "dependencies": {
     "@metrics/client": "^2.2.0",
     "@podium/client": "^2.2.3",
-    "@podium/context": "2.2.2",
+    "@podium/context": "3.0.0-beta.1",
     "@podium/podlet": "^3.0.0-alpha.2",
     "@podium/proxy": "2.4.0",
-    "@podium/schemas": "2.1.1",
+    "@podium/schemas": "3.0.0-beta.1",
     "abslog": "^2.2.3",
     "joi": "^14.3.1",
     "lodash.merge": "^4.6.1",

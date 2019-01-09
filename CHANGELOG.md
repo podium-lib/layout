@@ -24,8 +24,8 @@ The latest version of this document is always available in [releases][releases-u
 -   update joi to version 14.3.0
 -   update abslog to version 2.2.3
 
-[unreleased]: https://github.schibsted.io/Podium/layout/compare/v2.5.0...HEAD
-[2.5.0]: https://github.schibsted.io/Podium/layout/compare/v2.4.5...v2.5.0
-[2.4.5]: https://github.schibsted.io/Podium/layout/compare/v2.4.4...v2.4.5
-[2.4.4]: https://github.schibsted.io/Podium/layout/compare/v2.4.3...v2.4.4
-[releases-url]: https://github.schibsted.io/Podium/layout/blob/master/CHANGELOG.md
+[unreleased]: https://github.com/podium-lib/layout/compare/v2.5.0...HEAD
+[2.5.0]: https://github.com/podium-lib/layout/compare/v2.4.5...v2.5.0
+[2.4.5]: https://github.com/podium-lib/layout/compare/v2.4.4...v2.4.5
+[2.4.4]: https://github.com/podium-lib/layout/compare/v2.4.3...v2.4.4
+[releases-url]: https://github.com/podium-lib/layout/blob/master/CHANGELOG.md
