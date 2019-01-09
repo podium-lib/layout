@@ -1,5 +1,7 @@
 # @podium/layout
 
+[![Build Status](https://travis-ci.org/podium-lib/layout.svg?branch=master)](https://travis-ci.org/podium-lib/layout)
+
 Module for building a Layout server. A Layout server is mainly responsible for fetching HTML content
 from podlets and stitching these fragments into an full HTML page (called a layout in Podium speak).
 
