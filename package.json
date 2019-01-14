@@ -21,10 +21,10 @@
   },
   "dependencies": {
     "@metrics/client": "^2.2.0",
-    "@podium/client": "^2.2.3",
+    "@podium/client": "^3.0.0-beta.1",
     "@podium/context": "3.0.0-beta.1",
     "@podium/podlet": "^3.0.0-alpha.2",
-    "@podium/proxy": "2.4.0",
+    "@podium/proxy": "2.4.4",
     "@podium/schemas": "3.0.0-beta.1",
     "abslog": "^2.2.3",
     "joi": "^14.3.1",
