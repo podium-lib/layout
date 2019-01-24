@@ -1,5 +1,7 @@
 # @podium/layout
 
+Module for composing full page layouts out of page fragments in a micro frontend architecture.
+
 [![Build Status](https://travis-ci.org/podium-lib/layout.svg?branch=master)](https://travis-ci.org/podium-lib/layout)
 [![Greenkeeper badge](https://badges.greenkeeper.io/podium-lib/layout.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/podium-lib/layout/badge.svg)](https://snyk.io/test/github/podium-lib/layout)
