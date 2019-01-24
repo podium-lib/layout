@@ -32,9 +32,8 @@
   },
   "dependencies": {
     "@metrics/client": "2.3.0",
-    "@podium/client": "^3.0.0-beta.1",
+    "@podium/client": "3.0.0-beta.1",
     "@podium/context": "3.0.0-beta.1",
-    "@podium/podlet": "^3.0.0-alpha.2",
     "@podium/proxy": "2.5.0",
     "@podium/schemas": "3.0.0",
     "abslog": "2.2.3",
@@ -55,7 +54,8 @@
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
     "stoppable": "^1.1.0",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "@podium/podlet": "^3.0.0-alpha.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
