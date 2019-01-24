@@ -1,12 +1,23 @@
 {
   "name": "@podium/layout",
   "version": "3.0.0-beta.1",
+  "description": "Module for composing full page layouts out of page fragments in a micro frontend architecture.",
   "main": "lib/layout.js",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
+  "keywords": [
+    "micro services",
+    "micro frontend",
+    "components",
+    "podium"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:podium-lib/layout.git"
   },
+  "bugs": {
+    "url": "https://github.com/podium-lib/issues"
+  },
+  "homepage": "https://podium-lib.io/",
   "files": [
     "lib"
   ],
@@ -20,13 +31,13 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@metrics/client": "^2.2.0",
+    "@metrics/client": "2.3.0",
     "@podium/client": "^3.0.0-beta.1",
     "@podium/context": "3.0.0-beta.1",
     "@podium/podlet": "^3.0.0-alpha.2",
-    "@podium/proxy": "2.4.4",
-    "@podium/schemas": "3.0.0-beta.1",
-    "abslog": "^2.2.3",
+    "@podium/proxy": "2.5.0",
+    "@podium/schemas": "3.0.0",
+    "abslog": "2.2.3",
     "joi": "^14.3.1",
     "lodash.merge": "^4.6.1",
     "readable-stream": "^3.1.1"
