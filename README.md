@@ -6,16 +6,17 @@ Module for composing full page layouts out of page fragments in a micro frontend
 [![Greenkeeper badge](https://badges.greenkeeper.io/podium-lib/layout.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/podium-lib/layout/badge.svg)](https://snyk.io/test/github/podium-lib/layout)
 
-Module for building a Layout server. A Layout server is mainly responsible for fetching HTML content
-from podlets and stitching these fragments into an full HTML page (called a layout in Podium speak).
+Module for building a layout server. A layout server is mainly responsible for fetching HTML content
+from [podlets](https://github.com/podium-lib/layout) and stitching these fragments into an full HTML
+page (called a layout in Podium speak).
 
-To do this, a Layout instance provides three core features:
+To do this, a layout instance provides three core features:
 
 -   `@podium/client` used to fetch content from podlets
 -   `@podium/context` used to set request bound information on the requests from the layout to podlets when fetching their content
 -   `@podium/proxy` makes it possible to publicly expose data endpoints in a podlet or in any backend service
 
-A Layout can be used together with a plain node.js http server or any http framework and any templating
+This module can be used together with a plain node.js http server or any http framework and any templating
 language of your choosing (or none if you prefer). Though; Connect compatible middleware based frameworks
 (such as express.js) is first class in Podium so this module comes with a `.middleware()` method for convenience.
 
@@ -31,7 +32,7 @@ $ npm install @podium/layout
 
 ## Simple usage
 
-Build a simple Layout server with a single podlet using Express.js:
+Build a simple layout server including a single podlet using Express.js:
 
 ```js
 const express = require('express');
@@ -270,7 +271,9 @@ app.use(async (req, res, next) => {
 ### .middleware()
 
 A Connect compatible middleware which takes care of the operations needed for
-a Layout to fully work. It is more or less a wrapper for the `.process()` method.
+a layout to fully work. It is more or less a wrapper for the `.process()` method.
+
+**Important:** This middleware must be mounted before defining any routes.
 
 Example
 
