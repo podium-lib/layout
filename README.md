@@ -1,14 +1,14 @@
 # @podium/layout
 
-Module for composing full page layouts out of page fragments in a micro frontend architecture.
+Module for composing full page layouts out of page fragments in a micro frontend
+architecture.
 
 [![Build Status](https://travis-ci.org/podium-lib/layout.svg?branch=master)](https://travis-ci.org/podium-lib/layout)
 [![Greenkeeper badge](https://badges.greenkeeper.io/podium-lib/layout.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/podium-lib/layout/badge.svg)](https://snyk.io/test/github/podium-lib/layout)
 
-Module for building a layout server. A layout server is mainly responsible for fetching HTML content
-from [podlets](https://github.com/podium-lib/layout) and stitching these fragments into an full HTML
-page (called a layout in Podium speak).
+Module for building a layout server. A layout server is mainly responsible for
+fetching HTML fragments and stitching these fragments into an full HTML page.
 
 To do this, a layout instance provides three core features:
 
@@ -16,13 +16,16 @@ To do this, a layout instance provides three core features:
 -   `@podium/context` used to set request bound information on the requests from the layout to podlets when fetching their content
 -   `@podium/proxy` makes it possible to publicly expose data endpoints in a podlet or in any backend service
 
-This module can be used together with a plain node.js http server or any http framework and any templating
-language of your choosing (or none if you prefer). Though; Connect compatible middleware based frameworks
-(such as express.js) is first class in Podium so this module comes with a `.middleware()` method for convenience.
+This module can be used together with a plain node.js HTTP server or any HTTP
+framework and any templating language of your choosing (or none if you prefer).
+Though; Connect compatible middleware based frameworks (such as [Express]) is
+first class in Podium so this module comes with a `.middleware()` method for
+convenience.
 
-For writing layout servers with other http frameworks the following modules exist:
+For writing layout servers with other http frameworks the following modules
+exist:
 
--   [Hapi Layout Plugin](https://github.com/podium-lib/hapi-layout)
+-   [Hapi Layout Plugin]
 
 ## Installation
 
@@ -32,7 +35,7 @@ $ npm install @podium/layout
 
 ## Simple usage
 
-Build a simple layout server including a single podlet using Express.js:
+Build a simple layout server including a single podlet using [Express]:
 
 ```js
 const express = require('express');
@@ -99,8 +102,10 @@ const layout = new Layout({
 
 #### pathname
 
-The Pathname of where the Layout is mounted into the HTTP server. It is important that this value matches where the entry point of a route is in the HTTP server
-since this value is used to mount the proxy and tell podlets (through the context) where they are mounted and where the proxy is mounted.
+The Pathname of where the Layout is mounted into the HTTP server. It is
+important that this value matches where the entry point of a route is in the
+HTTP server since this value is used to mount the proxy and tell podlets
+(through the context) where they are mounted and where the proxy is mounted.
 
 If the layout is mounted at the server "root", set `pathname` to `/`:
 
@@ -138,8 +143,8 @@ app.get('/foo/:id', (req, res, next) => {
 });
 ```
 
-There is also a helper method for retrieving the set `pathname` which can
-be used to get the pathname from the Layout object when defining routes.
+There is also a helper method for retrieving the set `pathname` which can be
+used to get the pathname from the Layout object when defining routes.
 See [`.pathname()`](#pathname-1) for further details.
 
 #### logger
@@ -157,16 +162,14 @@ const layout = new Layout({
 });
 ```
 
-Under the hood [abslog](https://github.com/trygve-lie/abslog) is used to
-abstract out logging. Please see [abslog](https://github.com/trygve-lie/abslog)
-for further details.
+Under the hood [abslog] is used to abstract out logging. Please see [abslog] for
+further details.
 
 #### context
 
-Options to be passed on to the internal @podium/context constructor.
+Options to be passed on to the internal [@podium/context constructor].
 
-Please see the [@podium/context constructor](https://github.com/podium-lib/context#constructor)
-for which options can be set.
+Please see the [@podium/context constructor] for which options can be set.
 
 Example of setting the `debug` context to default `true`:
 
@@ -184,10 +187,9 @@ const layout = new Layout({
 
 #### client
 
-Options to be passed on to the internal @podium/client constructor.
+Options to be passed on to the internal [@podium/client constructor].
 
-Please see [@podium/client constructor](https://github.com/podium-lib/client#constructor)
-for which options which can be set.
+Please see [@podium/client constructor] for which options which can be set.
 
 Example of setting the `retries` on the client to `6`:
 
@@ -203,10 +205,9 @@ const layout = new Layout({
 
 #### proxy
 
-Options to be passed on to the internal @podium/proxy constructor.
+Options to be passed on to the internal [@podium/proxy constructor].
 
-Please see [@podium/proxy constructor](https://github.com/podium-lib/proxy#constructor)
-for which options which can be set.
+Please see [@podium/proxy constructor] for which options which can be set.
 
 Example of setting the `timeout` on the proxy to 30 seconds:
 
@@ -226,24 +227,25 @@ The Layout instance has the following API:
 
 ### .process(HttpIncoming)
 
-Metod for processing a incomming http request. This method is intended to be used
-to implement support for multiple http frameworks and should not really be used
-directly in a layout server.
+Metod for processing a incomming http request. This method is intended to be
+used to implement support for multiple http frameworks and should not really be
+used directly in a layout server.
 
 What it does:
 
--   Runs [context parsers](https://github.com/podium-lib/context) on the incomming request and sets an object with the context at `HttpIncoming.context` which can be passed on to the client when requesting content from podlets.
--   Mounts the [proxy](https://github.com/podium-lib/proxy) so each podlet can do transparent proxy requests if needed.
+-   Runs [@podium/context] parsers on the incomming request and sets an object with the context at `HttpIncoming.context` which can be passed on to the client when requesting content from podlets.
+-   Mounts the [@podium/proxy] so each podlet can do transparent proxy requests if needed.
 
-Returns a Promise. If the inbound request does match a proxy endpoint the returned Promise will resolve with
-`undefined`. If the inbound request does not match a proxy endpoint the returned Promise will resolve with the
-passed in `HttpIncoming` object.
+Returns a Promise. If the inbound request does match a proxy endpoint the
+returned Promise will resolve with `undefined`. If the inbound request does not
+match a proxy endpoint the returned Promise will resolve with the passed in
+[HttpIncoming] object.
 
 The method take the following arguments:
 
 #### HttpIncoming (required)
 
-An instance of a [HttpIncoming object](https://github.com/podium-lib/utils/blob/master/lib/http-incoming.js).
+An instance of an [HttpIncoming] class.
 
 ```js
 const { HttpIncoming } = require('@podium/utils');
@@ -282,7 +284,8 @@ const app = express();
 app.use(layout.middleware());
 ```
 
-The context generated by the middleware will be stored at `res.locals.podium.context`.
+The context generated by the middleware will be stored at
+`res.locals.podium.context`.
 
 Returns an Array of internal middleware performing the tasks described above.
 
@@ -315,7 +318,7 @@ app.get(`${layout.pathname()}/bar/:id`, (req, res, next) => {
 
 ### .client
 
-A property that exposes an instance of the @podium/client for fetching content
+A property that exposes an instance of the [@podium/client] for fetching content
 from podlets.
 
 Example of registering a podlet and fetching it:
@@ -336,8 +339,7 @@ podlet.fetch({}).then(result => {
 });
 ```
 
-Please see the [@podium/client module](https://github.com/podium-lib/client)
-for full documentation.
+Please see [@podium/client] for full documentation.
 
 ### .context
 
@@ -357,13 +359,45 @@ const layout = new Layout({
 layout.context.register('customParser', new Parser('someConfig'));
 ```
 
-Please see the [@podium/context module](https://github.com/podium-lib/context)
-for full documentation.
+Please see [@podium/context] for full documentation.
 
 ### .metrics
 
-Property that exposes a metric stream. This stream joins all internal metrics streams into one stream resulting in all metrics
-from all sub modules being exposed here.
+Property that exposes a metric stream. This stream joins all internal metrics
+streams into one stream resulting in all metrics from all sub modules being
+exposed here.
 
-Please see the [@podium/metrics module](https://github.com/podium-lib/metrics)
-for full documentation.
+Please see [@metrics-js/metric] for full documentation.
+
+## License
+
+Copyright (c) 2019 FINN.no
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+[express]: https://expressjs.com/ 'Express'
+[hapi layout plugin]: https://github.com/podium-lib/hapi-layout 'Hapi Layout Plugin'
+[@podium/client constructor]: https://github.com/podium-lib/client#constructor '@podium/client constructor'
+[@podium/proxy constructor]: https://github.com/podium-lib/proxy#constructor '@podium/proxy constructor'
+[@podium/context]: https://github.com/podium-lib/context '@podium/context'
+[@podium/client]: https://github.com/podium-lib/client '@podium/client'
+[@podium/proxy]: https://github.com/podium-lib/proxy '@podium/proxy'
+[httpincoming]: https://github.com/podium-lib/utils/blob/master/lib/http-incoming.js 'HttpIncoming'
+[@metrics-js/metric]: https://github.com/metrics-js/metric '@metrics-js/metric'
+[abslog]: https://github.com/trygve-lie/abslog 'abslog'
