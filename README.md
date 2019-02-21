@@ -123,7 +123,7 @@ app.get('/', (req, res, next) => {
 });
 ```
 
-If the layout is mouned at `/foo`, set pathname to `/foo`:
+If the layout is mounted at `/foo`, set pathname to `/foo`:
 
 ```js
 const app = express();
@@ -227,18 +227,18 @@ The Layout instance has the following API:
 
 ### .process(HttpIncoming)
 
-Metod for processing a incomming http request. This method is intended to be
-used to implement support for multiple http frameworks and should not really be
+Metod for processing an incoming HTTP request. This method is intended to be
+used to implement support for multiple HTTP frameworks and should not really be
 used directly in a layout server.
 
 What it does:
 
--   Runs [@podium/context] parsers on the incomming request and sets an object with the context at `HttpIncoming.context` which can be passed on to the client when requesting content from podlets.
+-   Runs [@podium/context] parsers on the incoming request and sets an object with the context at `HttpIncoming.context` which can be passed on to the client when requesting content from podlets.
 -   Mounts the [@podium/proxy] so each podlet can do transparent proxy requests if needed.
 
-Returns a Promise. If the inbound request does match a proxy endpoint the
-returned Promise will resolve with `undefined`. If the inbound request does not
-match a proxy endpoint the returned Promise will resolve with the passed in
+Returns a Promise. If the inbound request matches a proxy endpoint the returned
+Promise will resolve with `undefined`. If the inbound request does not match a
+proxy endpoint the returned Promise will resolve with the passed in
 [HttpIncoming] object.
 
 The method take the following arguments:
@@ -367,7 +367,7 @@ Property that exposes a metric stream. This stream joins all internal metrics
 streams into one stream resulting in all metrics from all sub modules being
 exposed here.
 
-Please see [@metrics-js/metric] for full documentation.
+Please see [@metrics/metric] for full documentation.
 
 ## License
 
@@ -399,5 +399,5 @@ SOFTWARE.
 [@podium/client]: https://github.com/podium-lib/client '@podium/client'
 [@podium/proxy]: https://github.com/podium-lib/proxy '@podium/proxy'
 [httpincoming]: https://github.com/podium-lib/utils/blob/master/lib/http-incoming.js 'HttpIncoming'
-[@metrics-js/metric]: https://github.com/metrics-js/metric '@metrics-js/metric'
+[@metrics/metric]: https://github.com/metrics-js/metric '@metrics/metric'
 [abslog]: https://github.com/trygve-lie/abslog 'abslog'
