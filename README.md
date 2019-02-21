@@ -3,9 +3,10 @@
 Module for composing full page layouts out of page fragments in a micro frontend
 architecture.
 
-[![Build Status](https://travis-ci.org/podium-lib/layout.svg?branch=master)](https://travis-ci.org/podium-lib/layout)
-[![Greenkeeper badge](https://badges.greenkeeper.io/podium-lib/layout.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/podium-lib/layout/badge.svg)](https://snyk.io/test/github/podium-lib/layout)
+[![Dependencies](https://img.shields.io/david/podium-lib/layout.svg?style=flat-square)](https://david-dm.org/podium-lib/layout)
+[![Build Status](https://travis-ci.org/podium-lib/layout.svg?branch=master&style=flat-square)](https://travis-ci.org/podium-lib/layout)
+[![Greenkeeper badge](https://badges.greenkeeper.io/podium-lib/layout.svg?style=flat-square)](https://greenkeeper.io/)
+[![Known Vulnerabilities](https://snyk.io/test/github/podium-lib/layout/badge.svg?style=flat-square)](https://snyk.io/test/github/podium-lib/layout)
 
 Module for building a layout server. A layout server is mainly responsible for
 fetching HTML fragments and stitching these fragments into an full HTML page.
