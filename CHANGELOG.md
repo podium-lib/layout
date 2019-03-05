@@ -6,6 +6,10 @@ The latest version of this document is always available in [releases][releases-u
 
 ## [unreleased]
 
+## [3.0.0] - 2019-02-21
+
+-   Initial open source release. Module is made http framework free and open source - [#6](https://github.com/podium-lib/layout/pull/6)
+
 ## [2.5.0] - 2019-01-03
 
 -   Add metrics collection from @podium/proxy (updated to 2.4.0)
@@ -24,7 +28,8 @@ The latest version of this document is always available in [releases][releases-u
 -   update joi to version 14.3.0
 -   update abslog to version 2.2.3
 
-[unreleased]: https://github.com/podium-lib/layout/compare/v2.5.0...HEAD
+[unreleased]: https://github.com/podium-lib/layout/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/podium-lib/layout/compare/v2.4.5...v3.0.0
 [2.5.0]: https://github.com/podium-lib/layout/compare/v2.4.5...v2.5.0
 [2.4.5]: https://github.com/podium-lib/layout/compare/v2.4.4...v2.4.5
 [2.4.4]: https://github.com/podium-lib/layout/compare/v2.4.3...v2.4.4
