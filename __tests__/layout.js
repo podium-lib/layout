@@ -126,8 +126,12 @@ test('Layout() - metrics properly decorated', async done => {
 
     layout.metrics.pipe(
         destObjectStream(arr => {
-            expect(arr[0].name).toBe('podlet_manifest_request');
-            expect(arr[3].name).toBe('podium_proxy_request');
+            expect(arr[0].name).toBe('context_run_parsers');
+            expect(arr[1].name).toBe('podlet_manifest_request');
+            expect(arr[2].name).toBe('podlet_fallback_request');
+            expect(arr[3].name).toBe('podlet_content_request');
+            expect(arr[4].name).toBe('context_run_parsers');
+            expect(arr[5].name).toBe('podium_proxy_request');
             done();
         }),
     );
