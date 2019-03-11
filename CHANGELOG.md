@@ -6,6 +6,16 @@ The latest version of this document is always available in [releases][releases-u
 
 ## [unreleased]
 
+## [3.0.2] - 2019-03-11
+
+This release center around removing Max Eventlistener warnings and improve error
+handling on internall streams.
+
+-   Update @metrics/client to version 2.4.1 - [#17](https://github.com/podium-lib/layout/pull/17)
+-   Update @podium/client to version 3.0.4 - [#23](https://github.com/podium-lib/layout/pull/23)
+-   Update @podium/context to version 3.0.2 - [#19](https://github.com/podium-lib/layout/pull/19)
+-   Update @podium/proxy to version 3.0.3 - [#22](https://github.com/podium-lib/layout/pull/22)
+
 ## [3.0.1] - 2019-03-05
 
 -   Add error event listeners on all metric streams - [#15](https://github.com/podium-lib/layout/pull/15)
@@ -35,7 +45,8 @@ The latest version of this document is always available in [releases][releases-u
 -   Update joi to version 14.3.0
 -   Update abslog to version 2.2.3
 
-[unreleased]: https://github.com/podium-lib/layout/compare/v3.0.1...HEAD
+[unreleased]: https://github.com/podium-lib/layout/compare/v3.0.2...HEAD
+[3.0.2]: https://github.com/podium-lib/layout/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/podium-lib/layout/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/podium-lib/layout/compare/v2.4.5...v3.0.0
 [2.5.0]: https://github.com/podium-lib/layout/compare/v2.4.5...v2.5.0
