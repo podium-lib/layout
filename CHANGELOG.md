@@ -6,6 +6,14 @@ The latest version of this document is always available in [releases][releases-u
 
 ## [unreleased]
 
+## [3.0.3] - 2019-03-15
+
+This release center around hardening piping of streams on the requests to the
+podlets.
+
+-   Update @podium/client to version 3.0.5 - [#24](https://github.com/podium-lib/layout/pull/24)
+-   Update readable-stream to version 3.2.0
+
 ## [3.0.2] - 2019-03-11
 
 This release center around removing Max Eventlistener warnings and improve error
@@ -45,7 +53,8 @@ handling on internall streams.
 -   Update joi to version 14.3.0
 -   Update abslog to version 2.2.3
 
-[unreleased]: https://github.com/podium-lib/layout/compare/v3.0.2...HEAD
+[unreleased]: https://github.com/podium-lib/layout/compare/v3.0.3...HEAD
+[3.0.3]: https://github.com/podium-lib/layout/compare/v3.0.2...v3.0.3
 [3.0.2]: https://github.com/podium-lib/layout/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/podium-lib/layout/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/podium-lib/layout/compare/v2.4.5...v3.0.0
