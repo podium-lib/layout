@@ -317,6 +317,177 @@ app.get(`${layout.pathname()}/bar/:id`, (req, res, next) => {
 });
 ```
 
+### .js(options)
+
+Sets and returns the pathname for a Layout's JavaScript assets. Defaults to an
+empty String.
+
+When a value is set it will be kept internally and returned when the method is called again.
+
+### options
+
+| option | type      | default | required |
+| ------ | --------- | ------- | -------- |
+| value  | `string`  |         |          |
+| prefix | `boolean` | `false` |          |
+
+#### value
+
+Used to set the pathname for the JavaScript assets for the Layout. The value
+can be a URL at which the Layout's user facing JavaScript is served. The value
+can be the [pathname] of a [URL] or an absolute URL.
+
+The value can only be set once. If called multiple times with a value, the
+method will throw. The method can, however, be called multiple times to
+retrieve the value.
+
+_Examples:_
+
+Serve a javascript file at `/assets/main.js`:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+app.get(layout.js({ value: '/assets/main.js' }), (req, res) => {
+    res.status(200).sendFile('./app/assets/main.js', err => {});
+});
+```
+
+Serve assets statically along side the app and set a relative URI to the
+JavaScript file:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+app.use('/assets', express.static('./app/files/assets'));
+layout.js({ value: '/assets/main.js' });
+```
+
+Set an absolute URL to where the JavaScript file is located:
+
+```js
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+layout.js({ value: 'http://cdn.mysite.com/assets/js/e7rfg76.js' });
+```
+
+#### prefix
+
+Specify whether the method should prefix the return value with the value for
+`pathname` set in the constructor.
+
+_Examples:_
+
+Return the full pathname, `/foo/assets/main.js`, to the JavaScript assets:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/foo',
+});
+
+layout.js({ value: '/assets/main.js', prefix: true });
+```
+
+Prefix will be ignored if the returned value is an absolute URL.
+
+### .css(pathname)
+
+Sets and returns the pathname for a Layout's CSS assets. Defaults to an empty
+String.
+
+When a value is set it will be kept internally and returned when the method is called again.
+
+### options
+
+| option | type      | default | required |
+| ------ | --------- | ------- | -------- |
+| value  | `string`  |         |          |
+| prefix | `boolean` | `false` |          |
+
+#### value
+
+Used to set the pathname for the CSS assets for the Layout. The value can be a
+URL at which the Layout's user facing CSS is served. The value can be the
+[pathname] of a [URL] or an absolute URL.
+
+The value can be set only once. If called multiple times with a value, the
+method will throw. The method can be called multiple times to retrieve the
+value though.
+
+_Examples:_
+
+Serve a CSS file at `/assets/main.css`:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+app.get(layout.css({ value: '/assets/main.css' }), (req, res) => {
+    res.status(200).sendFile('./app/assets/main.css', err => {});
+});
+```
+
+Serve assets from a static file server and set a relative URI to the CSS file:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+app.use('/assets', express.static('./app/files/assets'));
+layout.css({ value: '/assets/main.css' });
+```
+
+Set an absolute URL to where the CSS file is located:
+
+```js
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+layout.css({ value: 'http://cdn.mysite.com/assets/css/3ru39ur.css' });
+```
+
+#### prefix
+
+Sets whether the method should prefix the return value with the value for
+`pathname` set in the constructor.
+
+_Examples:_
+
+Return the full pathname (`/foo/assets/main.css`) to the CSS assets:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/foo',
+});
+
+layout.css({ value: '/assets/main.css', prefix: true });
+```
+
+Prefix will be ignored if the returned value is an absolute URL
+
 ### .client
 
 A property that exposes an instance of the [@podium/client] for fetching content
