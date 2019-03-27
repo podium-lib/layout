@@ -33,7 +33,7 @@
   "dependencies": {
     "@podium/client": "3.0.5",
     "@metrics/client": "2.4.1",
-    "@podium/proxy": "3.0.3",
+    "@podium/proxy": "3.0.4",
     "@podium/context": "3.0.3",
     "@podium/schemas": "3.0.0",
     "@podium/utils": "3.1.2",
