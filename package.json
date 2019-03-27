@@ -34,7 +34,7 @@
     "@podium/client": "3.0.5",
     "@metrics/client": "2.4.1",
     "@podium/proxy": "3.0.3",
-    "@podium/context": "3.0.2",
+    "@podium/context": "3.0.3",
     "@podium/schemas": "3.0.0",
     "@podium/utils": "3.1.2",
     "abslog": "2.4.0",
