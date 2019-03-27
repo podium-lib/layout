@@ -6,6 +6,13 @@ The latest version of this document is always available in [releases][releases-u
 
 ## [unreleased]
 
+## [3.0.4] - 2019-03-27
+
+-   Updated @podium/proxy to version 3.0.4 - [#28](https://github.com/podium-lib/layout/pull/28)
+-   Updated @podium/context to version 3.0.3 - [#27](https://github.com/podium-lib/layout/pull/27)
+-   Updated @podium/utils to version 3.1.2 - [#25](https://github.com/podium-lib/layout/pull/25)
+-   Updated other dependencies
+
 ## [3.0.3] - 2019-03-15
 
 This release center around hardening piping of streams on the requests to the
@@ -53,7 +60,8 @@ handling on internall streams.
 -   Update joi to version 14.3.0
 -   Update abslog to version 2.2.3
 
-[unreleased]: https://github.com/podium-lib/layout/compare/v3.0.3...HEAD
+[unreleased]: https://github.com/podium-lib/layout/compare/v3.0.4...HEAD
+[3.0.4]: https://github.com/podium-lib/layout/compare/v3.0.3...v3.0.4
 [3.0.3]: https://github.com/podium-lib/layout/compare/v3.0.2...v3.0.3
 [3.0.2]: https://github.com/podium-lib/layout/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/podium-lib/layout/compare/v3.0.0...v3.0.1
