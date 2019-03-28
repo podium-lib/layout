@@ -278,3 +278,29 @@ test('.js() - call method twice with a value for "value" argument - should throw
         layout.js({ value: '/foo/bar' });
     }).toThrowError('Value for "js" has already been set');
 });
+
+test('Layout() - metrics properly decorated', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.podiumSend('<div>should be wrapped in a doc</div>');
+    });
+
+    const s1 = stoppable(app.listen(4009), 0);
+
+    const result = await request('http://localhost:4009').get('/');
+
+    expect(result.text).toMatch('<div>should be wrapped in a doc</div>');
+    expect(result.text).toMatch('<html lang=');
+
+    s1.stop();
+});
