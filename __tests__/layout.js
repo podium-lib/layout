@@ -279,7 +279,35 @@ test('.js() - call method twice with a value for "value" argument - should throw
     }).toThrowError('Value for "js" has already been set');
 });
 
-test('Layout() - metrics properly decorated', async () => {
+test('Layout() - rendering using an object', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.podiumSend({
+            body: '<div>should be wrapped in a doc</div>',
+        });
+    });
+
+    const s1 = stoppable(app.listen(4009), 0);
+
+    const result = await request('http://localhost:4009').get('/');
+
+    expect(result.text).toMatch('<div>should be wrapped in a doc</div>');
+    expect(result.text).toMatch('<html lang=');
+
+    s1.stop();
+});
+
+test('Layout() - rendering using a string', async () => {
     expect.hasAssertions();
 
     const app = express();
@@ -295,9 +323,9 @@ test('Layout() - metrics properly decorated', async () => {
         res.podiumSend('<div>should be wrapped in a doc</div>');
     });
 
-    const s1 = stoppable(app.listen(4009), 0);
+    const s1 = stoppable(app.listen(4010), 0);
 
-    const result = await request('http://localhost:4009').get('/');
+    const result = await request('http://localhost:4010').get('/');
 
     expect(result.text).toMatch('<div>should be wrapped in a doc</div>');
     expect(result.text).toMatch('<html lang=');
