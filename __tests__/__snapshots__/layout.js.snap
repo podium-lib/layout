@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout() - rendering using a string - with assets 1`] = `
+"<!doctype html>
+<html lang=\\"en-US\\">
+    <head>
+        <meta charset=\\"utf-8\\">
+        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+        <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=Edge\\">
+        <script src=\\"http://url.com/some/js\\" defer></script>
+        <link media=\\"all\\" rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://url.com/some/css\\">
+        <title>awesome page</title>
+        extra head stuff
+    </head>
+    <body>
+        <div>should be wrapped in a doc</div>
+    </body>
+</html>"
+`;
+
+exports[`Layout() - setting a custom view template 1`] = `"<html><head>extra head stuff</head><body><div>should be wrapped in a doc</div></body></html>"`;

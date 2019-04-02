@@ -332,3 +332,68 @@ test('Layout() - rendering using a string', async () => {
 
     s1.stop();
 });
+
+test('Layout() - rendering using a string - with assets', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    layout.js({ value: `http://url.com/some/js` });
+    layout.css({ value: `http://url.com/some/css` });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.podiumSend({
+            title: 'awesome page',
+            head: 'extra head stuff',
+            body: '<div>should be wrapped in a doc</div>',
+        });
+    });
+
+    const s1 = stoppable(app.listen(4011), 0);
+
+    const result = await request('http://localhost:4011').get('/');
+
+    expect(result.text).toMatchSnapshot();
+
+    s1.stop();
+});
+
+test('Layout() - setting a custom view template', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    layout.view(
+        data =>
+            `<html><head>${data.head}</head><body>${data.body}</body></html>`,
+    );
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.podiumSend({
+            head: 'extra head stuff',
+            body: '<div>should be wrapped in a doc</div>',
+        });
+    });
+
+    const s1 = stoppable(app.listen(4012), 0);
+
+    const result = await request('http://localhost:4012').get('/');
+
+    expect(result.text).toMatchSnapshot();
+
+    s1.stop();
+});
