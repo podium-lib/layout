@@ -19,12 +19,12 @@ To do this, a layout instance provides three core features:
 
 This module can be used together with a plain node.js HTTP server or any HTTP
 framework and any templating language of your choosing (or none if you prefer).
-Though; Connect compatible middleware based frameworks (such as [Express]) is
-first class in Podium so this module comes with a `.middleware()` method for
+
+_Note:_ Connect compatible middleware based frameworks (such as [Express]) are considered
+first class in Podium so this module provides a `.middleware()` method for
 convenience.
 
-For writing layout servers with other http frameworks the following modules
-exist:
+For writing layout servers with other HTTP frameworks the following modules exist:
 
 -   [Hapi Layout Plugin]
 
@@ -228,9 +228,9 @@ The Layout instance has the following API:
 
 ### .process(HttpIncoming)
 
-Metod for processing an incoming HTTP request. This method is intended to be
-used to implement support for multiple HTTP frameworks and should not really be
-used directly in a layout server.
+Method for processing an incoming HTTP request. This method is intended to be
+used to implement support for multiple HTTP frameworks and it should not normally be
+necessary to use this method directly when creating a layout server.
 
 What it does:
 
@@ -242,7 +242,7 @@ Promise will resolve with `undefined`. If the inbound request does not match a
 proxy endpoint the returned Promise will resolve with the passed in
 [HttpIncoming] object.
 
-The method take the following arguments:
+The method takes the following arguments:
 
 #### HttpIncoming (required)
 
@@ -274,7 +274,7 @@ app.use(async (req, res, next) => {
 ### .middleware()
 
 A Connect compatible middleware which takes care of the operations needed for
-a layout to fully work. It is more or less a wrapper for the `.process()` method.
+a layout to fully work. This method is more or less a wrapper for the `.process()` method.
 
 **Important:** This middleware must be mounted before defining any routes.
 
@@ -487,6 +487,57 @@ layout.css({ value: '/assets/main.css', prefix: true });
 ```
 
 Prefix will be ignored if the returned value is an absolute URL
+
+### .view(template)
+
+Override the default encapsulating HTML document.
+
+Takes a function with the following shape:
+
+```js
+layout.view(data => `<!doctype html>
+<html lang="${data.locale}">
+    <head>
+        <meta charset="${data.encoding}">
+        <title>${data.title}</title>
+        <link href="${data.css}" rel="stylesheet">
+        <script src="${data.js}" defer></script>
+        ${data.head}
+    </head>
+    <body>
+        ${data.body}
+    </body>
+</html>`;
+);
+```
+
+### res.podiumSend(fragment)
+
+Method on the `http.ServerResponse` object for sending an HTML fragment. Calls
+the send / write method on the `http.ServerResponse` object.
+
+This method will wrap the provided fragment in a default HTML document before dispatching.
+You can use the `.view()` method to disable using a template or to set a custom template.
+
+_Example of sending an HTML fragment:_
+
+```js
+app.get(layout.pathname(), (req, res) => {
+    res.podiumSend('<h1>Hello World</h1>');
+});
+```
+
+_Example of sending additional content with an HTML fragment:_
+
+```js
+app.get(layout.pathname(), (req, res) => {
+    res.podiumSend({
+        title: 'Document title',
+        head: '<script src="additional-script.js" defer></script>',
+        body: '<h1>Hello World</h1>',
+    });
+});
+```
 
 ### .client
 
