@@ -271,6 +271,64 @@ app.use(async (req, res, next) => {
 });
 ```
 
+### .render(httpIncoming, data)
+
+This method is intended to be used to implement support for multiple HTTP frameworks and it should not normally be
+necessary to use this method directly when creating a layout server.
+
+This method is used by `.podiumSend()` when using the [Express] HTTP framework.
+
+The method takes the following arguments:
+
+#### HttpIncoming (required)
+
+An instance of the [HttpIncoming] class.
+
+```js
+const { HttpIncoming } = require('@podium/utils');
+const Layout = require('@podium/layout');
+const express = require('express);
+
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+const app = express();
+
+app.get('/', (req, res) => {
+    const incoming = new HttpIncoming(req, res, res.locals)
+    layout.render(incoming, '<div>content to render</div>');
+});
+```
+
+#### data
+
+An HTML string or an object with the following shape:
+
+-   `data.title` - document title
+-   `data.locale` - language tag/locale identifier defaults to `en-US`
+-   `data.encoding` - defaults to `utf-8`
+-   `data.head` - Any additional HTML markup that should be placed in the document `<head>`
+-   `data.js` - JavaScript URL, will be used as a `src` value in a script tag
+-   `data.css` - CSS URL, will be used as an `href` value in a link tag
+-   `data.body` - HTML body markup to be rendered
+
+Using a string
+
+```js
+layout.render(incoming, '<div>content to render</div>');
+```
+
+Using a data object
+
+```js
+layout.render(incoming, {
+    title: 'my doc title',
+    body: '<div>my content</div>',
+});
+```
+
 ### .middleware()
 
 A Connect compatible middleware which takes care of the operations needed for
