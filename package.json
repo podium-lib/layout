@@ -31,12 +31,12 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@podium/client": "3.0.6",
     "@metrics/client": "2.4.1",
-    "@podium/proxy": "3.0.4",
+    "@podium/client": "3.0.6",
     "@podium/context": "3.0.3",
+    "@podium/proxy": "^4.0.0-next",
     "@podium/schemas": "3.0.0",
-    "@podium/utils": "3.1.2",
+    "@podium/utils": "^4.0.0-next",
     "abslog": "2.4.0",
     "joi": "^14.3.1",
     "lodash.merge": "^4.6.1",
