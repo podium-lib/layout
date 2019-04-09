@@ -195,7 +195,7 @@ test('.css() - set illegal value on "value" argument - should throw', () => {
     expect(() => {
         layout.css({ value: '/foo / bar' });
     }).toThrowError(
-        'Value on argument variable "value", "/foo / bar", is not valid',
+        'Value for argument variable "value", "/foo / bar", is not valid',
     );
 });
 
@@ -258,7 +258,7 @@ test('.js() - set illegal value on "value" argument - should throw', () => {
     expect(() => {
         layout.js({ value: '/foo / bar' });
     }).toThrowError(
-        'Value on argument variable "value", "/foo / bar", is not valid',
+        'Value for argument variable "value", "/foo / bar", is not valid',
     );
 });
 
