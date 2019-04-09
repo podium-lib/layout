@@ -35,10 +35,9 @@
     "@podium/client": "3.0.6",
     "@podium/context": "3.0.3",
     "@podium/proxy": "^4.0.0-next",
-    "@podium/schemas": "3.0.0",
+    "@podium/schemas": "^4.0.0-next",
     "@podium/utils": "^4.0.0-next",
     "abslog": "2.4.0",
-    "joi": "^14.3.1",
     "lodash.merge": "^4.6.1",
     "readable-stream": "^3.2.0"
   },
