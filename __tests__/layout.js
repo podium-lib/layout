@@ -123,7 +123,7 @@ test('Layout() - metrics properly decorated', async done => {
 
     app.get('/', async (req, res) => {
         const response = await podletClient.fetch(res.locals.podium.context);
-        res.send(response);
+        res.send(response.content);
     });
 
     layout.metrics.pipe(
