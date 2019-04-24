@@ -79,6 +79,44 @@ test('Layout() - invalid value given to "name" argument - should throw', () => {
     );
 });
 
+test('Layout() - should collect metric with version info', done => {
+    expect.hasAssertions();
+
+    const layout = new Layout(DEFAULT_OPTIONS);
+
+    const dest = destObjectStream(arr => {
+        expect(arr[0]).toMatchObject({
+            name: 'podium_layout_version_info',
+            labels: [
+                {
+                    name: 'version',
+                    // eslint-disable-next-line global-require
+                    value: require('../package.json').version,
+                },
+                {
+                    name: 'major',
+                    value: expect.any(Number),
+                },
+                {
+                    name: 'minor',
+                    value: expect.any(Number),
+                },
+                {
+                    name: 'patch',
+                    value: expect.any(Number),
+                },
+            ],
+        });
+        done();
+    });
+
+    layout.metrics.pipe(dest);
+
+    setImmediate(() => {
+        dest.end();
+    });
+});
+
 test('Layout() - metrics properly decorated', async done => {
     expect.hasAssertions();
 
@@ -128,12 +166,12 @@ test('Layout() - metrics properly decorated', async done => {
 
     layout.metrics.pipe(
         destObjectStream(arr => {
-            expect(arr[0].name).toBe('context_run_parsers');
-            expect(arr[1].name).toBe('podlet_manifest_request');
-            expect(arr[2].name).toBe('podlet_fallback_request');
-            expect(arr[3].name).toBe('podlet_content_request');
-            expect(arr[4].name).toBe('context_run_parsers');
-            expect(arr[5].name).toBe('podium_proxy_request');
+            expect(arr[1].name).toBe('context_run_parsers');
+            expect(arr[2].name).toBe('podlet_manifest_request');
+            expect(arr[3].name).toBe('podlet_fallback_request');
+            expect(arr[4].name).toBe('podlet_content_request');
+            expect(arr[5].name).toBe('context_run_parsers');
+            expect(arr[6].name).toBe('podium_proxy_request');
             done();
         }),
     );
