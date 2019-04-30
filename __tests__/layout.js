@@ -166,12 +166,51 @@ test('Layout() - metrics properly decorated', async done => {
 
     layout.metrics.pipe(
         destObjectStream(arr => {
-            expect(arr[1].name).toBe('context_run_parsers');
-            expect(arr[2].name).toBe('podium_client_resolver_manifest_resolve');
-            expect(arr[3].name).toBe('podium_client_resolver_fallback_resolve');
-            expect(arr[4].name).toBe('podium_client_resolver_content_resolve');
-            expect(arr[5].name).toBe('context_run_parsers');
-            expect(arr[6].name).toBe('podium_proxy_request');
+            expect(arr[0].name).toBe('podium_layout_version_info');
+            expect(arr[0].type).toBe(1);
+            expect(arr[0].value).toBe(1);
+
+            expect(arr[1].name).toBe('podium_context_process');
+            expect(arr[1].type).toBe(5);
+
+            expect(arr[2].name).toBe('podium_proxy_process');
+            expect(arr[2].type).toBe(5);
+
+            expect(arr[3].name).toBe('podium_client_resolver_manifest_resolve');
+            expect(arr[3].type).toBe(5);
+            expect(arr[3].labels[0]).toEqual({
+                name: 'name',
+                value: 'myLayout',
+            });
+
+            expect(arr[4].name).toBe('podium_client_resolver_fallback_resolve');
+            expect(arr[4].type).toBe(5);
+            expect(arr[4].labels[0]).toEqual({
+                name: 'name',
+                value: 'myLayout',
+            });
+
+            expect(arr[5].name).toBe('podium_client_resolver_content_resolve');
+            expect(arr[5].type).toBe(5);
+            expect(arr[5].labels[0]).toEqual({
+                name: 'name',
+                value: 'myLayout',
+            });
+
+            expect(arr[6].name).toBe('podium_context_process');
+            expect(arr[6].type).toBe(5);
+            expect(arr[6].labels).toEqual([
+                { name: 'name', value: 'myLayout' },
+            ]);
+
+            expect(arr[7].name).toBe('podium_proxy_process');
+            expect(arr[7].type).toBe(5);
+            expect(arr[7].labels).toEqual([
+                { name: 'name', value: 'myLayout' },
+                { name: 'podlet', value: 'myPodlet' },
+                { name: 'proxy', value: true },
+                { name: 'error', value: false },
+            ]);
             done();
         }),
     );
