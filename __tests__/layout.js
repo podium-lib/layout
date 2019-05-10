@@ -283,14 +283,13 @@ test('.css() - call method with "value" argument, then call it a second time wit
     expect(result).toEqual('/foo/bar');
 });
 
-test('.css() - call method twice with a value for "value" argument - should throw', () => {
-    expect.hasAssertions();
+test('.css() - call method twice with a value for "value" argument - should set both values', () => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css({ value: '/foo/bar' });
+    layout.css({ value: '/bar/foo' });
 
-    expect(() => {
-        layout.css({ value: '/foo/bar' });
-    }).toThrowError('Value for "css" has already been set');
+    const result = layout.css();
+    expect(result).toEqual('/foo/bar');
 });
 
 // #############################################
@@ -346,14 +345,13 @@ test('.js() - call method with "value" argument, then call it a second time with
     expect(result).toEqual('/foo/bar');
 });
 
-test('.js() - call method twice with a value for "value" argument - should throw', () => {
-    expect.hasAssertions();
+test('.js() - call method twice with a value for "value" argument - should set both values', () => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js({ value: '/foo/bar' });
+    layout.js({ value: '/bar/foo' });
 
-    expect(() => {
-        layout.js({ value: '/foo/bar' });
-    }).toThrowError('Value for "js" has already been set');
+    const result = layout.js();
+    expect(result).toEqual('/foo/bar');
 });
 
 test('Layout() - rendering using an object', async () => {
