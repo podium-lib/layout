@@ -354,6 +354,15 @@ test('.js() - call method twice with a value for "value" argument - should set b
     expect(result).toEqual('/foo/bar');
 });
 
+test('.js() - "type" argument is set to "module" - should set "type" to "module"', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.js({ value: '/foo/bar' });
+    layout.js({ value: '/bar/foo', type: 'module' });
+
+    const result = layout.jsRoute;
+    expect(result).toEqual([{ type: "default", value: "/foo/bar" }, { type: "module", value: "/bar/foo" }]);
+});
+
 test('Layout() - rendering using an object', async () => {
     expect.hasAssertions();
 

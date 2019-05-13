@@ -384,20 +384,17 @@ When a value is set it will be kept internally and returned when the method is c
 
 ### options
 
-| option | type      | default | required |
-| ------ | --------- | ------- | -------- |
-| value  | `string`  |         |          |
-| prefix | `boolean` | `false` |          |
+| option | type      | default   | required |
+| ------ | --------- | --------- | -------- |
+| value  | `string`  |           |          |
+| prefix | `boolean` | `false`   |          |
+| type   | `string`  | `default` |          |
 
 #### value
 
 Used to set the pathname for the JavaScript assets for the Layout. The value
 can be a URL at which the Layout's user facing JavaScript is served. The value
 can be the [pathname] of a [URL] or an absolute URL.
-
-The value can only be set once. If called multiple times with a value, the
-method will throw. The method can, however, be called multiple times to
-retrieve the value.
 
 _Examples:_
 
@@ -460,6 +457,11 @@ layout.js({ value: '/assets/main.js', prefix: true });
 ```
 
 Prefix will be ignored if the returned value is an absolute URL.
+
+#### type
+
+Set the type of script which is set. `default` indicates an unknown type.
+`module` inidcates as ES6 module.
 
 ### .css(pathname)
 

@@ -8,7 +8,7 @@ exports[`Layout() - rendering using a string - with assets 1`] = `
         <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
         <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=Edge\\">
         <link rel=\\"stylesheet\\" type=\\"text/css\\" href=\\"http://url.com/some/css\\">
-        <script src=\\"http://url.com/some/js\\" defer></script>
+        <script defer src=\\"http://url.com/some/js\\" ></script>
         <title>awesome page</title>
         extra head stuff
     </head>
