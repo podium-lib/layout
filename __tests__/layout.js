@@ -1,11 +1,21 @@
 'use strict';
 
-const Podlet = require('@podium/podlet');
+const { HttpIncoming } = require('@podium/utils');
 const stoppable = require('stoppable');
 const express = require('express');
 const request = require('supertest');
+const Podlet = require('@podium/podlet');
 const stream = require('readable-stream');
+
 const Layout = require('../');
+
+const SIMPLE_REQ = {
+    headers: {},
+};
+
+const SIMPLE_RES = {
+    locals: {},
+};
 
 const destObjectStream = done => {
     const arr = [];
@@ -361,6 +371,17 @@ test('.js() - "type" argument is set to "module" - should set "type" to "module"
 
     const result = layout.jsRoute;
     expect(result).toEqual([{ type: "default", value: "/foo/bar" }, { type: "module", value: "/bar/foo" }]);
+});
+
+// #############################################
+// .process()
+// #############################################
+
+test('.process() - call method with HttpIncoming - should return HttpIncoming', async () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    const incoming = new HttpIncoming(SIMPLE_REQ, SIMPLE_RES);
+    const result = await layout.process(incoming);
+    expect(result).toEqual(incoming);
 });
 
 test('Layout() - rendering using an object', async () => {

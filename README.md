@@ -226,7 +226,7 @@ const layout = new Layout({
 
 The Layout instance has the following API:
 
-### .process(HttpIncoming)
+### .process(HttpIncoming, options)
 
 Method for processing an incoming HTTP request. This method is intended to be
 used to implement support for multiple HTTP frameworks and it should not normally be
@@ -270,6 +270,13 @@ app.use(async (req, res, next) => {
     }
 });
 ```
+
+#### options
+
+| option  | default | type      | required | details                                                                   |
+| ------- | ------- | --------- | -------- | ------------------------------------------------------------------------- |
+| context | `true`  | `boolean` | `false`  | If `@podium/context` should be applied as part of the `.process()` method |
+| proxy   | `true`  | `boolean` | `false`  | If `@podium/proxy` should be applied as part of the `.process()` method   |
 
 ### .render(httpIncoming, data)
 
