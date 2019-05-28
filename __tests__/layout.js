@@ -1,11 +1,11 @@
 'use strict';
 
+const { destinationObjectStream } = require('@podium/test-utils');
 const { HttpIncoming } = require('@podium/utils');
 const stoppable = require('stoppable');
 const express = require('express');
 const request = require('supertest');
 const Podlet = require('@podium/podlet');
-const stream = require('readable-stream');
 
 const Layout = require('../');
 
@@ -15,24 +15,6 @@ const SIMPLE_REQ = {
 
 const SIMPLE_RES = {
     locals: {},
-};
-
-const destObjectStream = done => {
-    const arr = [];
-
-    const dStream = new stream.Writable({
-        objectMode: true,
-        write(chunk, encoding, callback) {
-            arr.push(chunk);
-            callback();
-        },
-    });
-
-    dStream.on('finish', () => {
-        done(arr);
-    });
-
-    return dStream;
 };
 
 const DEFAULT_OPTIONS = { name: 'foo', pathname: '/' };
@@ -94,7 +76,7 @@ test('Layout() - should collect metric with version info', done => {
 
     const layout = new Layout(DEFAULT_OPTIONS);
 
-    const dest = destObjectStream(arr => {
+    const dest = destinationObjectStream(arr => {
         expect(arr[0]).toMatchObject({
             name: 'podium_layout_version_info',
             labels: [
@@ -175,7 +157,7 @@ test('Layout() - metrics properly decorated', async done => {
     });
 
     layout.metrics.pipe(
-        destObjectStream(arr => {
+        destinationObjectStream(arr => {
             expect(arr[0].name).toBe('podium_layout_version_info');
             expect(arr[0].type).toBe(1);
             expect(arr[0].value).toBe(1);
