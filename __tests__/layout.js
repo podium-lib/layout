@@ -365,7 +365,7 @@ test('.process() - call method with HttpIncoming - should return HttpIncoming', 
     const result = await layout.process(incoming);
     expect(result).toEqual(incoming);
 });
-
+/*
 test('Layout() - rendering using an object', async () => {
     expect.hasAssertions();
 
@@ -393,7 +393,7 @@ test('Layout() - rendering using an object', async () => {
 
     s1.stop();
 });
-
+*/
 test('Layout() - rendering using a string', async () => {
     expect.hasAssertions();
 
@@ -436,11 +436,14 @@ test('Layout() - rendering using a string - with assets', async () => {
     app.use(layout.middleware());
 
     app.get('/', async (req, res) => {
-        res.podiumSend({
+        res.locals.podium.view = {
             title: 'awesome page',
-            head: 'extra head stuff',
-            body: '<div>should be wrapped in a doc</div>',
-        });
+        };
+
+        const head = 'extra head stuff';
+        const body = '<div>should be wrapped in a doc</div>';
+
+        res.podiumSend(body, head);
     });
 
     const s1 = stoppable(app.listen(4011), 0);
@@ -463,17 +466,16 @@ test('Layout() - setting a custom view template', async () => {
     });
 
     layout.view(
-        data =>
-            `<html><head>${data.head}</head><body>${data.body}</body></html>`,
+        (incoming, body = '', head = '') =>
+            `<html><head>${head}</head><body>${body}</body></html>`,
     );
 
     app.use(layout.middleware());
 
     app.get('/', async (req, res) => {
-        res.podiumSend({
-            head: 'extra head stuff',
-            body: '<div>should be wrapped in a doc</div>',
-        });
+        const head = 'extra head stuff';
+        const body = '<div>should be wrapped in a doc</div>';
+        res.podiumSend(body, head);
     });
 
     const s1 = stoppable(app.listen(4012), 0);
