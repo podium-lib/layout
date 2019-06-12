@@ -1,29 +1,23 @@
 'use strict';
 
-const Podlet = require('@podium/podlet');
+const { destinationObjectStream } = require('@podium/test-utils');
+const { HttpIncoming } = require('@podium/utils');
 const stoppable = require('stoppable');
 const express = require('express');
 const request = require('supertest');
-const stream = require('readable-stream');
+const Podlet = require('@podium/podlet');
+
 const Layout = require('../');
 
-const destObjectStream = done => {
-    const arr = [];
-
-    const dStream = new stream.Writable({
-        objectMode: true,
-        write(chunk, encoding, callback) {
-            arr.push(chunk);
-            callback();
-        },
-    });
-
-    dStream.on('finish', () => {
-        done(arr);
-    });
-
-    return dStream;
+const SIMPLE_REQ = {
+    headers: {},
 };
+
+const SIMPLE_RES = {
+    locals: {},
+};
+
+const DEFAULT_OPTIONS = { name: 'foo', pathname: '/' };
 
 /**
  * Constructor
@@ -77,6 +71,44 @@ test('Layout() - invalid value given to "name" argument - should throw', () => {
     );
 });
 
+test('Layout() - should collect metric with version info', done => {
+    expect.hasAssertions();
+
+    const layout = new Layout(DEFAULT_OPTIONS);
+
+    const dest = destinationObjectStream(arr => {
+        expect(arr[0]).toMatchObject({
+            name: 'podium_layout_version_info',
+            labels: [
+                {
+                    name: 'version',
+                    // eslint-disable-next-line global-require
+                    value: require('../package.json').version,
+                },
+                {
+                    name: 'major',
+                    value: expect.any(Number),
+                },
+                {
+                    name: 'minor',
+                    value: expect.any(Number),
+                },
+                {
+                    name: 'patch',
+                    value: expect.any(Number),
+                },
+            ],
+        });
+        done();
+    });
+
+    layout.metrics.pipe(dest);
+
+    setImmediate(() => {
+        dest.end();
+    });
+});
+
 test('Layout() - metrics properly decorated', async done => {
     expect.hasAssertions();
 
@@ -121,17 +153,56 @@ test('Layout() - metrics properly decorated', async done => {
 
     app.get('/', async (req, res) => {
         const response = await podletClient.fetch(res.locals.podium.context);
-        res.send(response);
+        res.send(response.content);
     });
 
     layout.metrics.pipe(
-        destObjectStream(arr => {
-            expect(arr[0].name).toBe('context_run_parsers');
-            expect(arr[1].name).toBe('podlet_manifest_request');
-            expect(arr[2].name).toBe('podlet_fallback_request');
-            expect(arr[3].name).toBe('podlet_content_request');
-            expect(arr[4].name).toBe('context_run_parsers');
-            expect(arr[5].name).toBe('podium_proxy_request');
+        destinationObjectStream(arr => {
+            expect(arr[0].name).toBe('podium_layout_version_info');
+            expect(arr[0].type).toBe(1);
+            expect(arr[0].value).toBe(1);
+
+            expect(arr[1].name).toBe('podium_context_process');
+            expect(arr[1].type).toBe(5);
+
+            expect(arr[2].name).toBe('podium_proxy_process');
+            expect(arr[2].type).toBe(5);
+
+            expect(arr[3].name).toBe('podium_client_resolver_manifest_resolve');
+            expect(arr[3].type).toBe(5);
+            expect(arr[3].labels[0]).toEqual({
+                name: 'name',
+                value: 'myLayout',
+            });
+
+            expect(arr[4].name).toBe('podium_client_resolver_fallback_resolve');
+            expect(arr[4].type).toBe(5);
+            expect(arr[4].labels[0]).toEqual({
+                name: 'name',
+                value: 'myLayout',
+            });
+
+            expect(arr[5].name).toBe('podium_client_resolver_content_resolve');
+            expect(arr[5].type).toBe(5);
+            expect(arr[5].labels[0]).toEqual({
+                name: 'name',
+                value: 'myLayout',
+            });
+
+            expect(arr[6].name).toBe('podium_context_process');
+            expect(arr[6].type).toBe(5);
+            expect(arr[6].labels).toEqual([
+                { name: 'name', value: 'myLayout' },
+            ]);
+
+            expect(arr[7].name).toBe('podium_proxy_process');
+            expect(arr[7].type).toBe(5);
+            expect(arr[7].labels).toEqual([
+                { name: 'name', value: 'myLayout' },
+                { name: 'podlet', value: 'myPodlet' },
+                { name: 'proxy', value: true },
+                { name: 'error', value: false },
+            ]);
             done();
         }),
     );
@@ -149,4 +220,269 @@ test('Layout() - metrics properly decorated', async done => {
     layout.metrics.push(null);
     s1.stop();
     s2.stop();
+});
+
+// #############################################
+// .css()
+// #############################################
+
+test('.css() - call method with no arguments - should return default value', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    const result = layout.css();
+    expect(result).toEqual('');
+});
+
+test('.css() - set legal value on "value" argument - should return set value', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+
+    const result = layout.css({ value: '/foo/bar' });
+
+    expect(result).toEqual('/foo/bar');
+});
+
+test('.css() - set "prefix" argument to "true" - should prefix value returned by method', () => {
+    const options = Object.assign({}, DEFAULT_OPTIONS, {
+        pathname: '/xyz',
+    });
+    const layout = new Layout(options);
+
+    const result = layout.css({ value: '/foo/bar', prefix: true });
+
+    expect(result).toEqual('/xyz/foo/bar');
+});
+
+test('.css() - set legal absolute value on "value" argument - should set "css" to set value', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    const result = layout.css({ value: 'http://somewhere.remote.com' });
+    expect(result).toEqual('http://somewhere.remote.com');
+});
+
+test('.css() - set illegal value on "value" argument - should throw', () => {
+    expect.hasAssertions();
+    const layout = new Layout(DEFAULT_OPTIONS);
+
+    expect(() => {
+        layout.css({ value: '/foo / bar' });
+    }).toThrowError(
+        'Value for argument variable "value", "/foo / bar", is not valid',
+    );
+});
+
+test('.css() - call method with "value" argument, then call it a second time with no argument - should return first set value on second call', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.css({ value: '/foo/bar' });
+    const result = layout.css();
+    expect(result).toEqual('/foo/bar');
+});
+
+test('.css() - call method twice with a value for "value" argument - should set both values', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.css({ value: '/foo/bar' });
+    layout.css({ value: '/bar/foo' });
+
+    const result = layout.css();
+    expect(result).toEqual('/foo/bar');
+});
+
+// #############################################
+// .js()
+// #############################################
+
+test('.js() - call method with no arguments - should return default value', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    const result = layout.js();
+    expect(result).toEqual('');
+});
+
+test('.js() - set legal value on "value" argument - should return set value', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+
+    const result = layout.js({ value: '/foo/bar' });
+
+    expect(result).toEqual('/foo/bar');
+});
+
+test('.js() - set "prefix" argument to "true" - should prefix value returned by method', () => {
+    const options = Object.assign({}, DEFAULT_OPTIONS, {
+        pathname: '/xyz',
+    });
+    const layout = new Layout(options);
+
+    const result = layout.js({ value: '/foo/bar', prefix: true });
+
+    expect(result).toEqual('/xyz/foo/bar');
+});
+
+test('.js() - set legal absolute value on "value" argument - should set "js" to set value', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    const result = layout.js({ value: 'http://somewhere.remote.com' });
+    expect(result).toEqual('http://somewhere.remote.com');
+});
+
+test('.js() - set illegal value on "value" argument - should throw', () => {
+    expect.hasAssertions();
+    const layout = new Layout(DEFAULT_OPTIONS);
+
+    expect(() => {
+        layout.js({ value: '/foo / bar' });
+    }).toThrowError(
+        'Value for argument variable "value", "/foo / bar", is not valid',
+    );
+});
+
+test('.js() - call method with "value" argument, then call it a second time with no argument - should return first set value on second call', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.js({ value: '/foo/bar' });
+    const result = layout.js();
+    expect(result).toEqual('/foo/bar');
+});
+
+test('.js() - call method twice with a value for "value" argument - should set both values', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.js({ value: '/foo/bar' });
+    layout.js({ value: '/bar/foo' });
+
+    const result = layout.js();
+    expect(result).toEqual('/foo/bar');
+});
+
+test('.js() - "type" argument is set to "module" - should set "type" to "module"', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.js({ value: '/foo/bar' });
+    layout.js({ value: '/bar/foo', type: 'module' });
+
+    const result = layout.jsRoute;
+    expect(result).toEqual([{ type: "default", value: "/foo/bar" }, { type: "module", value: "/bar/foo" }]);
+});
+
+// #############################################
+// .process()
+// #############################################
+
+test('.process() - call method with HttpIncoming - should return HttpIncoming', async () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    const incoming = new HttpIncoming(SIMPLE_REQ, SIMPLE_RES);
+    const result = await layout.process(incoming);
+    expect(result).toEqual(incoming);
+});
+/*
+test('Layout() - rendering using an object', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.podiumSend({
+            body: '<div>should be wrapped in a doc</div>',
+        });
+    });
+
+    const s1 = stoppable(app.listen(4009), 0);
+
+    const result = await request('http://localhost:4009').get('/');
+
+    expect(result.text).toMatch('<div>should be wrapped in a doc</div>');
+    expect(result.text).toMatch('<html lang=');
+
+    s1.stop();
+});
+*/
+test('Layout() - rendering using a string', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.podiumSend('<div>should be wrapped in a doc</div>');
+    });
+
+    const s1 = stoppable(app.listen(4010), 0);
+
+    const result = await request('http://localhost:4010').get('/');
+
+    expect(result.text).toMatch('<div>should be wrapped in a doc</div>');
+    expect(result.text).toMatch('<html lang=');
+
+    s1.stop();
+});
+
+test('Layout() - rendering using a string - with assets', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    layout.js({ value: `http://url.com/some/js` });
+    layout.css({ value: `http://url.com/some/css` });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.locals.podium.view = {
+            title: 'awesome page',
+        };
+
+        const head = 'extra head stuff';
+        const body = '<div>should be wrapped in a doc</div>';
+
+        res.podiumSend(body, head);
+    });
+
+    const s1 = stoppable(app.listen(4011), 0);
+
+    const result = await request('http://localhost:4011').get('/');
+
+    expect(result.text).toMatchSnapshot();
+
+    s1.stop();
+});
+
+test('Layout() - setting a custom view template', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    layout.view(
+        (incoming, body = '', head = '') =>
+            `<html><head>${head}</head><body>${body}</body></html>`,
+    );
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        const head = 'extra head stuff';
+        const body = '<div>should be wrapped in a doc</div>';
+        res.podiumSend(body, head);
+    });
+
+    const s1 = stoppable(app.listen(4012), 0);
+
+    const result = await request('http://localhost:4012').get('/');
+
+    expect(result.text).toMatchSnapshot();
+
+    s1.stop();
 });

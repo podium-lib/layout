@@ -19,12 +19,12 @@ To do this, a layout instance provides three core features:
 
 This module can be used together with a plain node.js HTTP server or any HTTP
 framework and any templating language of your choosing (or none if you prefer).
-Though; Connect compatible middleware based frameworks (such as [Express]) is
-first class in Podium so this module comes with a `.middleware()` method for
+
+_Note:_ Connect compatible middleware based frameworks (such as [Express]) are considered
+first class in Podium so this module provides a `.middleware()` method for
 convenience.
 
-For writing layout servers with other http frameworks the following modules
-exist:
+For writing layout servers with other HTTP frameworks the following modules exist:
 
 -   [Hapi Layout Plugin]
 
@@ -226,11 +226,11 @@ const layout = new Layout({
 
 The Layout instance has the following API:
 
-### .process(HttpIncoming)
+### .process(HttpIncoming, options)
 
-Metod for processing an incoming HTTP request. This method is intended to be
-used to implement support for multiple HTTP frameworks and should not really be
-used directly in a layout server.
+Method for processing an incoming HTTP request. This method is intended to be
+used to implement support for multiple HTTP frameworks and it should not normally be
+necessary to use this method directly when creating a layout server.
 
 What it does:
 
@@ -242,7 +242,7 @@ Promise will resolve with `undefined`. If the inbound request does not match a
 proxy endpoint the returned Promise will resolve with the passed in
 [HttpIncoming] object.
 
-The method take the following arguments:
+The method takes the following arguments:
 
 #### HttpIncoming (required)
 
@@ -271,10 +271,75 @@ app.use(async (req, res, next) => {
 });
 ```
 
+#### options
+
+| option  | default | type      | required | details                                                                   |
+| ------- | ------- | --------- | -------- | ------------------------------------------------------------------------- |
+| context | `true`  | `boolean` | `false`  | If `@podium/context` should be applied as part of the `.process()` method |
+| proxy   | `true`  | `boolean` | `false`  | If `@podium/proxy` should be applied as part of the `.process()` method   |
+
+### .render(httpIncoming, data)
+
+This method is intended to be used to implement support for multiple HTTP frameworks and it should not normally be
+necessary to use this method directly when creating a layout server.
+
+This method is used by `.podiumSend()` when using the [Express] HTTP framework.
+
+The method takes the following arguments:
+
+#### HttpIncoming (required)
+
+An instance of the [HttpIncoming] class.
+
+```js
+const { HttpIncoming } = require('@podium/utils');
+const Layout = require('@podium/layout');
+const express = require('express);
+
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+const app = express();
+
+app.get('/', (req, res) => {
+    const incoming = new HttpIncoming(req, res, res.locals)
+    layout.render(incoming, '<div>content to render</div>');
+});
+```
+
+#### data
+
+An HTML string or an object with the following shape:
+
+-   `data.title` - document title
+-   `data.locale` - language tag/locale identifier defaults to `en-US`
+-   `data.encoding` - defaults to `utf-8`
+-   `data.head` - Any additional HTML markup that should be placed in the document `<head>`
+-   `data.js` - JavaScript URL, will be used as a `src` value in a script tag
+-   `data.css` - CSS URL, will be used as an `href` value in a link tag
+-   `data.body` - HTML body markup to be rendered
+
+Using a string
+
+```js
+layout.render(incoming, '<div>content to render</div>');
+```
+
+Using a data object
+
+```js
+layout.render(incoming, {
+    title: 'my doc title',
+    body: '<div>my content</div>',
+});
+```
+
 ### .middleware()
 
 A Connect compatible middleware which takes care of the operations needed for
-a layout to fully work. It is more or less a wrapper for the `.process()` method.
+a layout to fully work. This method is more or less a wrapper for the `.process()` method.
 
 **Important:** This middleware must be mounted before defining any routes.
 
@@ -314,6 +379,230 @@ app.get(`${layout.pathname()}/bar`, (req, res, next) => {
 
 app.get(`${layout.pathname()}/bar/:id`, (req, res, next) => {
     [ ... ]
+});
+```
+
+### .js(options)
+
+Sets and returns the pathname for a Layout's JavaScript assets. Defaults to an
+empty String.
+
+When a value is set it will be kept internally and returned when the method is called again.
+
+### options
+
+| option | type      | default   | required |
+| ------ | --------- | --------- | -------- |
+| value  | `string`  |           |          |
+| prefix | `boolean` | `false`   |          |
+| type   | `string`  | `default` |          |
+
+#### value
+
+Used to set the pathname for the JavaScript assets for the Layout. The value
+can be a URL at which the Layout's user facing JavaScript is served. The value
+can be the [pathname] of a [URL] or an absolute URL.
+
+_Examples:_
+
+Serve a javascript file at `/assets/main.js`:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+app.get(layout.js({ value: '/assets/main.js' }), (req, res) => {
+    res.status(200).sendFile('./app/assets/main.js', err => {});
+});
+```
+
+Serve assets statically along side the app and set a relative URI to the
+JavaScript file:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+app.use('/assets', express.static('./app/files/assets'));
+layout.js({ value: '/assets/main.js' });
+```
+
+Set an absolute URL to where the JavaScript file is located:
+
+```js
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+layout.js({ value: 'http://cdn.mysite.com/assets/js/e7rfg76.js' });
+```
+
+#### prefix
+
+Specify whether the method should prefix the return value with the value for
+`pathname` set in the constructor.
+
+_Examples:_
+
+Return the full pathname, `/foo/assets/main.js`, to the JavaScript assets:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/foo',
+});
+
+layout.js({ value: '/assets/main.js', prefix: true });
+```
+
+Prefix will be ignored if the returned value is an absolute URL.
+
+#### type
+
+Set the type of script which is set. `default` indicates an unknown type.
+`module` inidcates as ES6 module.
+
+### .css(pathname)
+
+Sets and returns the pathname for a Layout's CSS assets. Defaults to an empty
+String.
+
+When a value is set it will be kept internally and returned when the method is called again.
+
+### options
+
+| option | type      | default | required |
+| ------ | --------- | ------- | -------- |
+| value  | `string`  |         |          |
+| prefix | `boolean` | `false` |          |
+
+#### value
+
+Used to set the pathname for the CSS assets for the Layout. The value can be a
+URL at which the Layout's user facing CSS is served. The value can be the
+[pathname] of a [URL] or an absolute URL.
+
+The value can be set only once. If called multiple times with a value, the
+method will throw. The method can be called multiple times to retrieve the
+value though.
+
+_Examples:_
+
+Serve a CSS file at `/assets/main.css`:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+app.get(layout.css({ value: '/assets/main.css' }), (req, res) => {
+    res.status(200).sendFile('./app/assets/main.css', err => {});
+});
+```
+
+Serve assets from a static file server and set a relative URI to the CSS file:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+app.use('/assets', express.static('./app/files/assets'));
+layout.css({ value: '/assets/main.css' });
+```
+
+Set an absolute URL to where the CSS file is located:
+
+```js
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/',
+});
+
+layout.css({ value: 'http://cdn.mysite.com/assets/css/3ru39ur.css' });
+```
+
+#### prefix
+
+Sets whether the method should prefix the return value with the value for
+`pathname` set in the constructor.
+
+_Examples:_
+
+Return the full pathname (`/foo/assets/main.css`) to the CSS assets:
+
+```js
+const app = express();
+const layout = new Layout({
+    name: 'myLayout',
+    pathname: '/foo',
+});
+
+layout.css({ value: '/assets/main.css', prefix: true });
+```
+
+Prefix will be ignored if the returned value is an absolute URL
+
+### .view(template)
+
+Override the default encapsulating HTML document.
+
+Takes a function with the following shape:
+
+```js
+layout.view(data => `<!doctype html>
+<html lang="${data.locale}">
+    <head>
+        <meta charset="${data.encoding}">
+        <title>${data.title}</title>
+        <link href="${data.css}" rel="stylesheet">
+        <script src="${data.js}" defer></script>
+        ${data.head}
+    </head>
+    <body>
+        ${data.body}
+    </body>
+</html>`;
+);
+```
+
+### res.podiumSend(fragment)
+
+Method on the `http.ServerResponse` object for sending an HTML fragment. Calls
+the send / write method on the `http.ServerResponse` object.
+
+This method will wrap the provided fragment in a default HTML document before dispatching.
+You can use the `.view()` method to disable using a template or to set a custom template.
+
+_Example of sending an HTML fragment:_
+
+```js
+app.get(layout.pathname(), (req, res) => {
+    res.podiumSend('<h1>Hello World</h1>');
+});
+```
+
+_Example of sending additional content with an HTML fragment:_
+
+```js
+app.get(layout.pathname(), (req, res) => {
+    res.podiumSend({
+        title: 'Document title',
+        head: '<script src="additional-script.js" defer></script>',
+        body: '<h1>Hello World</h1>',
+    });
 });
 ```
 
