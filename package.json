@@ -31,7 +31,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@podium/client": "3.0.6",
+    "@podium/client": "4.0.0",
     "@metrics/client": "2.4.1",
     "@podium/proxy": "3.0.4",
     "@podium/context": "3.0.3",
