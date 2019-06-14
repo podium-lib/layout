@@ -1,7 +1,9 @@
 # @podium/layout
 
-Module for composing full page layouts out of page fragments in a micro frontend
+A Module for composing full page layouts out of page fragments in a micro frontend
 architecture.
+
+See the [official Podium documentation](https://podium-lib.io/) site.
 
 [![Dependencies](https://img.shields.io/david/podium-lib/layout.svg?style=flat-square)](https://david-dm.org/podium-lib/layout)
 [![Build Status](https://travis-ci.org/podium-lib/layout.svg?branch=master&style=flat-square)](https://travis-ci.org/podium-lib/layout)
