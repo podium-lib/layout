@@ -386,8 +386,9 @@ app.get(`${layout.pathname()}/bar/:id`, (req, res, next) => {
 
 ### .js(options)
 
-Sets and returns the pathname for a Layout's JavaScript assets. Defaults to an
-empty String.
+Sets the pathname for a Layout's JavaScript assets.
+
+`options` can be either an object or an array of options objects as described below.
 
 When a value is set it will be kept internally and returned when the method is called again.
 
@@ -416,9 +417,11 @@ const layout = new Layout({
     pathname: '/',
 });
 
-app.get(layout.js({ value: '/assets/main.js' }), (req, res) => {
-    res.status(200).sendFile('./app/assets/main.js', err => {});
-});
+layout.js({ value: '/assets/main.js' });
+
+// or
+
+layout.js([{ value: '/assets/main.js' }, { value: '/assets/secondary.js' }]);
 ```
 
 Serve assets statically along side the app and set a relative URI to the
@@ -472,10 +475,11 @@ Prefix will be ignored if the returned value is an absolute URL.
 Set the type of script which is set. `default` indicates an unknown type.
 `module` inidcates as ES6 module.
 
-### .css(pathname)
+### .css(options)
 
-Sets and returns the pathname for a Layout's CSS assets. Defaults to an empty
-String.
+Sets the pathname for a Layout's CSS assets.
+
+`options` can be either an object or an array of options objects as described below.
 
 When a value is set it will be kept internally and returned when the method is called again.
 
@@ -507,9 +511,11 @@ const layout = new Layout({
     pathname: '/',
 });
 
-app.get(layout.css({ value: '/assets/main.css' }), (req, res) => {
-    res.status(200).sendFile('./app/assets/main.css', err => {});
-});
+layout.css({ value: '/assets/main.css' });
+
+// or
+
+layout.css([{ value: '/assets/main.css' }, { value: '/assets/secondary.css' }]);
 ```
 
 Serve assets from a static file server and set a relative URI to the CSS file:
