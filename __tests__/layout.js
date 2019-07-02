@@ -284,6 +284,42 @@ test('.css() - call method twice with a value for "value" argument - should set 
     expect(result).toEqual('/foo/bar');
 });
 
+test('.css() - "options" argument as an array - should accept an array of values', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
+
+    expect(layout.cssRoute).toEqual([
+        { type: 'default', value: '/foo/bar' },
+        { type: 'default', value: '/bar/foo' },
+    ]);
+});
+
+test('.css() - "options" argument as an array - call method twice - should set all values', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
+    layout.css([{ value: '/foo/bar/baz' }, { value: '/bar/foo/baz' }]);
+
+    expect(layout.cssRoute).toEqual([
+        { type: 'default', value: '/foo/bar' },
+        { type: 'default', value: '/bar/foo' },
+        { type: 'default', value: '/foo/bar/baz' },
+        { type: 'default', value: '/bar/foo/baz' },
+    ]);
+});
+
+test('.css() - "options" argument as an array - should set additional keys', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.css([
+        { value: '/foo/bar', fake: 'prop' },
+        { value: '/bar/foo', prop: 'fake' },
+    ]);
+
+    expect(layout.cssRoute).toEqual([
+        { type: 'default', value: '/foo/bar', fake: 'prop' },
+        { type: 'default', value: '/bar/foo', prop: 'fake' },
+    ]);
+});
+
 // #############################################
 // .js()
 // #############################################
@@ -352,7 +388,49 @@ test('.js() - "type" argument is set to "module" - should set "type" to "module"
     layout.js({ value: '/bar/foo', type: 'module' });
 
     const result = layout.jsRoute;
-    expect(result).toEqual([{ type: "default", value: "/foo/bar" }, { type: "module", value: "/bar/foo" }]);
+    expect(result).toEqual([
+        { type: 'default', value: '/foo/bar' },
+        { type: 'module', value: '/bar/foo' },
+    ]);
+});
+
+test('.js() - "options" argument as an array - should accept an array of values', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.js([{ value: '/foo/bar' }, { value: '/bar/foo', type: 'module' }]);
+
+    expect(layout.jsRoute).toEqual([
+        { type: 'default', value: '/foo/bar' },
+        { type: 'module', value: '/bar/foo' },
+    ]);
+});
+
+test('.js() - "options" argument as an array - call method twice - should set all values', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.js([{ value: '/foo/bar' }, { value: '/bar/foo', type: 'module' }]);
+    layout.js([
+        { value: '/foo/bar/baz' },
+        { value: '/bar/foo/baz', type: 'module' },
+    ]);
+
+    expect(layout.jsRoute).toEqual([
+        { type: 'default', value: '/foo/bar' },
+        { type: 'module', value: '/bar/foo' },
+        { type: 'default', value: '/foo/bar/baz' },
+        { type: 'module', value: '/bar/foo/baz' },
+    ]);
+});
+
+test('.js() - "options" argument as an array - should set additional keys', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.js([
+        { value: '/foo/bar', fake: 'prop' },
+        { value: '/bar/foo', type: 'module', prop: 'fake' },
+    ]);
+
+    expect(layout.jsRoute).toEqual([
+        { type: 'default', value: '/foo/bar', fake: 'prop' },
+        { type: 'module', value: '/bar/foo', prop: 'fake' },
+    ]);
 });
 
 // #############################################
