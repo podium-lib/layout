@@ -32,14 +32,14 @@
   },
   "dependencies": {
     "@metrics/client": "2.4.1",
-    "@podium/client": "4.0.0",
+    "@podium/client": "4.0.1",
     "@podium/context": "4.0.0",
     "@podium/proxy": "4.0.1",
     "@podium/schemas": "4.0.0",
     "@podium/utils": "4.0.1",
     "abslog": "2.4.0",
     "objobj": "^1.0.0",
-    "lodash.merge": "^4.6.1"
+    "lodash.merge": "^4.6.2"
   },
   "devDependencies": {
     "@podium/test-utils": "1.6.3",
@@ -52,7 +52,7 @@
     "hbs": "^4.0.2",
     "husky": "^3.0.0",
     "jest": "^24.1.0",
-    "lint-staged": "^9.0.0",
+    "lint-staged": "^9.2.0",
     "prettier": "^1.16.3",
     "stoppable": "^1.1.0",
     "supertest": "^4.0.0",
