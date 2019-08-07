@@ -288,9 +288,11 @@ test('.css() - "options" argument as an array - should accept an array of values
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
 
-    expect(layout.cssRoute).toEqual([
-        { type: 'default', value: '/foo/bar' },
-        { type: 'default', value: '/bar/foo' },
+    const result = JSON.parse(JSON.stringify(layout.cssRoute));
+
+    expect(result).toEqual([
+        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
+        { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
     ]);
 });
 
@@ -299,24 +301,28 @@ test('.css() - "options" argument as an array - call method twice - should set a
     layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
     layout.css([{ value: '/foo/bar/baz' }, { value: '/bar/foo/baz' }]);
 
-    expect(layout.cssRoute).toEqual([
-        { type: 'default', value: '/foo/bar' },
-        { type: 'default', value: '/bar/foo' },
-        { type: 'default', value: '/foo/bar/baz' },
-        { type: 'default', value: '/bar/foo/baz' },
+    const result = JSON.parse(JSON.stringify(layout.cssRoute));
+
+    expect(result).toEqual([
+        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
+        { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
+        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar/baz' },
+        { rel: 'stylesheet', type: 'text/css', value: '/bar/foo/baz' },
     ]);
 });
 
-test('.css() - "options" argument as an array - should set additional keys', () => {
+test('.css() - "options" argument as an array - should NOT set additional keys', () => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css([
         { value: '/foo/bar', fake: 'prop' },
         { value: '/bar/foo', prop: 'fake' },
     ]);
 
-    expect(layout.cssRoute).toEqual([
-        { type: 'default', value: '/foo/bar', fake: 'prop' },
-        { type: 'default', value: '/bar/foo', prop: 'fake' },
+    const result = JSON.parse(JSON.stringify(layout.cssRoute));
+
+    expect(result).toEqual([
+        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
+        { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
     ]);
 });
 
@@ -387,7 +393,8 @@ test('.js() - "type" argument is set to "module" - should set "type" to "module"
     layout.js({ value: '/foo/bar' });
     layout.js({ value: '/bar/foo', type: 'module' });
 
-    const result = layout.jsRoute;
+    const result = JSON.parse(JSON.stringify(layout.jsRoute));
+
     expect(result).toEqual([
         { type: 'default', value: '/foo/bar' },
         { type: 'module', value: '/bar/foo' },
@@ -398,7 +405,9 @@ test('.js() - "options" argument as an array - should accept an array of values'
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js([{ value: '/foo/bar' }, { value: '/bar/foo', type: 'module' }]);
 
-    expect(layout.jsRoute).toEqual([
+    const result = JSON.parse(JSON.stringify(layout.jsRoute));
+
+    expect(result).toEqual([
         { type: 'default', value: '/foo/bar' },
         { type: 'module', value: '/bar/foo' },
     ]);
@@ -412,7 +421,9 @@ test('.js() - "options" argument as an array - call method twice - should set al
         { value: '/bar/foo/baz', type: 'module' },
     ]);
 
-    expect(layout.jsRoute).toEqual([
+    const result = JSON.parse(JSON.stringify(layout.jsRoute));
+
+    expect(result).toEqual([
         { type: 'default', value: '/foo/bar' },
         { type: 'module', value: '/bar/foo' },
         { type: 'default', value: '/foo/bar/baz' },
@@ -420,16 +431,18 @@ test('.js() - "options" argument as an array - call method twice - should set al
     ]);
 });
 
-test('.js() - "options" argument as an array - should set additional keys', () => {
+test('.js() - "options" argument as an array - should NOT set additional keys', () => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js([
         { value: '/foo/bar', fake: 'prop' },
         { value: '/bar/foo', type: 'module', prop: 'fake' },
     ]);
 
-    expect(layout.jsRoute).toEqual([
-        { type: 'default', value: '/foo/bar', fake: 'prop' },
-        { type: 'module', value: '/bar/foo', prop: 'fake' },
+    const result = JSON.parse(JSON.stringify(layout.jsRoute));
+
+    expect(result).toEqual([
+        { type: 'default', value: '/foo/bar' },
+        { type: 'module', value: '/bar/foo' },
     ]);
 });
 
