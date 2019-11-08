@@ -1,7 +1,7 @@
 'use strict';
 
 const { destinationObjectStream } = require('@podium/test-utils');
-const { HttpIncoming } = require('@podium/utils');
+const { HttpIncoming, AssetJs, AssetCss } = require('@podium/utils');
 const stoppable = require('stoppable');
 const express = require('express');
 const request = require('supertest');
@@ -241,9 +241,7 @@ test('.css() - set legal value on "value" argument - should return set value', (
 });
 
 test('.css() - set "prefix" argument to "true" - should prefix value returned by method', () => {
-    const options = Object.assign({}, DEFAULT_OPTIONS, {
-        pathname: '/xyz',
-    });
+    const options = { ...DEFAULT_OPTIONS, pathname: '/xyz',};
     const layout = new Layout(options);
 
     const result = layout.css({ value: '/foo/bar', prefix: true });
@@ -326,9 +324,29 @@ test('.css() - "options" argument as an array - should NOT set additional keys',
     ]);
 });
 
+test('.css() - passing an instance of AssetsCss - should return set value', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+
+    layout.css(new AssetCss({ value: '/foo/bar', type: 'text/css' }));
+    const result = JSON.parse(JSON.stringify(layout.cssRoute));
+
+    expect(result).toEqual([
+        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
+    ]);
+});
+
 // #############################################
 // .js()
 // #############################################
+
+test('.js() - passing an instance of AssetsJs - should return set value', () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+
+    layout.js(new AssetJs({ value: '/foo/bar', type: 'module' }));
+    const result = JSON.parse(JSON.stringify(layout.jsRoute));
+
+    expect(result).toEqual([{ type: 'module', value: '/foo/bar' }]);
+});
 
 test('.js() - call method with no arguments - should return default value', () => {
     const layout = new Layout(DEFAULT_OPTIONS);
@@ -345,9 +363,7 @@ test('.js() - set legal value on "value" argument - should return set value', ()
 });
 
 test('.js() - set "prefix" argument to "true" - should prefix value returned by method', () => {
-    const options = Object.assign({}, DEFAULT_OPTIONS, {
-        pathname: '/xyz',
-    });
+    const options = { ...DEFAULT_OPTIONS, pathname: '/xyz',};
     const layout = new Layout(options);
 
     const result = layout.js({ value: '/foo/bar', prefix: true });
