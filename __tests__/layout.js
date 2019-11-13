@@ -133,7 +133,7 @@ test('Layout() - metrics properly decorated', async done => {
             version: '1.0.0',
         });
     });
-    const s1 = stoppable(podletApp.listen(4002), 0);
+    const s1 = stoppable(podletApp.listen(5021), 0);
 
     // layout
     const app = express();
@@ -147,7 +147,7 @@ test('Layout() - metrics properly decorated', async done => {
     app.use(layout.middleware());
 
     const podletClient = layout.client.register({
-        uri: 'http://localhost:4002/manifest.json',
+        uri: 'http://localhost:5021/manifest.json',
         name: 'myPodlet',
     });
 
@@ -207,10 +207,10 @@ test('Layout() - metrics properly decorated', async done => {
         }),
     );
 
-    const s2 = stoppable(app.listen(4001), 0);
+    const s2 = stoppable(app.listen(5022), 0);
 
-    const result = await request('http://localhost:4001').get('/');
-    const apiResponse = await request('http://localhost:4001').get(
+    const result = await request('http://localhost:5022').get('/');
+    const apiResponse = await request('http://localhost:5022').get(
         '/podium-resource/myPodlet/api',
     );
 
@@ -241,7 +241,7 @@ test('.css() - set legal value on "value" argument - should return set value', (
 });
 
 test('.css() - set "prefix" argument to "true" - should prefix value returned by method', () => {
-    const options = { ...DEFAULT_OPTIONS, pathname: '/xyz',};
+    const options = { ...DEFAULT_OPTIONS, pathname: '/xyz' };
     const layout = new Layout(options);
 
     const result = layout.css({ value: '/foo/bar', prefix: true });
@@ -363,7 +363,7 @@ test('.js() - set legal value on "value" argument - should return set value', ()
 });
 
 test('.js() - set "prefix" argument to "true" - should prefix value returned by method', () => {
-    const options = { ...DEFAULT_OPTIONS, pathname: '/xyz',};
+    const options = { ...DEFAULT_OPTIONS, pathname: '/xyz' };
     const layout = new Layout(options);
 
     const result = layout.js({ value: '/foo/bar', prefix: true });
