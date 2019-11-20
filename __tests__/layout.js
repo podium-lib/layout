@@ -2,6 +2,7 @@
 
 const { destinationObjectStream } = require('@podium/test-utils');
 const { HttpIncoming, AssetJs, AssetCss } = require('@podium/utils');
+const PodletClientResponse = require('@podium/client/lib/response');
 const stoppable = require('stoppable');
 const express = require('express');
 const request = require('supertest');
@@ -472,6 +473,28 @@ test('.process() - call method with HttpIncoming - should return HttpIncoming', 
     const result = await layout.process(incoming);
     expect(result).toEqual(incoming);
 });
+
+test('.process() - idempotence - manipulating the HttpIncoming should not affect layout', async () => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    expect(layout.jsRoute).toEqual([]);
+    expect(layout.cssRoute).toEqual([]);
+
+    // Simulate middleware
+    const incoming = new HttpIncoming(SIMPLE_REQ, SIMPLE_RES);
+    await layout.process(incoming);
+
+    // Simulate layout route
+    incoming.podlets = [
+        new PodletClientResponse({
+            js: [{ value: '/foo/bar' }],
+            css: [{ value: '/bar/foo' }],
+        }),
+    ];
+
+    expect(layout.jsRoute).toEqual([]);
+    expect(layout.cssRoute).toEqual([]);
+});
+
 /*
 test('Layout() - rendering using an object', async () => {
     expect.hasAssertions();
