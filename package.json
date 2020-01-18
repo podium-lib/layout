@@ -37,7 +37,7 @@
     "@podium/client": "4.3.0",
     "@podium/context": "4.1.0",
     "@podium/proxy": "4.1.0",
-    "@podium/schemas": "4.0.0",
+    "@podium/schemas": "4.0.1",
     "@podium/utils": "4.1.2",
     "abslog": "2.4.0",
     "lodash.merge": "4.6.2",
