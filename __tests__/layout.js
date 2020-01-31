@@ -120,11 +120,15 @@ test('Layout() - metrics properly decorated', async done => {
         name: 'myPodlet',
         version: '1.0.0',
         pathname: '/',
+        fallback: '/fallback',
         development: false,
     });
     podletApp.use(podlet.middleware());
     podletApp.get('/manifest.json', (req, res) => {
         res.send(podlet);
+    });
+    podletApp.get('/fallback', (req, res) => {
+        res.send('this is fallback content');
     });
     podletApp.get('/', (req, res) => {
         res.send('this is podlet content');
