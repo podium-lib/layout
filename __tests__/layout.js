@@ -620,3 +620,31 @@ test('Layout() - setting a custom view template', async () => {
 
     s1.stop();
 });
+
+test('Layout() - request url parsing', async () => {
+    expect.hasAssertions();
+
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        expect(res.locals.podium.url.href).toBe('http://localhost:4013/');
+        expect(res.locals.podium.context['podium-mount-origin']).toBe(
+            'http://localhost:4013',
+        );
+        expect(res.locals.podium.context['podium-mount-pathname']).toBe('/');
+        res.send('ok');
+    });
+
+    const s1 = stoppable(app.listen(4013), 0);
+
+    await request('http://localhost:4013').get('/');
+
+    s1.stop();
+});
