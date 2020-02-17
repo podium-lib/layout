@@ -26,9 +26,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "jest .",
-    "test:verbose": "jest --verbose",
-    "test:coverage": "jest --coverage",
+    "test": "tap",
+    "test:snapshots": "tap --snapshot",
     "lint:format": "eslint --fix .",
     "precommit": "lint-staged"
   },
@@ -53,24 +52,9 @@
     "eslint-plugin-prettier": "3.1.2",
     "express": "4.17.1",
     "hbs": "4.1.0",
-    "jest": "25.1.0",
     "prettier": "1.19.1",
     "stoppable": "1.1.0",
-    "supertest": "4.0.2"
-  },
-  "jest": {
-    "coveragePathIgnorePatterns": [
-      "test/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 85,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "testEnvironment": "node",
-    "clearMocks": true
+    "supertest": "4.0.2",
+    "tap": "^14.10.6"
   }
 }
