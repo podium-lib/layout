@@ -44,7 +44,7 @@
     "objobj": "1.0.0"
   },
   "devDependencies": {
-    "@podium/podlet": "4.2.4",
+    "@podium/podlet": "4.3.0",
     "@podium/test-utils": "2.0.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.0.0",
