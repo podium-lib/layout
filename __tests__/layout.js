@@ -200,9 +200,9 @@ test('Layout() - metrics properly decorated', t => {
         });
 });
 
-// // #############################################
-// // .css()
-// // #############################################
+// #############################################
+// .css()
+// #############################################
 
 test('.css() - call method with no arguments - should return default value', t => {
     const layout = new Layout(DEFAULT_OPTIONS);
@@ -308,9 +308,9 @@ test('.css() - passing an instance of AssetsCss - should return set value', t =>
     t.end();
 });
 
-// // #############################################
-// // .js()
-// // #############################################
+// #############################################
+// .js()
+// #############################################
 
 test('.js() - passing an instance of AssetsJs - should return set value', t => {
     const layout = new Layout(DEFAULT_OPTIONS);
@@ -428,9 +428,9 @@ test('.js() - "options" argument as an array - should NOT set additional keys', 
     t.end();
 });
 
-// // #############################################
-// // .process()
-// // #############################################
+// #############################################
+// .process()
+// #############################################
 
 test('.process() - call method with HttpIncoming - should return HttpIncoming', async t => {
     const layout = new Layout(DEFAULT_OPTIONS);
