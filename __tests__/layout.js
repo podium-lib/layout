@@ -153,12 +153,18 @@ test('Layout() - metrics properly decorated', t => {
                 name: 'name',
                 value: 'myLayout',
             });
+            t.same(arr[3].meta, {
+                buckets: [0.001, 0.01, 0.1, 0.5, 1, 2, 10],
+            });
 
             t.equal(arr[4].name, 'podium_client_resolver_fallback_resolve');
             t.equal(arr[4].type, 5);
             t.same(arr[4].labels[0], {
                 name: 'name',
                 value: 'myLayout',
+            });
+            t.same(arr[4].meta, {
+                buckets: [0.001, 0.01, 0.1, 0.5, 1, 2, 10],
             });
 
             t.equal(arr[5].name, 'podium_client_resolver_content_resolve');
@@ -167,10 +173,16 @@ test('Layout() - metrics properly decorated', t => {
                 name: 'name',
                 value: 'myLayout',
             });
+            t.same(arr[5].meta, {
+                buckets: [0.001, 0.01, 0.1, 0.5, 1, 2, 10],
+            });
 
             t.equal(arr[6].name, 'podium_context_process');
             t.equal(arr[6].type, 5);
             t.same(arr[6].labels, [{ name: 'name', value: 'myLayout' }]);
+            t.same(arr[6].meta, {
+                buckets: [0.001, 0.01, 0.1, 0.5, 1],
+            });
 
             t.equal(arr[7].name, 'podium_proxy_process');
             t.equal(arr[7].type, 5);
@@ -180,6 +192,9 @@ test('Layout() - metrics properly decorated', t => {
                 { name: 'proxy', value: true },
                 { name: 'error', value: false },
             ]);
+            t.same(arr[7].meta, {
+                buckets: [0.001, 0.01, 0.1, 0.5, 1, 2, 10],
+            });
             t.end();
         }),
     );
