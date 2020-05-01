@@ -29,7 +29,9 @@
     "test": "tap",
     "test:snapshots": "tap --snapshot",
     "lint:format": "eslint --fix .",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "@metrics/client": "2.5.0",
@@ -40,7 +42,8 @@
     "@podium/utils": "4.2.5",
     "abslog": "2.4.0",
     "lodash.merge": "4.6.2",
-    "objobj": "1.0.0"
+    "objobj": "1.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@podium/podlet": "4.3.1",
@@ -56,5 +59,6 @@
     "stoppable": "1.1.0",
     "supertest": "4.0.2",
     "tap": "14.10.7"
-  }
+  },
+  "snyk": true
 }
