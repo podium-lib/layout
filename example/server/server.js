@@ -5,7 +5,7 @@
 
 const express = require('express');
 const path = require('path');
-const Layout = require('../../');
+const Layout = require("../..");
 
 const layout = new Layout({
     pathname: '/foo',
