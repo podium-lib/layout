@@ -9,7 +9,7 @@ const express = require('express');
 const request = require('supertest');
 const Podlet = require('@podium/podlet');
 
-const Layout = require('../');
+const Layout = require("..");
 
 const SIMPLE_REQ = {
     headers: {},
