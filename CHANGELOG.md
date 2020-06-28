@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/podium-lib/layout/compare/v4.5.1...v4.6.0) (2020-06-28)
+
+
+### Features
+
+* Added support for data-* attributes on .js() method ([516909c](https://github.com/podium-lib/layout/commit/516909cada29497910a4e06fdb0d3d9698229ca4))
+
 # Changelog
 
 Notable changes to this project will be documented in this file.
