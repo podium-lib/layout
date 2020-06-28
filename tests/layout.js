@@ -443,6 +443,37 @@ test('.js() - "options" argument as an array - should NOT set additional keys', 
     t.end();
 });
 
+test('.js() - data attribute object - should convert to array of key / value objects', (t) => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    layout.js([
+        { 
+            value: '/foo/bar',
+            data: {
+                bar: 'a',
+                foo: 'b'
+            } 
+        }
+    ]);
+
+    const result = JSON.parse(JSON.stringify(layout.jsRoute));
+
+    t.same(result, [{ 
+        type: 'default', 
+        value: '/foo/bar',
+        data: [
+            {
+                key: 'bar',
+                value: 'a',
+            },
+            {
+                key: 'foo',
+                value: 'b',
+            }
+        ] 
+    }]);
+    t.end()
+});
+
 // #############################################
 // .process()
 // #############################################
