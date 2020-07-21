@@ -1,3 +1,17 @@
+# [5.0.0-next.2](https://github.com/podium-lib/layout/compare/v5.0.0-next.1...v5.0.0-next.2) (2020-07-21)
+
+
+### Features
+
+* Remove deprecated return value on .js and .css methods ([e9052ed](https://github.com/podium-lib/layout/commit/e9052ed0b86f4690c8837dd09639ec5170f76e5c))
+
+
+### BREAKING CHANGES
+
+* In version 4 of podium it became possible to set multiple assets to a layout through its `.js()` and `.css()` methods. This did make it impossible to let these methods return a reasonable value, but to keep a backwards compatibility with version 3 of Podium, the first item passed in was returned for compatibility. This removes this compatibility with version 3 of Podium.
+
+This resolves https://github.com/podium-lib/issues/issues/23
+
 # [5.0.0-next.1](https://github.com/podium-lib/layout/compare/v4.6.0...v5.0.0-next.1) (2020-07-14)
 
 
