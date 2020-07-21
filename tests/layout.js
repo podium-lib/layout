@@ -131,7 +131,7 @@ test('Layout() - metrics properly decorated', t => {
     });
 
     app.get('/', async (req, res) => {
-        const response = await podletClient.fetch(res.locals.podium.context);
+        const response = await podletClient.fetch(res.locals.podium);
         res.send(response.content);
     });
 
@@ -219,58 +219,21 @@ test('Layout() - metrics properly decorated', t => {
 // .css()
 // #############################################
 
-test('.css() - call method with no arguments - should return default value', t => {
+test('.css() - call method with no arguments - should throw', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
-    const result = layout.css();
-    t.equal(result, '');
-    t.end();
-});
-
-test('.css() - set legal value on "value" argument - should return set value', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    const result = layout.css({ value: '/foo/bar' });
-    t.equal(result, '/foo/bar');
-    t.end();
-});
-
-test('.css() - set "prefix" argument to "true" - should prefix value returned by method', t => {
-    const options = { ...DEFAULT_OPTIONS, pathname: '/xyz' };
-    const layout = new Layout(options);
-    const result = layout.css({ value: '/foo/bar', prefix: true });
-    t.equal(result, '/xyz/foo/bar');
-    t.end();
+    t.throws(() => {
+        layout.css();
+    }, 'Value for argument variable "value", "undefined", is not valid');
+    t.end()
 });
 
 test('.css() - set legal absolute value on "value" argument - should set "css" to set value', t => {
     const layout = new Layout(DEFAULT_OPTIONS);
-    const result = layout.css({ value: 'http://somewhere.remote.com' });
-    t.equal(result, 'http://somewhere.remote.com');
-    t.end();
-});
-
-test('.css() - set illegal value on "value" argument - should throw', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-
-    t.throws(() => {
-        layout.css({ value: '/foo / bar' });
-    }, 'Value for argument variable "value", "/foo / bar", is not valid');
-    t.end();
-});
-
-test('.css() - call method with "value" argument, then call it a second time with no argument - should return first set value on second call', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.css({ value: '/foo/bar' });
-    const result = layout.css();
-    t.equal(result, '/foo/bar');
-    t.end();
-});
-
-test('.css() - call method twice with a value for "value" argument - should set both values', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.css({ value: '/foo/bar' });
-    layout.css({ value: '/bar/foo' });
-    const result = layout.css();
-    t.equal(result, '/foo/bar');
+    layout.css({ value: 'http://somewhere.remote.com' });
+    const result = JSON.parse(JSON.stringify(layout.cssRoute));
+    t.same(result, [
+        { rel: 'stylesheet', type: 'text/css', value: 'http://somewhere.remote.com' },
+    ]);
     t.end();
 });
 
@@ -327,6 +290,14 @@ test('.css() - passing an instance of AssetsCss - should return set value', t =>
 // .js()
 // #############################################
 
+test('.js() - call method with no arguments - should throw', (t) => {
+    const layout = new Layout(DEFAULT_OPTIONS);
+    t.throws(() => {
+        layout.js();
+    }, 'Value for argument variable "value", "undefined", is not valid');
+    t.end()
+});
+
 test('.js() - passing an instance of AssetsJs - should return set value', t => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js(new AssetJs({ value: '/foo/bar', type: 'module' }));
@@ -335,57 +306,13 @@ test('.js() - passing an instance of AssetsJs - should return set value', t => {
     t.end();
 });
 
-test('.js() - call method with no arguments - should return default value', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    const result = layout.js();
-    t.equal(result, '');
-    t.end();
-});
-
-test('.js() - set legal value on "value" argument - should return set value', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    const result = layout.js({ value: '/foo/bar' });
-    t.equal(result, '/foo/bar');
-    t.end();
-});
-
-test('.js() - set "prefix" argument to "true" - should prefix value returned by method', t => {
-    const options = { ...DEFAULT_OPTIONS, pathname: '/xyz' };
-    const layout = new Layout(options);
-    const result = layout.js({ value: '/foo/bar', prefix: true });
-    t.equal(result, '/xyz/foo/bar');
-    t.end();
-});
-
 test('.js() - set legal absolute value on "value" argument - should set "js" to set value', t => {
     const layout = new Layout(DEFAULT_OPTIONS);
-    const result = layout.js({ value: 'http://somewhere.remote.com' });
-    t.equal(result, 'http://somewhere.remote.com');
-    t.end();
-});
-
-test('.js() - set illegal value on "value" argument - should throw', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    t.throws(() => {
-        layout.js({ value: '/foo / bar' });
-    }, 'Value for argument variable "value", "/foo / bar", is not valid');
-    t.end();
-});
-
-test('.js() - call method with "value" argument, then call it a second time with no argument - should return first set value on second call', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js({ value: '/foo/bar' });
-    const result = layout.js();
-    t.equals(result, '/foo/bar');
-    t.end();
-});
-
-test('.js() - call method twice with a value for "value" argument - should set both values', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js({ value: '/foo/bar' });
-    layout.js({ value: '/bar/foo' });
-    const result = layout.js();
-    t.equals(result, '/foo/bar');
+    layout.js({ value: 'http://somewhere.remote.com' });
+    const result = JSON.parse(JSON.stringify(layout.jsRoute));
+    t.same(result, [
+        { type: 'default', value: 'http://somewhere.remote.com' },
+    ]);
     t.end();
 });
 
