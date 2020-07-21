@@ -37,11 +37,11 @@
   },
   "dependencies": {
     "@metrics/client": "2.5.0",
-    "@podium/client": "4.4.2",
-    "@podium/context": "4.1.6",
-    "@podium/proxy": "4.2.1",
-    "@podium/schemas": "4.0.2",
-    "@podium/utils": "4.3.0",
+    "@podium/client": "5.0.0-next.4",
+    "@podium/context": "5.0.0-next.3",
+    "@podium/proxy": "5.0.0-next.2",
+    "@podium/schemas": "5.0.0-next.1",
+    "@podium/utils": "5.0.0-next.2",
     "abslog": "2.4.0",
     "lodash.merge": "4.6.2",
     "objobj": "1.0.0"
