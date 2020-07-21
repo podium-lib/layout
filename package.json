@@ -43,7 +43,6 @@
     "@podium/schemas": "5.0.0-next.1",
     "@podium/utils": "5.0.0-next.2",
     "abslog": "2.4.0",
-    "lodash.merge": "4.6.2",
     "objobj": "1.0.0"
   },
   "devDependencies": {
