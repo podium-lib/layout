@@ -1,3 +1,10 @@
+# [5.0.0-next.3](https://github.com/podium-lib/layout/compare/v5.0.0-next.2...v5.0.0-next.3) (2020-07-21)
+
+
+### Bug Fixes
+
+* Remove lodash.merge ([#157](https://github.com/podium-lib/layout/issues/157)) ([ea2bc77](https://github.com/podium-lib/layout/commit/ea2bc77e761c181fb97cb61fb74fccf91238c7d6))
+
 # [5.0.0-next.2](https://github.com/podium-lib/layout/compare/v5.0.0-next.1...v5.0.0-next.2) (2020-07-21)
 
 
