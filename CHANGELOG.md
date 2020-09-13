@@ -1,3 +1,10 @@
+## [4.6.3](https://github.com/podium-lib/layout/compare/v4.6.2...v4.6.3) (2020-09-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/utils to v4.3.1 ([e437f19](https://github.com/podium-lib/layout/commit/e437f192891444b23b568326237c408536e2f866))
+
 ## [4.6.2](https://github.com/podium-lib/layout/compare/v4.6.1...v4.6.2) (2020-09-13)
 
 
