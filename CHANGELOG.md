@@ -1,3 +1,10 @@
+## [4.6.22](https://github.com/podium-lib/layout/compare/v4.6.21...v4.6.22) (2020-10-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/context to v4.1.12 ([966f28e](https://github.com/podium-lib/layout/commit/966f28e785c7fea9ca60b1e8d394384dd4b34973))
+
 ## [4.6.21](https://github.com/podium-lib/layout/compare/v4.6.20...v4.6.21) (2020-10-29)
 
 
