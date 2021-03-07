@@ -1,3 +1,10 @@
+## [4.6.51](https://github.com/podium-lib/layout/compare/v4.6.50...v4.6.51) (2021-03-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/proxy to v4.2.20 ([56f77bc](https://github.com/podium-lib/layout/commit/56f77bc5e29f7363e7f18743adbae6136f189be1))
+
 ## [4.6.50](https://github.com/podium-lib/layout/compare/v4.6.49...v4.6.50) (2021-03-07)
 
 
