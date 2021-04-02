@@ -3,8 +3,12 @@
     "config:base",
     "group:linters"
   ],
-  "packageRules": [{
-    "depTypeList": ["dependencies"],
+  "packageRules": [  {
+    "matchPackagePatterns": ["^@podium"],
+    "groupName": "@podium packages"
+  },
+  {
+    "matchDepTypes": ["dependencies"],
     "timezone": "Europe/Oslo",
     "schedule": ["daily"],
     "automerge": true,
@@ -13,7 +17,7 @@
     }
   },
   {
-    "depTypeList": ["devDependencies"],
+    "matchDepTypes": ["devDependencies"],
     "timezone": "Europe/Oslo",
     "schedule": ["weekly"],
     "commitMessage": "Dev dependency {{depName}} updated to version {{newValue}}",
@@ -22,9 +26,5 @@
     "major": {
       "automerge": false
     }
-  },
-  {
-    "groupName": "@podium packages",
-    "packagePatterns": ["^@podium/", "^podium"]
   }]
 }
