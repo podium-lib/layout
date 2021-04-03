@@ -1,3 +1,10 @@
+## [4.6.76](https://github.com/podium-lib/layout/compare/v4.6.75...v4.6.76) (2021-04-03)
+
+
+### Bug Fixes
+
+* **deps:** update [@podium](https://github.com/podium) packages ([0341eec](https://github.com/podium-lib/layout/commit/0341eec908ba773a81eb9cd7186023e7532984ac))
+
 ## [4.6.75](https://github.com/podium-lib/layout/compare/v4.6.74...v4.6.75) (2021-03-31)
 
 
