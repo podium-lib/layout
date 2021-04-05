@@ -30,8 +30,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "tap --no-esm",
-    "test:snapshots": "tap --snapshot --no-esm",
+    "test": "tap --no-check-coverage",
+    "test:snapshots": "tap --snapshot --no-check-coverage",
     "lint:format": "eslint --fix .",
     "precommit": "lint-staged"
   },
@@ -67,6 +67,6 @@
     "prettier": "2.2.1",
     "stoppable": "1.1.0",
     "supertest": "6.1.3",
-    "tap": "14.11.0"
+    "tap": "15.0.1"
   }
 }
