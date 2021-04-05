@@ -376,7 +376,7 @@ test('.js() - call method with "value" argument, then call it a second time with
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js({ value: '/foo/bar' });
     const result = layout.js();
-    t.equals(result, '/foo/bar');
+    t.equal(result, '/foo/bar');
     t.end();
 });
 
@@ -385,7 +385,7 @@ test('.js() - call method twice with a value for "value" argument - should set b
     layout.js({ value: '/foo/bar' });
     layout.js({ value: '/bar/foo' });
     const result = layout.js();
-    t.equals(result, '/foo/bar');
+    t.equal(result, '/foo/bar');
     t.end();
 });
 

@@ -30,8 +30,8 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "tap --no-esm",
-    "test:snapshots": "tap --snapshot --no-esm",
+    "test": "tap --no-check-coverage",
+    "test:snapshots": "tap --snapshot --no-check-coverage",
     "lint:format": "eslint --fix .",
     "precommit": "lint-staged"
   },
