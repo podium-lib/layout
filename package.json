@@ -63,7 +63,7 @@
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-prettier": "3.3.1",
     "express": "4.17.1",
-    "hbs": "4.1.1",
+    "hbs": "4.1.2",
     "prettier": "2.2.1",
     "stoppable": "1.1.0",
     "supertest": "6.1.3",
