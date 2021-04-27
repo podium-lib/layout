@@ -45,7 +45,7 @@
     "abslog": "2.4.0",
     "lodash.merge": "4.6.2",
     "objobj": "1.0.0",
-    "ajv": "8.1.0"
+    "ajv": "8.2.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "5.0.1",
