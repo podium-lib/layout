@@ -1,7 +1,6 @@
 {
   "name": "@podium/layout",
-  "version": "5.0.0-next.4",
-  "type": "module",
+  "version": "5.0.0-next.5",
   "description": "Module for composing full page layouts out of page fragments in a micro frontend architecture.",
   "license": "MIT",
   "keywords": [
