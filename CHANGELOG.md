@@ -1,4 +1,5 @@
 # [5.0.0-next.4](https://github.com/podium-lib/layout/compare/v5.0.0-next.3...v5.0.0-next.4) (2021-04-30)
+## [4.6.84](https://github.com/podium-lib/layout/compare/v4.6.83...v4.6.84) (2021-05-09)
 
 
 ### Bug Fixes
@@ -87,6 +88,22 @@
 * **deps:** update dependency @podium/utils to v4.4.5 ([067ccf1](https://github.com/podium-lib/layout/commit/067ccf103f7387414bf5d6408c88ae3973bc2f53))
 
 # [5.0.0-next.3](https://github.com/podium-lib/layout/compare/v5.0.0-next.2...v5.0.0-next.3) (2020-07-21)
+* **deps:** update all dependencies ([eaeaf2d](https://github.com/podium-lib/layout/commit/eaeaf2d8f441a3e145136a234ab9f6f561ed0b77))
+
+## [4.6.83](https://github.com/podium-lib/layout/compare/v4.6.82...v4.6.83) (2021-05-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ajv to v8.3.0 ([a7a8c2c](https://github.com/podium-lib/layout/commit/a7a8c2c56167c2ad68231a1681e89699e174f4b2))
+
+## [4.6.82](https://github.com/podium-lib/layout/compare/v4.6.81...v4.6.82) (2021-05-05)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies ([321c474](https://github.com/podium-lib/layout/commit/321c47474e4f678ed1447e236cdff896837de432))
+
 ## [4.6.81](https://github.com/podium-lib/layout/compare/v4.6.80...v4.6.81) (2021-04-27)
 
 
