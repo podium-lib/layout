@@ -1,3 +1,19 @@
+# [5.0.0-next.6](https://github.com/podium-lib/layout/compare/v5.0.0-next.5...v5.0.0-next.6) (2021-05-10)
+
+
+### Features
+
+* Convert to ESM ([#286](https://github.com/podium-lib/layout/issues/286)) ([7824568](https://github.com/podium-lib/layout/commit/7824568ddd2f4d3d81d5b7308da34fd38ae34ae0))
+
+
+### BREAKING CHANGES
+
+* Convert from CommonJS module to ESM
+
+* fix: Set type to be module
+
+Co-authored-by: Trygve Lie <trygve.lie@finn.no>
+
 # [5.0.0-next.5](https://github.com/podium-lib/layout/compare/v5.0.0-next.4...v5.0.0-next.5) (2021-05-09)
 
 
