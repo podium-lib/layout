@@ -1,3 +1,10 @@
+## [4.6.88](https://github.com/podium-lib/layout/compare/v4.6.87...v4.6.88) (2021-06-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ajv to v8.6.0 ([4568822](https://github.com/podium-lib/layout/commit/456882276b91ce1f5acd66b7bcfcce090e85ef9e))
+
 ## [4.6.87](https://github.com/podium-lib/layout/compare/v4.6.86...v4.6.87) (2021-05-24)
 
 
