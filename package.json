@@ -55,7 +55,7 @@
     "@semantic-release/npm": "7.1.3",
     "@semantic-release/release-notes-generator": "9.0.3",
     "semantic-release": "17.4.4",
-    "@podium/podlet": "4.4.34",
+    "@podium/podlet": "4.4.37",
     "@podium/test-utils": "2.4.1",
     "eslint": "7.32.0",
     "eslint-config-airbnb-base": "14.2.1",
