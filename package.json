@@ -66,7 +66,7 @@
     "hbs": "4.1.2",
     "prettier": "2.3.2",
     "stoppable": "1.1.0",
-    "supertest": "6.1.5",
+    "supertest": "6.1.6",
     "tap": "15.0.9"
   }
 }
