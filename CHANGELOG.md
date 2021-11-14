@@ -1,3 +1,10 @@
+## [4.6.103](https://github.com/podium-lib/layout/compare/v4.6.102...v4.6.103) (2021-11-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/schemas to v4.1.27 ([eb9bc4c](https://github.com/podium-lib/layout/commit/eb9bc4ca12bfd8fc756fdf897ab7ddbf02572024))
+
 ## [4.6.102](https://github.com/podium-lib/layout/compare/v4.6.101...v4.6.102) (2021-11-13)
 
 
