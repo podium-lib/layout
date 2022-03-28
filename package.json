@@ -37,15 +37,15 @@
   },
   "dependencies": {
     "@metrics/client": "2.5.0",
-    "@podium/client": "4.5.20",
-    "@podium/context": "4.1.73",
-    "@podium/proxy": "4.2.72",
-    "@podium/schemas": "4.1.31",
-    "@podium/utils": "4.4.35",
+    "@podium/client": "4.5.22",
+    "@podium/context": "4.1.74",
+    "@podium/proxy": "4.2.73",
+    "@podium/schemas": "4.1.32",
+    "@podium/utils": "4.4.36",
     "abslog": "2.4.0",
     "lodash.merge": "4.6.2",
     "objobj": "1.0.0",
-    "ajv": "8.10.0"
+    "ajv": "8.11.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "6.0.1",
