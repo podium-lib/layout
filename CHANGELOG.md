@@ -1,3 +1,10 @@
+## [4.6.110](https://github.com/podium-lib/layout/compare/v4.6.109...v4.6.110) (2022-04-05)
+
+
+### Bug Fixes
+
+* update Proxy module to fix trailer header vulnerability ([fe43e65](https://github.com/podium-lib/layout/commit/fe43e655432b0a5f07b6475f67babcc2588fb039))
+
 ## [4.6.109](https://github.com/podium-lib/layout/compare/v4.6.108...v4.6.109) (2022-03-28)
 
 
