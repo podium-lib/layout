@@ -1,3 +1,36 @@
+# [5.0.0-next.7](https://github.com/podium-lib/layout/compare/v5.0.0-next.6...v5.0.0-next.7) (2022-05-10)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies ([c597284](https://github.com/podium-lib/layout/commit/c5972848deec24e0d53365c181d4d7a25bba2921))
+* **deps:** update all dependencies ([dc50304](https://github.com/podium-lib/layout/commit/dc5030414adf9e193022fdac011c7db22971982d))
+* **deps:** update all dependencies ([78f476d](https://github.com/podium-lib/layout/commit/78f476d8bef56f3632d609030bdc820df2cee223))
+* **deps:** update all dependencies ([d0169c0](https://github.com/podium-lib/layout/commit/d0169c0406376026027314edeb897f86f1cbf497))
+* **deps:** update all dependencies ([b719baa](https://github.com/podium-lib/layout/commit/b719baaa617bb4e60ca8a0411a8fd705fd65ed22))
+* **deps:** update all dependencies ([5341f5a](https://github.com/podium-lib/layout/commit/5341f5ae9dea8d7e5a5a90fa0b56b39d2bdd033b))
+* **deps:** update all dependencies ([b870f4f](https://github.com/podium-lib/layout/commit/b870f4fc38e71d8d78ebdf600a73261de4ebeaa5))
+* **deps:** update all dependencies ([1406c94](https://github.com/podium-lib/layout/commit/1406c94256b375379ea084c9a3e9a24b699650f2))
+* **deps:** update all dependencies ([c1a7226](https://github.com/podium-lib/layout/commit/c1a7226cc33e8d66fac32c6b4c705b9ba7384faa))
+* **deps:** update all dependencies ([a9bb493](https://github.com/podium-lib/layout/commit/a9bb4932dffc515a5e43dfce54c9105e185585b3))
+* **deps:** update all dependencies ([1b55e44](https://github.com/podium-lib/layout/commit/1b55e44baf875977e5608276c8e69a83edaa1321))
+* **deps:** update all dependencies ([4116e56](https://github.com/podium-lib/layout/commit/4116e56a5318e830718ae4e1137544d4bce60660))
+* **deps:** update all dependencies ([4ac5610](https://github.com/podium-lib/layout/commit/4ac56102538221e5a550f48025b650fe2b6b718b))
+* **deps:** update all dependencies ([#343](https://github.com/podium-lib/layout/issues/343)) ([c8c4d14](https://github.com/podium-lib/layout/commit/c8c4d14be915bfdadefea6a7b46c6f884393ece8))
+* **deps:** update all dependencies (non-major) ([4a7ba72](https://github.com/podium-lib/layout/commit/4a7ba72e7830c68f8349db7c5edbee3bf3eb684e))
+* **deps:** update all dependencies (non-major) ([23f5964](https://github.com/podium-lib/layout/commit/23f59644eaa989269fe8de578d5a8b3d8b458488))
+* **deps:** update dependency @podium/client to v4.5.0 ([#320](https://github.com/podium-lib/layout/issues/320)) ([3da1a8c](https://github.com/podium-lib/layout/commit/3da1a8ca005fe495fa3509019b20decc1a41b012))
+* **deps:** update dependency @podium/context to v4.1.59 ([14e0e5d](https://github.com/podium-lib/layout/commit/14e0e5deb2e20232b3c5cf6c7f608a9d470a1476))
+* **deps:** update dependency @podium/proxy to v4.2.75 ([5b353d8](https://github.com/podium-lib/layout/commit/5b353d859e4037ac519fb2e9e37a1d1641ee4092))
+* **deps:** update dependency @podium/schemas to v4.1.23 ([3b6830b](https://github.com/podium-lib/layout/commit/3b6830b7416de6ef1f9fabd66c7033b622815e6e))
+* **deps:** update dependency @podium/schemas to v4.1.27 ([eb9bc4c](https://github.com/podium-lib/layout/commit/eb9bc4ca12bfd8fc756fdf897ab7ddbf02572024))
+* **deps:** update dependency ajv to v8.5.0 ([e82c51e](https://github.com/podium-lib/layout/commit/e82c51e63022991ed09f9522dda57b71654c1585))
+* **deps:** update dependency ajv to v8.6.0 ([4568822](https://github.com/podium-lib/layout/commit/456882276b91ce1f5acd66b7bcfcce090e85ef9e))
+* **deps:** update dependency ajv to v8.6.1 ([cba88f1](https://github.com/podium-lib/layout/commit/cba88f13b1b9f9b6c1fbd73a5489b67855bfc03f))
+* **deps:** update dependency ajv to v8.6.2 ([8bb6671](https://github.com/podium-lib/layout/commit/8bb667150785eb6f8afb1a62fc8bedb6ecdbac32))
+* **deps:** update dependency ajv to v8.7.1 ([a9740cc](https://github.com/podium-lib/layout/commit/a9740cc839199f0d07641f42e4ba010eb4d9f4d3))
+* update Proxy module to fix trailer header vulnerability ([fe43e65](https://github.com/podium-lib/layout/commit/fe43e655432b0a5f07b6475f67babcc2588fb039))
+
 # [5.0.0-next.6](https://github.com/podium-lib/layout/compare/v5.0.0-next.5...v5.0.0-next.6) (2021-05-10)
 
 
