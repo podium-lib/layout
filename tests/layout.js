@@ -133,7 +133,7 @@ tap.test('Layout() - metrics properly decorated', t => {
     app.use(layout.middleware());
 
     const podletClient = layout.client.register({
-        uri: 'http://localhost:5021/manifest.json',
+        uri: 'http://0.0.0.0:5021/manifest.json',
         name: 'myPodlet',
     });
 
@@ -208,10 +208,10 @@ tap.test('Layout() - metrics properly decorated', t => {
 
     const s2 = stoppable(app.listen(5022), 0);
 
-    request('http://localhost:5022')
+    request('http://0.0.0.0:5022')
         .get('/')
         .then(async result => {
-            const apiResponse = await request('http://localhost:5022').get(
+            const apiResponse = await request('http://0.0.0.0:5022').get(
                 '/podium-resource/myPodlet/api',
             );
             t.equal(result.text, 'this is podlet content');
@@ -468,7 +468,7 @@ tap.test('Layout() - rendering using a string', async t => {
 
     const s1 = stoppable(app.listen(4010), 0);
 
-    const result = await request('http://localhost:4010').get('/');
+    const result = await request('http://0.0.0.0:4010').get('/');
 
     t.match(result.text, '<div>should be wrapped in a doc</div>');
     t.match(result.text, '<html lang=');
@@ -503,7 +503,7 @@ tap.test('Layout() - rendering using a string - with assets', async t => {
 
     const s1 = stoppable(app.listen(4011), 0);
 
-    const result = await request('http://localhost:4011').get('/');
+    const result = await request('http://0.0.0.0:4011').get('/');
 
     t.matchSnapshot(result.text);
 
@@ -534,7 +534,7 @@ tap.test('Layout() - setting a custom view template', async t => {
 
     const s1 = stoppable(app.listen(4012), 0);
 
-    const result = await request('http://localhost:4012').get('/');
+    const result = await request('http://0.0.0.0:4012').get('/');
 
     t.matchSnapshot(result.text);
 
@@ -553,10 +553,10 @@ tap.test('Layout() - request url parsing', async t => {
     app.use(layout.middleware());
 
     app.get('/', async (req, res) => {
-        t.equal(res.locals.podium.url.href, 'http://localhost:4013/');
+        t.equal(res.locals.podium.url.href, 'http://0.0.0.0:4013/');
         t.equal(
             res.locals.podium.context['podium-mount-origin'],
-            'http://localhost:4013',
+            'http://0.0.0.0:4013',
         );
         t.equal(res.locals.podium.context['podium-mount-pathname'], '/');
         res.send('ok');
@@ -564,7 +564,7 @@ tap.test('Layout() - request url parsing', async t => {
 
     const s1 = stoppable(app.listen(4013), 0);
 
-    await request('http://localhost:4013').get('/');
+    await request('http://0.0.0.0:4013').get('/');
 
     s1.stop();
 });
