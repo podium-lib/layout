@@ -1,5 +1,3 @@
-'use strict';
-
 const CustomContextParser = class CustomContextParser {
     get [Symbol.toStringTag]() {
         return 'CustomContextParser';
@@ -12,4 +10,4 @@ const CustomContextParser = class CustomContextParser {
     }
 };
 
-module.exports = CustomContextParser;
+export default CustomContextParser;

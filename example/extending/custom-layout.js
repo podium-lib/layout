@@ -1,7 +1,5 @@
-'use strict';
-
-const CustomContext = require('./custom-context');
-const PodiumLayout = require("../..");
+import CustomContext from './custom-context.js';
+import PodiumLayout from '../../lib/layout.js';
 
 const CustomLayout = class CustomLayout extends PodiumLayout {
     constructor(name) {
@@ -17,4 +15,4 @@ const CustomLayout = class CustomLayout extends PodiumLayout {
     }
 };
 
-module.exports = CustomLayout;
+export default CustomLayout;
