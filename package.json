@@ -1,6 +1,6 @@
 {
   "name": "@podium/layout",
-  "version": "4.6.111",
+  "version": "4.6.112",
   "description": "Module for composing full page layouts out of page fragments in a micro frontend architecture.",
   "main": "lib/layout.js",
   "license": "MIT",

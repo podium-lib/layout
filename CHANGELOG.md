@@ -1,3 +1,10 @@
+## [4.6.112](https://github.com/podium-lib/layout/compare/v4.6.111...v4.6.112) (2022-09-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/client to v4.5.23 ([#398](https://github.com/podium-lib/layout/issues/398)) ([ad5c84c](https://github.com/podium-lib/layout/commit/ad5c84c22645a485f47351ad43531227d7697f69))
+
 ## [4.6.111](https://github.com/podium-lib/layout/compare/v4.6.110...v4.6.111) (2022-05-09)
 
 
