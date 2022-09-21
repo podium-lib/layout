@@ -1,3 +1,10 @@
+# [5.0.0-next.8](https://github.com/podium-lib/layout/compare/v5.0.0-next.7...v5.0.0-next.8) (2022-09-21)
+
+
+### Bug Fixes
+
+* Use latest client and proxy ([#399](https://github.com/podium-lib/layout/issues/399)) ([4035461](https://github.com/podium-lib/layout/commit/40354617b85a866448faa30410c5b0c4cb42ad60))
+
 # [5.0.0-next.7](https://github.com/podium-lib/layout/compare/v5.0.0-next.6...v5.0.0-next.7) (2022-05-10)
 
 
