@@ -1,3 +1,10 @@
+## [4.6.114](https://github.com/podium-lib/layout/compare/v4.6.113...v4.6.114) (2022-11-14)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([5f373fb](https://github.com/podium-lib/layout/commit/5f373fbe537fe5bd27c201ff84cbf6cd7503fb04))
+
 ## [4.6.113](https://github.com/podium-lib/layout/compare/v4.6.112...v4.6.113) (2022-10-18)
 
 
