@@ -1,3 +1,17 @@
+## [4.6.122](https://github.com/podium-lib/layout/compare/v4.6.121...v4.6.122) (2023-09-25)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([a27c20b](https://github.com/podium-lib/layout/commit/a27c20bd530750e1a655df480ee236a859580235))
+
+## [4.6.121](https://github.com/podium-lib/layout/compare/v4.6.120...v4.6.121) (2023-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([1f2de8d](https://github.com/podium-lib/layout/commit/1f2de8d23b52abf824f19a9dff15d4f008af732d))
+
 ## [4.6.120](https://github.com/podium-lib/layout/compare/v4.6.119...v4.6.120) (2023-05-12)
 
 
