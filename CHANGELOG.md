@@ -1,3 +1,10 @@
+## [4.6.123](https://github.com/podium-lib/layout/compare/v4.6.122...v4.6.123) (2023-10-09)
+
+
+### Bug Fixes
+
+* add type definitions ([afb0649](https://github.com/podium-lib/layout/commit/afb06496bbc1390860e8fd411b076ac5d30dca18))
+
 ## [4.6.122](https://github.com/podium-lib/layout/compare/v4.6.121...v4.6.122) (2023-09-25)
 
 
