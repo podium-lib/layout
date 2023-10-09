@@ -1,3 +1,5 @@
+/// <reference path="../layout.d.ts" />
+
 'use strict';
 
 const { test } = require('tap');
@@ -9,7 +11,7 @@ const express = require('express');
 const request = require('supertest');
 const Podlet = require('@podium/podlet');
 
-const Layout = require("..");
+const Layout = require('..');
 
 const SIMPLE_REQ = {
     headers: {},
@@ -25,50 +27,50 @@ const DEFAULT_OPTIONS = { name: 'foo', pathname: '/' };
  * Constructor
  */
 
-test('Layout() - instantiate new layout object - should create an object', t => {
+test('Layout() - instantiate new layout object - should create an object', (t) => {
     const layout = new Layout({ name: 'foo', pathname: '/' });
     t.ok(layout instanceof Layout);
     t.end();
 });
 
-test('Layout() - object tag - should be PodiumLayout', t => {
+test('Layout() - object tag - should be PodiumLayout', (t) => {
     const layout = new Layout({ name: 'foo', pathname: '/' });
     t.equal(Object.prototype.toString.call(layout), '[object PodiumLayout]');
     t.end();
 });
 
-test('Layout() - no value given to "name" argument - should throw', t => {
+test('Layout() - no value given to "name" argument - should throw', (t) => {
     t.throws(() => {
         const layout = new Layout({ pathname: '/' }); // eslint-disable-line no-unused-vars
     }, 'The value, "", for the required argument "name" on the Layout constructor is not defined or not valid.');
     t.end();
 });
 
-test('Layout() - invalid value given to "name" argument - should throw', t => {
+test('Layout() - invalid value given to "name" argument - should throw', (t) => {
     t.throws(() => {
         const layout = new Layout({ name: 'foo bar', pathname: '/' }); // eslint-disable-line no-unused-vars
     }, 'The value, "foo bar", for the required argument "name" on the Layout constructor is not defined or not valid.');
     t.end();
 });
 
-test('Layout() - no value given to "pathname" argument - should throw', t => {
+test('Layout() - no value given to "pathname" argument - should throw', (t) => {
     t.throws(() => {
         const layout = new Layout({ name: 'foo' }); // eslint-disable-line no-unused-vars
     }, 'The value, "", for the required argument "pathname" on the Layout constructor is not defined or not valid.');
     t.end();
 });
 
-test('Layout() - invalid value given to "name" argument - should throw', t => {
+test('Layout() - invalid value given to "name" argument - should throw', (t) => {
     t.throws(() => {
         const layout = new Layout({ name: 'foo', pathname: 'foo bar' }); // eslint-disable-line no-unused-vars
     }, 'The value, "foo bar", for the required argument "pathname" on the Layout constructor is not defined or not valid.');
     t.end();
 });
 
-test('Layout() - should collect metric with version info', t => {
+test('Layout() - should collect metric with version info', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
 
-    const dest = destinationObjectStream(arr => {
+    const dest = destinationObjectStream((arr) => {
         t.equal(arr[0].name, 'podium_layout_version_info');
         t.equal(arr[0].labels[0].name, 'version');
         // eslint-disable-next-line global-require
@@ -86,7 +88,7 @@ test('Layout() - should collect metric with version info', t => {
     });
 });
 
-test('Layout() - metrics properly decorated', t => {
+test('Layout() - metrics properly decorated', (t) => {
     // podlet
     const podletApp = express();
 
@@ -136,7 +138,7 @@ test('Layout() - metrics properly decorated', t => {
     });
 
     layout.metrics.pipe(
-        destinationObjectStream(arr => {
+        destinationObjectStream((arr) => {
             t.equal(arr[0].name, 'podium_layout_version_info');
             t.equal(arr[0].type, 1);
             t.equal(arr[0].value, 1);
@@ -203,7 +205,7 @@ test('Layout() - metrics properly decorated', t => {
 
     request('http://localhost:5022')
         .get('/')
-        .then(async result => {
+        .then(async (result) => {
             const apiResponse = await request('http://localhost:5022').get(
                 '/podium-resource/myPodlet/api',
             );
@@ -219,21 +221,21 @@ test('Layout() - metrics properly decorated', t => {
 // .css()
 // #############################################
 
-test('.css() - call method with no arguments - should return default value', t => {
+test('.css() - call method with no arguments - should return default value', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     const result = layout.css();
     t.equal(result, '');
     t.end();
 });
 
-test('.css() - set legal value on "value" argument - should return set value', t => {
+test('.css() - set legal value on "value" argument - should return set value', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     const result = layout.css({ value: '/foo/bar' });
     t.equal(result, '/foo/bar');
     t.end();
 });
 
-test('.css() - set "prefix" argument to "true" - should prefix value returned by method', t => {
+test('.css() - set "prefix" argument to "true" - should prefix value returned by method', (t) => {
     const options = { ...DEFAULT_OPTIONS, pathname: '/xyz' };
     const layout = new Layout(options);
     const result = layout.css({ value: '/foo/bar', prefix: true });
@@ -241,14 +243,14 @@ test('.css() - set "prefix" argument to "true" - should prefix value returned by
     t.end();
 });
 
-test('.css() - set legal absolute value on "value" argument - should set "css" to set value', t => {
+test('.css() - set legal absolute value on "value" argument - should set "css" to set value', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     const result = layout.css({ value: 'http://somewhere.remote.com' });
     t.equal(result, 'http://somewhere.remote.com');
     t.end();
 });
 
-test('.css() - set illegal value on "value" argument - should throw', t => {
+test('.css() - set illegal value on "value" argument - should throw', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
 
     t.throws(() => {
@@ -257,7 +259,7 @@ test('.css() - set illegal value on "value" argument - should throw', t => {
     t.end();
 });
 
-test('.css() - call method with "value" argument, then call it a second time with no argument - should return first set value on second call', t => {
+test('.css() - call method with "value" argument, then call it a second time with no argument - should return first set value on second call', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css({ value: '/foo/bar' });
     const result = layout.css();
@@ -265,7 +267,7 @@ test('.css() - call method with "value" argument, then call it a second time wit
     t.end();
 });
 
-test('.css() - call method twice with a value for "value" argument - should set both values', t => {
+test('.css() - call method twice with a value for "value" argument - should set both values', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css({ value: '/foo/bar' });
     layout.css({ value: '/bar/foo' });
@@ -274,7 +276,7 @@ test('.css() - call method twice with a value for "value" argument - should set 
     t.end();
 });
 
-test('.css() - "options" argument as an array - should accept an array of values', t => {
+test('.css() - "options" argument as an array - should accept an array of values', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
     const result = JSON.parse(JSON.stringify(layout.cssRoute));
@@ -285,7 +287,7 @@ test('.css() - "options" argument as an array - should accept an array of values
     t.end();
 });
 
-test('.css() - "options" argument as an array - call method twice - should set all values', t => {
+test('.css() - "options" argument as an array - call method twice - should set all values', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
     layout.css([{ value: '/foo/bar/baz' }, { value: '/bar/foo/baz' }]);
@@ -299,7 +301,7 @@ test('.css() - "options" argument as an array - call method twice - should set a
     t.end();
 });
 
-test('.css() - "options" argument as an array - should NOT set additional keys', t => {
+test('.css() - "options" argument as an array - should NOT set additional keys', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css([
         { value: '/foo/bar', fake: 'prop' },
@@ -313,7 +315,7 @@ test('.css() - "options" argument as an array - should NOT set additional keys',
     t.end();
 });
 
-test('.css() - passing an instance of AssetsCss - should return set value', t => {
+test('.css() - passing an instance of AssetsCss - should return set value', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.css(new AssetCss({ value: '/foo/bar', type: 'text/css' }));
     const result = JSON.parse(JSON.stringify(layout.cssRoute));
@@ -327,7 +329,7 @@ test('.css() - passing an instance of AssetsCss - should return set value', t =>
 // .js()
 // #############################################
 
-test('.js() - passing an instance of AssetsJs - should return set value', t => {
+test('.js() - passing an instance of AssetsJs - should return set value', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js(new AssetJs({ value: '/foo/bar', type: 'module' }));
     const result = JSON.parse(JSON.stringify(layout.jsRoute));
@@ -335,21 +337,21 @@ test('.js() - passing an instance of AssetsJs - should return set value', t => {
     t.end();
 });
 
-test('.js() - call method with no arguments - should return default value', t => {
+test('.js() - call method with no arguments - should return default value', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     const result = layout.js();
     t.equal(result, '');
     t.end();
 });
 
-test('.js() - set legal value on "value" argument - should return set value', t => {
+test('.js() - set legal value on "value" argument - should return set value', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     const result = layout.js({ value: '/foo/bar' });
     t.equal(result, '/foo/bar');
     t.end();
 });
 
-test('.js() - set "prefix" argument to "true" - should prefix value returned by method', t => {
+test('.js() - set "prefix" argument to "true" - should prefix value returned by method', (t) => {
     const options = { ...DEFAULT_OPTIONS, pathname: '/xyz' };
     const layout = new Layout(options);
     const result = layout.js({ value: '/foo/bar', prefix: true });
@@ -357,14 +359,14 @@ test('.js() - set "prefix" argument to "true" - should prefix value returned by 
     t.end();
 });
 
-test('.js() - set legal absolute value on "value" argument - should set "js" to set value', t => {
+test('.js() - set legal absolute value on "value" argument - should set "js" to set value', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     const result = layout.js({ value: 'http://somewhere.remote.com' });
     t.equal(result, 'http://somewhere.remote.com');
     t.end();
 });
 
-test('.js() - set illegal value on "value" argument - should throw', t => {
+test('.js() - set illegal value on "value" argument - should throw', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     t.throws(() => {
         layout.js({ value: '/foo / bar' });
@@ -372,7 +374,7 @@ test('.js() - set illegal value on "value" argument - should throw', t => {
     t.end();
 });
 
-test('.js() - call method with "value" argument, then call it a second time with no argument - should return first set value on second call', t => {
+test('.js() - call method with "value" argument, then call it a second time with no argument - should return first set value on second call', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js({ value: '/foo/bar' });
     const result = layout.js();
@@ -380,7 +382,7 @@ test('.js() - call method with "value" argument, then call it a second time with
     t.end();
 });
 
-test('.js() - call method twice with a value for "value" argument - should set both values', t => {
+test('.js() - call method twice with a value for "value" argument - should set both values', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js({ value: '/foo/bar' });
     layout.js({ value: '/bar/foo' });
@@ -389,7 +391,7 @@ test('.js() - call method twice with a value for "value" argument - should set b
     t.end();
 });
 
-test('.js() - "type" argument is set to "module" - should set "type" to "module"', t => {
+test('.js() - "type" argument is set to "module" - should set "type" to "module"', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js({ value: '/foo/bar' });
     layout.js({ value: '/bar/foo', type: 'module' });
@@ -401,7 +403,7 @@ test('.js() - "type" argument is set to "module" - should set "type" to "module"
     t.end();
 });
 
-test('.js() - "options" argument as an array - should accept an array of values', t => {
+test('.js() - "options" argument as an array - should accept an array of values', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js([{ value: '/foo/bar' }, { value: '/bar/foo', type: 'module' }]);
     const result = JSON.parse(JSON.stringify(layout.jsRoute));
@@ -412,7 +414,7 @@ test('.js() - "options" argument as an array - should accept an array of values'
     t.end();
 });
 
-test('.js() - "options" argument as an array - call method twice - should set all values', t => {
+test('.js() - "options" argument as an array - call method twice - should set all values', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js([{ value: '/foo/bar' }, { value: '/bar/foo', type: 'module' }]);
     layout.js([
@@ -429,7 +431,7 @@ test('.js() - "options" argument as an array - call method twice - should set al
     t.end();
 });
 
-test('.js() - "options" argument as an array - should NOT set additional keys', t => {
+test('.js() - "options" argument as an array - should NOT set additional keys', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js([
         { value: '/foo/bar', fake: 'prop' },
@@ -446,39 +448,41 @@ test('.js() - "options" argument as an array - should NOT set additional keys', 
 test('.js() - data attribute object - should convert to array of key / value objects', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js([
-        { 
+        {
             value: '/foo/bar',
             data: {
                 bar: 'a',
-                foo: 'b'
-            } 
-        }
+                foo: 'b',
+            },
+        },
     ]);
 
     const result = JSON.parse(JSON.stringify(layout.jsRoute));
 
-    t.same(result, [{ 
-        type: 'default', 
-        value: '/foo/bar',
-        data: [
-            {
-                key: 'bar',
-                value: 'a',
-            },
-            {
-                key: 'foo',
-                value: 'b',
-            }
-        ] 
-    }]);
-    t.end()
+    t.same(result, [
+        {
+            type: 'default',
+            value: '/foo/bar',
+            data: [
+                {
+                    key: 'bar',
+                    value: 'a',
+                },
+                {
+                    key: 'foo',
+                    value: 'b',
+                },
+            ],
+        },
+    ]);
+    t.end();
 });
 
 // #############################################
 // .process()
 // #############################################
 
-test('.process() - call method with HttpIncoming - should return HttpIncoming', async t => {
+test('.process() - call method with HttpIncoming - should return HttpIncoming', async (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     const incoming = new HttpIncoming(SIMPLE_REQ, SIMPLE_RES);
     const result = await layout.process(incoming);
@@ -486,7 +490,7 @@ test('.process() - call method with HttpIncoming - should return HttpIncoming', 
     t.end();
 });
 
-test('.process() - idempotence - manipulating the HttpIncoming should not affect layout', async t => {
+test('.process() - idempotence - manipulating the HttpIncoming should not affect layout', async (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     t.same(layout.jsRoute, []);
     t.same(layout.cssRoute, []);
@@ -508,7 +512,7 @@ test('.process() - idempotence - manipulating the HttpIncoming should not affect
     t.end();
 });
 
-test('Layout() - rendering using a string', async t => {
+test('Layout() - rendering using a string', async (t) => {
     const app = express();
 
     const layout = new Layout({
@@ -533,7 +537,7 @@ test('Layout() - rendering using a string', async t => {
     t.end();
 });
 
-test('Layout() - rendering using a string - with assets', async t => {
+test('Layout() - rendering using a string - with assets', async (t) => {
     const app = express();
 
     const layout = new Layout({
@@ -567,7 +571,7 @@ test('Layout() - rendering using a string - with assets', async t => {
     t.end();
 });
 
-test('Layout() - setting a custom view template', async t => {
+test('Layout() - setting a custom view template', async (t) => {
     const app = express();
 
     const layout = new Layout({
@@ -598,7 +602,7 @@ test('Layout() - setting a custom view template', async t => {
     t.end();
 });
 
-test('Layout() - request url parsing', async t => {
+test('Layout() - request url parsing', async (t) => {
     const app = express();
 
     const layout = new Layout({
