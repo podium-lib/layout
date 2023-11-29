@@ -1,3 +1,32 @@
+# [5.0.0](https://github.com/podium-lib/layout/compare/v4.6.125...v5.0.0) (2023-11-29)
+
+
+### Bug Fixes
+
+* Remove lodash.merge ([#157](https://github.com/podium-lib/layout/issues/157)) ([ea2bc77](https://github.com/podium-lib/layout/commit/ea2bc77e761c181fb97cb61fb74fccf91238c7d6))
+* Resolve merge conflicts ([be49970](https://github.com/podium-lib/layout/commit/be49970d317a8205762570f04962ba5f4c66eac9))
+* Use latest client and proxy ([#399](https://github.com/podium-lib/layout/issues/399)) ([4035461](https://github.com/podium-lib/layout/commit/40354617b85a866448faa30410c5b0c4cb42ad60))
+
+
+### Features
+
+* Convert to ESM ([#286](https://github.com/podium-lib/layout/issues/286)) ([7824568](https://github.com/podium-lib/layout/commit/7824568ddd2f4d3d81d5b7308da34fd38ae34ae0))
+* Drop node 10.x support ([7e0bb22](https://github.com/podium-lib/layout/commit/7e0bb22c7756c8597422673f244caef493f08ad2))
+* Remove deprecated return value on .js and .css methods ([e9052ed](https://github.com/podium-lib/layout/commit/e9052ed0b86f4690c8837dd09639ec5170f76e5c))
+
+
+### BREAKING CHANGES
+
+* Convert from CommonJS module to ESM
+
+* fix: Set type to be module
+
+Co-authored-by: Trygve Lie <trygve.lie@finn.no>
+* In version 4 of podium it became possible to set multiple assets to a layout through its `.js()` and `.css()` methods. This did make it impossible to let these methods return a reasonable value, but to keep a backwards compatibility with version 3 of Podium, the first item passed in was returned for compatibility. This removes this compatibility with version 3 of Podium.
+
+This resolves https://github.com/podium-lib/issues/issues/23
+* Only support node 12 and 14.
+
 # [5.0.0-next.10](https://github.com/podium-lib/layout/compare/v5.0.0-next.9...v5.0.0-next.10) (2023-11-29)
 
 
