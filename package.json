@@ -28,7 +28,7 @@
     "lib"
   ],
   "main": "./lib/layout.js",
-  "types": "index.d.ts",
+  "types": "layout.d.ts",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
