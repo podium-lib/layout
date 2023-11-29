@@ -1,3 +1,5 @@
+tap-snapshots/
 coverage/
-coverage
-tap-snapshots
+benchmark/
+example/
+dist/

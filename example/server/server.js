@@ -1,11 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
-
-'use strict';
-
-const express = require('express');
-const path = require('path');
-const Layout = require("../..");
+import express from 'express';
+import Layout from '../../lib/layout.js';
+import template from './views/template.js';
 
 const layout = new Layout({
     pathname: '/foo',
@@ -38,52 +35,30 @@ const footer = layout.client.register({
     resolveCss: true,
 });
 
+layout.css({ value: '/foo/assets/grid.css' });
+
 const app = express();
-
-app.set('view engine', 'hbs');
-app.set('views', path.resolve(__dirname, './views/'));
-
-/*
-app.use((req, res, next) => {
-    res.locals.locale = 'nb-NO';
-    next();
-});
-*/
 
 app.use(layout.pathname(), layout.middleware());
 
-app.get(
-    `${layout.pathname()}/:bar?`,
-    (req, res, next) => {
-        const ctx = res.locals.podium.context;
-        Promise.all([
-            content.fetch(ctx),
-            header.fetch(ctx),
-            menu.fetch(ctx),
-            footer.fetch(ctx),
-        ])
-            .then(result => {
-                res.locals = {
-                    title: 'Podium - Layout',
-                    podlets: {
-                        content: result[0],
-                        header: result[1],
-                        menu: result[2],
-                        footer: result[3],
-                    },
-                };
-                next();
-            })
-            .catch(error => {
-                next(error);
-            });
-    },
-    (req, res) => {
-        res.locals.css = layout.client.css();
-        res.locals.js = layout.client.js();
-        res.status(200).render('layout', res.locals);
-    },
-);
+app.get(`${layout.pathname()}/:bar?`,async (req, res, next) => {
+    const incoming = res.locals.podium;
+    const podlets = await Promise.all([
+        header.fetch(incoming),
+        menu.fetch(incoming),
+        content.fetch(incoming),
+        footer.fetch(incoming),
+    ]);
+
+    incoming.view = {
+        title: 'Example application',
+    };
+
+    incoming.podlets = podlets;
+
+    const markup = template(podlets);
+    res.status(200).podiumSend(markup);
+});
 
 app.use(`${layout.pathname()}/assets`, express.static('assets'));
 

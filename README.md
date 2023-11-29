@@ -1,4 +1,4 @@
-# @podium/layout
+# @podium/layout v5
 
 A Module for composing full page layouts out of page fragments in a micro frontend
 architecture.
