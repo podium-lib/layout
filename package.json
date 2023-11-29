@@ -21,7 +21,7 @@
   "files": [
     "package.json",
     "CHANGELOG.md",
-    "index.d.ts",
+    "layout.d.ts",
     "README.md",
     "LICENSE",
     "dist",
@@ -36,7 +36,7 @@
     "test:snapshots": "tap --snapshot --no-check-coverage"
   },
   "dependencies": {
-    "@metrics/client": "2.5.0",
+    "@metrics/client": "2.5.2",
     "@podium/client": "5.0.0-next.13",
     "@podium/context": "5.0.0-next.6",
     "@podium/proxy": "5.0.0-next.7",
@@ -45,24 +45,29 @@
     "abslog": "2.4.0",
     "lodash.merge": "4.6.2",
     "objobj": "1.0.0",
-    "ajv": "8.11.0"
+    "ajv": "8.12.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "6.0.1",
-    "@semantic-release/git": "10.0.1",
-    "semantic-release": "19.0.5",
-    "@podium/podlet": "4.4.65",
+    "@podium/podlet": "5.0.0",
     "@podium/test-utils": "2.5.2",
-    "eslint": "8.23.1",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/commit-analyzer": "9.0.2",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "8.1.0",
+    "@semantic-release/npm": "9.0.2",
+    "@semantic-release/release-notes-generator": "10.0.3",
+    "semantic-release": "19.0.5",
+    "eslint": "8.52.0",
     "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-import": "2.26.0",
+    "eslint-config-prettier": "8.10.0",
+    "eslint-plugin-import": "2.29.0",
     "eslint-plugin-prettier": "4.2.1",
     "@babel/eslint-parser": "7.19.1",
-    "express": "4.18.1",
-    "prettier": "2.7.1",
+    "express": "4.18.2",
+    "hbs": "4.2.0",
+    "prettier": "2.8.8",
     "stoppable": "1.1.0",
-    "supertest": "6.2.4",
-    "tap": "16.3.0"
+    "supertest": "6.3.3",
+    "tap": "16.3.9"
   }
 }

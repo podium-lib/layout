@@ -7,8 +7,6 @@ import stoppable from 'stoppable';
 import express from 'express';
 import request from 'supertest';
 import Podlet from '@podium/podlet';
-
-
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -75,7 +73,7 @@ tap.test('Layout() - invalid value given to "name" argument - should throw', t =
 tap.test('Layout() - should collect metric with version info', t => {
     const layout = new Layout(DEFAULT_OPTIONS);
 
-    const dest = destinationObjectStream(arr => {
+    const dest = destinationObjectStream((arr) => {
         t.equal(arr[0].name, 'podium_layout_version_info');
         t.equal(arr[0].labels[0].name, 'version');
         // eslint-disable-next-line global-require
@@ -143,7 +141,7 @@ tap.test('Layout() - metrics properly decorated', t => {
     });
 
     layout.metrics.pipe(
-        destinationObjectStream(arr => {
+        destinationObjectStream((arr) => {
             t.equal(arr[0].name, 'podium_layout_version_info');
             t.equal(arr[0].type, 1);
             t.equal(arr[0].value, 1);
@@ -392,32 +390,34 @@ tap.test('.js() - "options" argument as an array - should NOT set additional key
 tap.test('.js() - data attribute object - should convert to array of key / value objects', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js([
-        { 
+        {
             value: '/foo/bar',
             data: {
                 bar: 'a',
-                foo: 'b'
-            } 
-        }
+                foo: 'b',
+            },
+        },
     ]);
 
     const result = JSON.parse(JSON.stringify(layout.jsRoute));
 
-    t.same(result, [{ 
-        type: 'default', 
-        value: '/foo/bar',
-        data: [
-            {
-                key: 'bar',
-                value: 'a',
-            },
-            {
-                key: 'foo',
-                value: 'b',
-            }
-        ] 
-    }]);
-    t.end()
+    t.same(result, [
+        {
+            type: 'default',
+            value: '/foo/bar',
+            data: [
+                {
+                    key: 'bar',
+                    value: 'a',
+                },
+                {
+                    key: 'foo',
+                    value: 'b',
+                },
+            ],
+        },
+    ]);
+    t.end();
 });
 
 // #############################################

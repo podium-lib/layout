@@ -58,7 +58,7 @@ app.use(layout.middleware());
 
 app.get('/', (req, res, next) => {
     const ctx = res.locals.podium.context;
-    Promise.all([podlet.fetch(ctx)]).then(result => {
+    Promise.all([podlet.fetch(ctx)]).then((result) => {
         res.status(200).send(`
                 <html><body>
                     <section>${result[0]}</section>
@@ -631,7 +631,7 @@ const podlet = layout.client.register({
     uri: 'http://localhost:7100/manifest.json',
 });
 
-podlet.fetch({}).then(result => {
+podlet.fetch({}).then((result) => {
     console.log(result);
 });
 ```
