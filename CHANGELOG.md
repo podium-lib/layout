@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/podium-lib/layout/compare/v5.0.0...v5.0.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* point types at correct types file ([06b52de](https://github.com/podium-lib/layout/commit/06b52de3ccfbad1e5d2b11f792e3d8daac909169))
+
 # [5.0.0](https://github.com/podium-lib/layout/compare/v4.6.125...v5.0.0) (2023-11-29)
 
 
