@@ -1,3 +1,10 @@
+## [5.0.4](https://github.com/podium-lib/layout/compare/v5.0.3...v5.0.4) (2023-12-06)
+
+
+### Bug Fixes
+
+* export default now that package is esm ([8657940](https://github.com/podium-lib/layout/commit/86579400fe3c5e003db805d3ce329dcab8d4ecd2))
+
 ## [5.0.3](https://github.com/podium-lib/layout/compare/v5.0.2...v5.0.3) (2023-12-03)
 
 
