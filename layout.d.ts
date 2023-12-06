@@ -1,7 +1,6 @@
 import { HttpIncoming, AssetJs, AssetCss } from '@podium/utils';
 import PodiumClient, { PodiumClientOptions } from '@podium/client';
 import PodiumContext from '@podium/context';
-import { AssetJs, AssetCss } from '@podium/utils';
 import PodiumProxy, { PodiumProxyOptions } from '@podium/proxy';
 import MetricsClient from '@metrics/client';
 
@@ -205,4 +204,4 @@ declare namespace PodiumLayout {
     };
 }
 
-export = PodiumLayout;
+export default PodiumLayout;
