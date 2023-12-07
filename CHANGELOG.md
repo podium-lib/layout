@@ -1,3 +1,10 @@
+## [5.0.5](https://github.com/podium-lib/layout/compare/v5.0.4...v5.0.5) (2023-12-07)
+
+
+### Bug Fixes
+
+* Make proxy use given name in layout instead of the name in the manifest ([d6966b8](https://github.com/podium-lib/layout/commit/d6966b88782265cc1f529003cea683b88ee000d8))
+
 ## [5.0.4](https://github.com/podium-lib/layout/compare/v5.0.3...v5.0.4) (2023-12-06)
 
 
