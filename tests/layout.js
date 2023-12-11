@@ -7,8 +7,6 @@ import stoppable from 'stoppable';
 import express from 'express';
 import request from 'supertest';
 import Podlet from '@podium/podlet';
-
-
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -75,7 +73,7 @@ tap.test('Layout() - invalid value given to "name" argument - should throw', t =
 tap.test('Layout() - should collect metric with version info', t => {
     const layout = new Layout(DEFAULT_OPTIONS);
 
-    const dest = destinationObjectStream(arr => {
+    const dest = destinationObjectStream((arr) => {
         t.equal(arr[0].name, 'podium_layout_version_info');
         t.equal(arr[0].labels[0].name, 'version');
         // eslint-disable-next-line global-require
@@ -143,7 +141,7 @@ tap.test('Layout() - metrics properly decorated', t => {
     });
 
     layout.metrics.pipe(
-        destinationObjectStream(arr => {
+        destinationObjectStream((arr) => {
             t.equal(arr[0].name, 'podium_layout_version_info');
             t.equal(arr[0].type, 1);
             t.equal(arr[0].value, 1);
@@ -392,32 +390,34 @@ tap.test('.js() - "options" argument as an array - should NOT set additional key
 tap.test('.js() - data attribute object - should convert to array of key / value objects', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     layout.js([
-        { 
+        {
             value: '/foo/bar',
             data: {
                 bar: 'a',
-                foo: 'b'
-            } 
-        }
+                foo: 'b',
+            },
+        },
     ]);
 
     const result = JSON.parse(JSON.stringify(layout.jsRoute));
 
-    t.same(result, [{ 
-        type: 'default', 
-        value: '/foo/bar',
-        data: [
-            {
-                key: 'bar',
-                value: 'a',
-            },
-            {
-                key: 'foo',
-                value: 'b',
-            }
-        ] 
-    }]);
-    t.end()
+    t.same(result, [
+        {
+            type: 'default',
+            value: '/foo/bar',
+            data: [
+                {
+                    key: 'bar',
+                    value: 'a',
+                },
+                {
+                    key: 'foo',
+                    value: 'b',
+                },
+            ],
+        },
+    ]);
+    t.end();
 });
 
 // #############################################
@@ -567,4 +567,37 @@ tap.test('Layout() - request url parsing', async t => {
     await request('http://0.0.0.0:4013').get('/');
 
     s1.stop();
+});
+
+tap.test('Proxy - builds correct proxy url', async (t) => {
+    // podlet with a simple api endpoint /api and name value in manifest.json of "podlet-manifest-name"
+    const podletApp = express();
+    const podlet = new Podlet({ name: 'podlet-manifest-name', version: '1.0.0', pathname: '/' });
+    podletApp.use(podlet.middleware());
+    podletApp.get('/manifest.json', (req, res) => res.send(podlet));
+    podletApp.get(podlet.proxy({ target: '/api', name: 'api' }), (req, res) => res.sendStatus(200));
+    const s1 = stoppable(podletApp.listen(5043), 0);
+
+    // layout that register podlet with the name "podlet-registered-name"
+    const app = express();
+    const layout = new Layout({ name: 'my-layout', pathname: '/' });
+    const podletClient = layout.client.register({ name: 'podlet-registered-name', uri: 'http://0.0.0.0:5043/manifest.json' });
+    app.use(layout.middleware());
+    app.get('/', async (req, res) => {
+        await podletClient.fetch(res.locals.podium);
+        res.sendStatus(200);
+    });
+    const s2 = stoppable(app.listen(5044), 0);
+
+    // trigger mounting of the proxy with an initial request to the / endpoint
+    await fetch('http://0.0.0.0:5044/');
+
+    let result;
+    result = await fetch('http://0.0.0.0:5044/podium-resource/podlet-registered-name/api');
+    t.equal(result.status, 200, 'proxy endpoint should use "name" supplied by layout.client.register');
+    result = await fetch('http://0.0.0.0:5044/podium-resource/podlet-manifest-name/api');
+    t.equal(result.status, 404, 'proxy endpoint should not use "name" supplied by podlet manifest file');
+
+    s1.stop();
+    s2.stop();
 });

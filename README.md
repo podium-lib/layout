@@ -40,8 +40,8 @@ $ npm install @podium/layout
 Build a simple layout server including a single podlet using [Express]:
 
 ```js
-const express = require('express');
-const Layout = require('@podium/layout');
+import express from 'express';
+import Layout from '@podium/layout';
 
 const layout = new Layout({
     name: 'myLayout',
@@ -58,7 +58,7 @@ app.use(layout.middleware());
 
 app.get('/', (req, res, next) => {
     const ctx = res.locals.podium.context;
-    Promise.all([podlet.fetch(ctx)]).then(result => {
+    Promise.all([podlet.fetch(ctx)]).then((result) => {
         res.status(200).send(`
                 <html><body>
                     <section>${result[0]}</section>
@@ -250,8 +250,8 @@ The method takes the following arguments:
 An instance of an [HttpIncoming] class.
 
 ```js
-const { HttpIncoming } = require('@podium/utils');
-const Layout = require('@podium/layout');
+import { HttpIncoming } from '@podium/utils';
+import Layout from '@podium/layout';
 
 const layout = new Layout({
     name: 'myLayout',
@@ -293,9 +293,9 @@ The method takes the following arguments:
 An instance of the [HttpIncoming] class.
 
 ```js
-const { HttpIncoming } = require('@podium/utils');
-const Layout = require('@podium/layout');
-const express = require('express);
+import { HttpIncoming } from '@podium/utils';
+import Layout from '@podium/layout';
+import express from 'express';
 
 const layout = new Layout({
     name: 'myLayout',
@@ -631,7 +631,7 @@ const podlet = layout.client.register({
     uri: 'http://localhost:7100/manifest.json',
 });
 
-podlet.fetch({}).then(result => {
+podlet.fetch({}).then((result) => {
     console.log(result);
 });
 ```
@@ -646,7 +646,7 @@ context.
 Example of registering a custom third party context parser to the context:
 
 ```js
-const Parser = require('my-custom-parser');
+import Parser from 'my-custom-parser';
 
 const layout = new Layout({
     name: 'myLayout',

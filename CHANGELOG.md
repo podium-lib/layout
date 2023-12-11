@@ -1,3 +1,184 @@
+## [5.0.6](https://github.com/podium-lib/layout/compare/v5.0.5...v5.0.6) (2023-12-11)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([fac0638](https://github.com/podium-lib/layout/commit/fac0638d7e3bd865c25a72ec20d29504d1278e6f))
+
+## [5.0.5](https://github.com/podium-lib/layout/compare/v5.0.4...v5.0.5) (2023-12-07)
+
+
+### Bug Fixes
+
+* Make proxy use given name in layout instead of the name in the manifest ([d6966b8](https://github.com/podium-lib/layout/commit/d6966b88782265cc1f529003cea683b88ee000d8))
+
+## [5.0.4](https://github.com/podium-lib/layout/compare/v5.0.3...v5.0.4) (2023-12-06)
+
+
+### Bug Fixes
+
+* export default now that package is esm ([8657940](https://github.com/podium-lib/layout/commit/86579400fe3c5e003db805d3ce329dcab8d4ecd2))
+
+## [5.0.3](https://github.com/podium-lib/layout/compare/v5.0.2...v5.0.3) (2023-12-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/client to v5.0.2 ([28715f4](https://github.com/podium-lib/layout/commit/28715f4e6d640950cad6d07ee4e2f2a03e9304f1))
+
+## [5.0.2](https://github.com/podium-lib/layout/compare/v5.0.1...v5.0.2) (2023-12-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/client to v5.0.1 ([c29b9d8](https://github.com/podium-lib/layout/commit/c29b9d84e01e467839f02a31b52015eb46788827))
+
+## [5.0.1](https://github.com/podium-lib/layout/compare/v5.0.0...v5.0.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* point types at correct types file ([06b52de](https://github.com/podium-lib/layout/commit/06b52de3ccfbad1e5d2b11f792e3d8daac909169))
+
+# [5.0.0](https://github.com/podium-lib/layout/compare/v4.6.125...v5.0.0) (2023-11-29)
+
+
+### Bug Fixes
+
+* Remove lodash.merge ([#157](https://github.com/podium-lib/layout/issues/157)) ([ea2bc77](https://github.com/podium-lib/layout/commit/ea2bc77e761c181fb97cb61fb74fccf91238c7d6))
+* Resolve merge conflicts ([be49970](https://github.com/podium-lib/layout/commit/be49970d317a8205762570f04962ba5f4c66eac9))
+* Use latest client and proxy ([#399](https://github.com/podium-lib/layout/issues/399)) ([4035461](https://github.com/podium-lib/layout/commit/40354617b85a866448faa30410c5b0c4cb42ad60))
+
+
+### Features
+
+* Convert to ESM ([#286](https://github.com/podium-lib/layout/issues/286)) ([7824568](https://github.com/podium-lib/layout/commit/7824568ddd2f4d3d81d5b7308da34fd38ae34ae0))
+* Drop node 10.x support ([7e0bb22](https://github.com/podium-lib/layout/commit/7e0bb22c7756c8597422673f244caef493f08ad2))
+* Remove deprecated return value on .js and .css methods ([e9052ed](https://github.com/podium-lib/layout/commit/e9052ed0b86f4690c8837dd09639ec5170f76e5c))
+
+
+### BREAKING CHANGES
+
+* Convert from CommonJS module to ESM
+
+* fix: Set type to be module
+
+Co-authored-by: Trygve Lie <trygve.lie@finn.no>
+* In version 4 of podium it became possible to set multiple assets to a layout through its `.js()` and `.css()` methods. This did make it impossible to let these methods return a reasonable value, but to keep a backwards compatibility with version 3 of Podium, the first item passed in was returned for compatibility. This removes this compatibility with version 3 of Podium.
+
+This resolves https://github.com/podium-lib/issues/issues/23
+* Only support node 12 and 14.
+
+# [5.0.0-next.10](https://github.com/podium-lib/layout/compare/v5.0.0-next.9...v5.0.0-next.10) (2023-11-29)
+
+
+### Bug Fixes
+
+* add type definitions ([afb0649](https://github.com/podium-lib/layout/commit/afb06496bbc1390860e8fd411b076ac5d30dca18))
+* **deps:** update all dependencies (non-major) ([4033719](https://github.com/podium-lib/layout/commit/4033719370f2c9ea9a28b91f7b4be50146721680))
+* **deps:** update all dependencies (non-major) ([a27c20b](https://github.com/podium-lib/layout/commit/a27c20bd530750e1a655df480ee236a859580235))
+* **deps:** update all dependencies (non-major) ([1f2de8d](https://github.com/podium-lib/layout/commit/1f2de8d23b52abf824f19a9dff15d4f008af732d))
+* **deps:** update all dependencies (non-major) ([cbc1350](https://github.com/podium-lib/layout/commit/cbc13509b73c67a66f13333a58a7c5a153e2d8ff))
+* **deps:** update all dependencies (non-major) ([977a0f0](https://github.com/podium-lib/layout/commit/977a0f0845dad45525b154f9ceb79822ce2e569d))
+* **deps:** update all dependencies (non-major) ([c4c22b2](https://github.com/podium-lib/layout/commit/c4c22b2d19bb10a71326d05c6ba35677dde493ff))
+* **deps:** update all dependencies (non-major) ([5f373fb](https://github.com/podium-lib/layout/commit/5f373fbe537fe5bd27c201ff84cbf6cd7503fb04))
+* **deps:** update dependency @podium/client to v4.5.24 ([#402](https://github.com/podium-lib/layout/issues/402)) ([4a7ea4e](https://github.com/podium-lib/layout/commit/4a7ea4e9d2ca5086f45eec64b2b41f828546ba0f))
+* **deps:** update dependency @podium/client to v4.5.30 ([e1cb17b](https://github.com/podium-lib/layout/commit/e1cb17b39f3a841ac17f6e70db9219265511f615))
+* **deps:** update dependency @podium/client to v4.5.31 ([#426](https://github.com/podium-lib/layout/issues/426)) ([5e7e504](https://github.com/podium-lib/layout/commit/5e7e5046210017ee0a7981768739259d1ac0c1b0))
+* **deps:** update dependency @podium/context to v4.1.75 ([a7f5cab](https://github.com/podium-lib/layout/commit/a7f5cabae9468ecd1b3c61f8131e9800fbb36b19))
+* **deps:** update dependency @podium/context to v4.1.78 ([caba9ae](https://github.com/podium-lib/layout/commit/caba9ae9afe6300e21af20897074b04d2dda0b5a))
+
+## [4.6.125](https://github.com/podium-lib/layout/compare/v4.6.124...v4.6.125) (2023-10-23)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([4033719](https://github.com/podium-lib/layout/commit/4033719370f2c9ea9a28b91f7b4be50146721680))
+
+## [4.6.124](https://github.com/podium-lib/layout/compare/v4.6.123...v4.6.124) (2023-10-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/context to v4.1.78 ([caba9ae](https://github.com/podium-lib/layout/commit/caba9ae9afe6300e21af20897074b04d2dda0b5a))
+
+## [4.6.123](https://github.com/podium-lib/layout/compare/v4.6.122...v4.6.123) (2023-10-09)
+
+
+### Bug Fixes
+
+* add type definitions ([afb0649](https://github.com/podium-lib/layout/commit/afb06496bbc1390860e8fd411b076ac5d30dca18))
+
+## [4.6.122](https://github.com/podium-lib/layout/compare/v4.6.121...v4.6.122) (2023-09-25)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([a27c20b](https://github.com/podium-lib/layout/commit/a27c20bd530750e1a655df480ee236a859580235))
+
+## [4.6.121](https://github.com/podium-lib/layout/compare/v4.6.120...v4.6.121) (2023-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([1f2de8d](https://github.com/podium-lib/layout/commit/1f2de8d23b52abf824f19a9dff15d4f008af732d))
+
+## [4.6.120](https://github.com/podium-lib/layout/compare/v4.6.119...v4.6.120) (2023-05-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/client to v4.5.31 ([#426](https://github.com/podium-lib/layout/issues/426)) ([5e7e504](https://github.com/podium-lib/layout/commit/5e7e5046210017ee0a7981768739259d1ac0c1b0))
+
+## [4.6.119](https://github.com/podium-lib/layout/compare/v4.6.118...v4.6.119) (2023-03-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/context to v4.1.75 ([a7f5cab](https://github.com/podium-lib/layout/commit/a7f5cabae9468ecd1b3c61f8131e9800fbb36b19))
+
+## [4.6.118](https://github.com/podium-lib/layout/compare/v4.6.117...v4.6.118) (2023-02-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/client to v4.5.30 ([e1cb17b](https://github.com/podium-lib/layout/commit/e1cb17b39f3a841ac17f6e70db9219265511f615))
+
+## [4.6.117](https://github.com/podium-lib/layout/compare/v4.6.116...v4.6.117) (2023-01-09)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([cbc1350](https://github.com/podium-lib/layout/commit/cbc13509b73c67a66f13333a58a7c5a153e2d8ff))
+
+## [4.6.116](https://github.com/podium-lib/layout/compare/v4.6.115...v4.6.116) (2022-12-12)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([977a0f0](https://github.com/podium-lib/layout/commit/977a0f0845dad45525b154f9ceb79822ce2e569d))
+
+## [4.6.115](https://github.com/podium-lib/layout/compare/v4.6.114...v4.6.115) (2022-11-21)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([c4c22b2](https://github.com/podium-lib/layout/commit/c4c22b2d19bb10a71326d05c6ba35677dde493ff))
+
+## [4.6.114](https://github.com/podium-lib/layout/compare/v4.6.113...v4.6.114) (2022-11-14)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([5f373fb](https://github.com/podium-lib/layout/commit/5f373fbe537fe5bd27c201ff84cbf6cd7503fb04))
+
+## [4.6.113](https://github.com/podium-lib/layout/compare/v4.6.112...v4.6.113) (2022-10-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/client to v4.5.24 ([#402](https://github.com/podium-lib/layout/issues/402)) ([4a7ea4e](https://github.com/podium-lib/layout/commit/4a7ea4e9d2ca5086f45eec64b2b41f828546ba0f))
+
 # [5.0.0-next.9](https://github.com/podium-lib/layout/compare/v5.0.0-next.8...v5.0.0-next.9) (2022-09-21)
 
 
