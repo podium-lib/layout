@@ -1,3 +1,10 @@
+## [5.0.7](https://github.com/podium-lib/layout/compare/v5.0.6...v5.0.7) (2023-12-11)
+
+
+### Bug Fixes
+
+* Use original URL from express ([10a70c1](https://github.com/podium-lib/layout/commit/10a70c1bab193b351a46bca53ac8c622006671c8))
+
 ## [5.0.6](https://github.com/podium-lib/layout/compare/v5.0.5...v5.0.6) (2023-12-11)
 
 
