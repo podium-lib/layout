@@ -28,12 +28,13 @@
     "lib"
   ],
   "main": "./lib/layout.js",
-  "types": "layout.d.ts",
+  "types": "./types/layout.d.ts",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "tap --disable-coverage --allow-empty-coverage",
-    "test:snapshots": "tap --snapshot --disable-coverage --allow-empty-coverage"
+    "test:snapshots": "tap --snapshot --disable-coverage --allow-empty-coverage",
+    "types": "tsc --declaration --emitDeclarationOnly && ./fixup.sh"
   },
   "dependencies": {
     "@metrics/client": "2.5.2",
