@@ -21,7 +21,6 @@
   "files": [
     "package.json",
     "CHANGELOG.md",
-    "layout.d.ts",
     "README.md",
     "LICENSE",
     "dist",
