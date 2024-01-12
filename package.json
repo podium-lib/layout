@@ -23,6 +23,7 @@
     "CHANGELOG.md",
     "README.md",
     "LICENSE",
+    "types",
     "dist",
     "lib"
   ],
