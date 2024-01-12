@@ -59,6 +59,7 @@
     "@semantic-release/npm": "11.0.1",
     "@semantic-release/release-notes-generator": "12.1.0",
     "@types/node": "^20.10.5",
+    "@types/readable-stream": "^4.0.10",
     "eslint": "8.54.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "9.0.0",
