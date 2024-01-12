@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /* eslint-disable no-param-reassign */
 
 import tap from 'tap';
