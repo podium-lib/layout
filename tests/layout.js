@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /* eslint-disable no-param-reassign */
 
 import tap from 'tap';
@@ -13,7 +15,10 @@ import fs from 'fs';
 import Layout from '../lib/layout.js';
 
 const currentDirectory = dirname(fileURLToPath(import.meta.url));
-const pkgJson = fs.readFileSync(join(currentDirectory, '../package.json'), 'utf-8');
+const pkgJson = fs.readFileSync(
+    join(currentDirectory, '../package.json'),
+    'utf-8',
+);
 const pkg = JSON.parse(pkgJson);
 
 const SIMPLE_REQ = {
@@ -30,47 +35,59 @@ const DEFAULT_OPTIONS = { name: 'foo', pathname: '/' };
  * Constructor
  */
 
-tap.test('Layout() - instantiate new layout object - should create an object', t => {
-    const layout = new Layout({ name: 'foo', pathname: '/' });
-    t.ok(layout instanceof Layout);
-    t.end();
-});
+tap.test(
+    'Layout() - instantiate new layout object - should create an object',
+    (t) => {
+        const layout = new Layout({ name: 'foo', pathname: '/' });
+        t.ok(layout instanceof Layout);
+        t.end();
+    },
+);
 
-tap.test('Layout() - object tag - should be PodiumLayout', t => {
+tap.test('Layout() - object tag - should be PodiumLayout', (t) => {
     const layout = new Layout({ name: 'foo', pathname: '/' });
     t.equal(Object.prototype.toString.call(layout), '[object PodiumLayout]');
     t.end();
 });
 
-tap.test('Layout() - no value given to "name" argument - should throw', t => {
+tap.test('Layout() - no value given to "name" argument - should throw', (t) => {
     t.throws(() => {
         const layout = new Layout({ pathname: '/' }); // eslint-disable-line no-unused-vars
     }, 'The value, "", for the required argument "name" on the Layout constructor is not defined or not valid.');
     t.end();
 });
 
-tap.test('Layout() - invalid value given to "name" argument - should throw', t => {
-    t.throws(() => {
-        const layout = new Layout({ name: 'foo bar', pathname: '/' }); // eslint-disable-line no-unused-vars
-    }, 'The value, "foo bar", for the required argument "name" on the Layout constructor is not defined or not valid.');
-    t.end();
-});
+tap.test(
+    'Layout() - invalid value given to "name" argument - should throw',
+    (t) => {
+        t.throws(() => {
+            const layout = new Layout({ name: 'foo bar', pathname: '/' }); // eslint-disable-line no-unused-vars
+        }, 'The value, "foo bar", for the required argument "name" on the Layout constructor is not defined or not valid.');
+        t.end();
+    },
+);
 
-tap.test('Layout() - no value given to "pathname" argument - should throw', t => {
-    t.throws(() => {
-        const layout = new Layout({ name: 'foo' }); // eslint-disable-line no-unused-vars
-    }, 'The value, "", for the required argument "pathname" on the Layout constructor is not defined or not valid.');
-    t.end();
-});
+tap.test(
+    'Layout() - no value given to "pathname" argument - should throw',
+    (t) => {
+        t.throws(() => {
+            const layout = new Layout({ name: 'foo' }); // eslint-disable-line no-unused-vars
+        }, 'The value, "", for the required argument "pathname" on the Layout constructor is not defined or not valid.');
+        t.end();
+    },
+);
 
-tap.test('Layout() - invalid value given to "name" argument - should throw', t => {
-    t.throws(() => {
-        const layout = new Layout({ name: 'foo', pathname: 'foo bar' }); // eslint-disable-line no-unused-vars
-    }, 'The value, "foo bar", for the required argument "pathname" on the Layout constructor is not defined or not valid.');
-    t.end();
-});
+tap.test(
+    'Layout() - invalid value given to "name" argument - should throw',
+    (t) => {
+        t.throws(() => {
+            const layout = new Layout({ name: 'foo', pathname: 'foo bar' }); // eslint-disable-line no-unused-vars
+        }, 'The value, "foo bar", for the required argument "pathname" on the Layout constructor is not defined or not valid.');
+        t.end();
+    },
+);
 
-tap.test('Layout() - should collect metric with version info', t => {
+tap.test('Layout() - should collect metric with version info', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
 
     const dest = destinationObjectStream((arr) => {
@@ -91,7 +108,7 @@ tap.test('Layout() - should collect metric with version info', t => {
     });
 });
 
-tap.test('Layout() - metrics properly decorated', t => {
+tap.test('Layout() - metrics properly decorated', (t) => {
     // podlet
     const podletApp = express();
 
@@ -208,7 +225,7 @@ tap.test('Layout() - metrics properly decorated', t => {
 
     request('http://0.0.0.0:5022')
         .get('/')
-        .then(async result => {
+        .then(async (result) => {
             const apiResponse = await request('http://0.0.0.0:5022').get(
                 '/podium-resource/myPodlet/api',
             );
@@ -229,67 +246,86 @@ tap.test('.css() - call method with no arguments - should throw', (t) => {
     t.throws(() => {
         layout.css();
     }, 'Value for argument variable "value", "undefined", is not valid');
-    t.end()
-});
-
-tap.test('.css() - set legal absolute value on "value" argument - should set "css" to set value', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.css({ value: 'http://somewhere.remote.com' });
-    const result = JSON.parse(JSON.stringify(layout.cssRoute));
-    t.same(result, [
-        { rel: 'stylesheet', type: 'text/css', value: 'http://somewhere.remote.com' },
-    ]);
     t.end();
 });
 
-tap.test('.css() - "options" argument as an array - should accept an array of values', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
-    const result = JSON.parse(JSON.stringify(layout.cssRoute));
-    t.same(result, [
-        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
-        { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.css() - set legal absolute value on "value" argument - should set "css" to set value',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.css({ value: 'http://somewhere.remote.com' });
+        const result = JSON.parse(JSON.stringify(layout.cssRoute));
+        t.same(result, [
+            {
+                rel: 'stylesheet',
+                type: 'text/css',
+                value: 'http://somewhere.remote.com',
+            },
+        ]);
+        t.end();
+    },
+);
 
-tap.test('.css() - "options" argument as an array - call method twice - should set all values', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
-    layout.css([{ value: '/foo/bar/baz' }, { value: '/bar/foo/baz' }]);
-    const result = JSON.parse(JSON.stringify(layout.cssRoute));
-    t.same(result, [
-        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
-        { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
-        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar/baz' },
-        { rel: 'stylesheet', type: 'text/css', value: '/bar/foo/baz' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.css() - "options" argument as an array - should accept an array of values',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
+        const result = JSON.parse(JSON.stringify(layout.cssRoute));
+        t.same(result, [
+            { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
+            { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
+        ]);
+        t.end();
+    },
+);
 
-tap.test('.css() - "options" argument as an array - should NOT set additional keys', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.css([
-        { value: '/foo/bar', fake: 'prop' },
-        { value: '/bar/foo', prop: 'fake' },
-    ]);
-    const result = JSON.parse(JSON.stringify(layout.cssRoute));
-    t.same(result, [
-        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
-        { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.css() - "options" argument as an array - call method twice - should set all values',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.css([{ value: '/foo/bar' }, { value: '/bar/foo' }]);
+        layout.css([{ value: '/foo/bar/baz' }, { value: '/bar/foo/baz' }]);
+        const result = JSON.parse(JSON.stringify(layout.cssRoute));
+        t.same(result, [
+            { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
+            { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
+            { rel: 'stylesheet', type: 'text/css', value: '/foo/bar/baz' },
+            { rel: 'stylesheet', type: 'text/css', value: '/bar/foo/baz' },
+        ]);
+        t.end();
+    },
+);
 
-tap.test('.css() - passing an instance of AssetsCss - should return set value', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.css(new AssetCss({ value: '/foo/bar', type: 'text/css' }));
-    const result = JSON.parse(JSON.stringify(layout.cssRoute));
-    t.same(result, [
-        { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.css() - "options" argument as an array - should NOT set additional keys',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.css([
+            { value: '/foo/bar', fake: 'prop' },
+            { value: '/bar/foo', prop: 'fake' },
+        ]);
+        const result = JSON.parse(JSON.stringify(layout.cssRoute));
+        t.same(result, [
+            { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
+            { rel: 'stylesheet', type: 'text/css', value: '/bar/foo' },
+        ]);
+        t.end();
+    },
+);
+
+tap.test(
+    '.css() - passing an instance of AssetsCss - should return set value',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.css(new AssetCss({ value: '/foo/bar', type: 'text/css' }));
+        const result = JSON.parse(JSON.stringify(layout.cssRoute));
+        t.same(result, [
+            { rel: 'stylesheet', type: 'text/css', value: '/foo/bar' },
+        ]);
+        t.end();
+    },
+);
 
 // #############################################
 // .js()
@@ -300,159 +336,197 @@ tap.test('.js() - call method with no arguments - should throw', (t) => {
     t.throws(() => {
         layout.js();
     }, 'Value for argument variable "value", "undefined", is not valid');
-    t.end()
-});
-
-tap.test('.js() - passing an instance of AssetsJs - should return set value', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js(new AssetJs({ value: '/foo/bar', type: 'module' }));
-    const result = JSON.parse(JSON.stringify(layout.jsRoute));
-    t.same(result, [{ type: 'module', value: '/foo/bar' }]);
     t.end();
 });
 
-tap.test('.js() - set legal absolute value on "value" argument - should set "js" to set value', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js({ value: 'http://somewhere.remote.com' });
-    const result = JSON.parse(JSON.stringify(layout.jsRoute));
-    t.same(result, [
-        { type: 'default', value: 'http://somewhere.remote.com' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.js() - passing an instance of AssetsJs - should return set value',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.js(new AssetJs({ value: '/foo/bar', type: 'module' }));
+        const result = JSON.parse(JSON.stringify(layout.jsRoute));
+        t.same(result, [{ type: 'module', value: '/foo/bar' }]);
+        t.end();
+    },
+);
 
-tap.test('.js() - set illegal value on "value" argument - should throw', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js({ value: '/foo/bar' });
-    layout.js({ value: '/bar/foo', type: 'module' });
-    const result = JSON.parse(JSON.stringify(layout.jsRoute));
-    t.same(result, [
-        { type: 'default', value: '/foo/bar' },
-        { type: 'module', value: '/bar/foo' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.js() - set legal absolute value on "value" argument - should set "js" to set value',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.js({ value: 'http://somewhere.remote.com' });
+        const result = JSON.parse(JSON.stringify(layout.jsRoute));
+        t.same(result, [
+            { type: 'default', value: 'http://somewhere.remote.com' },
+        ]);
+        t.end();
+    },
+);
 
-tap.test('.js() - "type" argument is set to "module" - should set "type" to "module"', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js({ value: '/foo/bar' });
-    layout.js({ value: '/bar/foo', type: 'module' });
-    const result = JSON.parse(JSON.stringify(layout.jsRoute));
-    t.same(result, [
-        { type: 'default', value: '/foo/bar' },
-        { type: 'module', value: '/bar/foo' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.js() - set illegal value on "value" argument - should throw',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.js({ value: '/foo/bar' });
+        layout.js({ value: '/bar/foo', type: 'module' });
+        const result = JSON.parse(JSON.stringify(layout.jsRoute));
+        t.same(result, [
+            { type: 'default', value: '/foo/bar' },
+            { type: 'module', value: '/bar/foo' },
+        ]);
+        t.end();
+    },
+);
 
-tap.test('.js() - "options" argument as an array - should accept an array of values', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js([{ value: '/foo/bar' }, { value: '/bar/foo', type: 'module' }]);
-    const result = JSON.parse(JSON.stringify(layout.jsRoute));
-    t.same(result, [
-        { type: 'default', value: '/foo/bar' },
-        { type: 'module', value: '/bar/foo' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.js() - "type" argument is set to "module" - should set "type" to "module"',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.js({ value: '/foo/bar' });
+        layout.js({ value: '/bar/foo', type: 'module' });
+        const result = JSON.parse(JSON.stringify(layout.jsRoute));
+        t.same(result, [
+            { type: 'default', value: '/foo/bar' },
+            { type: 'module', value: '/bar/foo' },
+        ]);
+        t.end();
+    },
+);
 
-tap.test('.js() - "options" argument as an array - call method twice - should set all values', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js([{ value: '/foo/bar' }, { value: '/bar/foo', type: 'module' }]);
-    layout.js([
-        { value: '/foo/bar/baz' },
-        { value: '/bar/foo/baz', type: 'module' },
-    ]);
-    const result = JSON.parse(JSON.stringify(layout.jsRoute));
-    t.same(result, [
-        { type: 'default', value: '/foo/bar' },
-        { type: 'module', value: '/bar/foo' },
-        { type: 'default', value: '/foo/bar/baz' },
-        { type: 'module', value: '/bar/foo/baz' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.js() - "options" argument as an array - should accept an array of values',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.js([
+            { value: '/foo/bar' },
+            { value: '/bar/foo', type: 'module' },
+        ]);
+        const result = JSON.parse(JSON.stringify(layout.jsRoute));
+        t.same(result, [
+            { type: 'default', value: '/foo/bar' },
+            { type: 'module', value: '/bar/foo' },
+        ]);
+        t.end();
+    },
+);
 
-tap.test('.js() - "options" argument as an array - should NOT set additional keys', t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js([
-        { value: '/foo/bar', fake: 'prop' },
-        { value: '/bar/foo', type: 'module', prop: 'fake' },
-    ]);
-    const result = JSON.parse(JSON.stringify(layout.jsRoute));
-    t.same(result, [
-        { type: 'default', value: '/foo/bar' },
-        { type: 'module', value: '/bar/foo' },
-    ]);
-    t.end();
-});
+tap.test(
+    '.js() - "options" argument as an array - call method twice - should set all values',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.js([
+            { value: '/foo/bar' },
+            { value: '/bar/foo', type: 'module' },
+        ]);
+        layout.js([
+            { value: '/foo/bar/baz' },
+            { value: '/bar/foo/baz', type: 'module' },
+        ]);
+        const result = JSON.parse(JSON.stringify(layout.jsRoute));
+        t.same(result, [
+            { type: 'default', value: '/foo/bar' },
+            { type: 'module', value: '/bar/foo' },
+            { type: 'default', value: '/foo/bar/baz' },
+            { type: 'module', value: '/bar/foo/baz' },
+        ]);
+        t.end();
+    },
+);
 
-tap.test('.js() - data attribute object - should convert to array of key / value objects', (t) => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    layout.js([
-        {
-            value: '/foo/bar',
-            data: {
-                bar: 'a',
-                foo: 'b',
+tap.test(
+    '.js() - "options" argument as an array - should NOT set additional keys',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.js([
+            { value: '/foo/bar', fake: 'prop' },
+            { value: '/bar/foo', type: 'module', prop: 'fake' },
+        ]);
+        const result = JSON.parse(JSON.stringify(layout.jsRoute));
+        t.same(result, [
+            { type: 'default', value: '/foo/bar' },
+            { type: 'module', value: '/bar/foo' },
+        ]);
+        t.end();
+    },
+);
+
+tap.test(
+    '.js() - data attribute object - should convert to array of key / value objects',
+    (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        layout.js([
+            {
+                value: '/foo/bar',
+                data: {
+                    bar: 'a',
+                    foo: 'b',
+                },
             },
-        },
-    ]);
+        ]);
 
-    const result = JSON.parse(JSON.stringify(layout.jsRoute));
+        const result = JSON.parse(JSON.stringify(layout.jsRoute));
 
-    t.same(result, [
-        {
-            type: 'default',
-            value: '/foo/bar',
-            data: [
-                {
-                    key: 'bar',
-                    value: 'a',
-                },
-                {
-                    key: 'foo',
-                    value: 'b',
-                },
-            ],
-        },
-    ]);
-    t.end();
-});
+        t.same(result, [
+            {
+                type: 'default',
+                value: '/foo/bar',
+                data: [
+                    {
+                        key: 'bar',
+                        value: 'a',
+                    },
+                    {
+                        key: 'foo',
+                        value: 'b',
+                    },
+                ],
+            },
+        ]);
+        t.end();
+    },
+);
 
 // #############################################
 // .process()
 // #############################################
 
-tap.test('.process() - call method with HttpIncoming - should return HttpIncoming', async t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    const incoming = new HttpIncoming(SIMPLE_REQ, SIMPLE_RES);
-    const result = await layout.process(incoming);
-    t.same(result, incoming);
-    t.end();
-});
+tap.test(
+    '.process() - call method with HttpIncoming - should return HttpIncoming',
+    async (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        const incoming = new HttpIncoming(SIMPLE_REQ, SIMPLE_RES);
+        const result = await layout.process(incoming);
+        t.same(result, incoming);
+        t.end();
+    },
+);
 
-tap.test('.process() - idempotence - manipulating the HttpIncoming should not affect layout', async t => {
-    const layout = new Layout(DEFAULT_OPTIONS);
-    t.same(layout.jsRoute, []);
-    t.same(layout.cssRoute, []);
+tap.test(
+    '.process() - idempotence - manipulating the HttpIncoming should not affect layout',
+    async (t) => {
+        const layout = new Layout(DEFAULT_OPTIONS);
+        t.same(layout.jsRoute, []);
+        t.same(layout.cssRoute, []);
 
-    // Simulate middleware
-    const incoming = new HttpIncoming(SIMPLE_REQ, SIMPLE_RES);
-    await layout.process(incoming);
+        // Simulate middleware
+        const incoming = new HttpIncoming(SIMPLE_REQ, SIMPLE_RES);
+        await layout.process(incoming);
 
-    // Simulate layout route
-    incoming.podlets = [{
-        js: [{ value: '/foo/bar' }],
-        css: [{ value: '/bar/foo' }],
-    }];
+        // Simulate layout route
+        incoming.podlets = [
+            {
+                js: [{ value: '/foo/bar' }],
+                css: [{ value: '/bar/foo' }],
+            },
+        ];
 
-    t.same(layout.jsRoute, []);
-    t.same(layout.cssRoute, []);
-    t.end();
-});
+        t.same(layout.jsRoute, []);
+        t.same(layout.cssRoute, []);
+        t.end();
+    },
+);
 
-tap.test('Layout() - rendering using a string', async t => {
+tap.test('Layout() - rendering using a string', async (t) => {
     const app = express();
 
     const layout = new Layout({
@@ -477,7 +551,7 @@ tap.test('Layout() - rendering using a string', async t => {
     t.end();
 });
 
-tap.test('Layout() - rendering using a string - with assets', async t => {
+tap.test('Layout() - rendering using a string - with assets', async (t) => {
     const app = express();
 
     const layout = new Layout({
@@ -511,7 +585,7 @@ tap.test('Layout() - rendering using a string - with assets', async t => {
     t.end();
 });
 
-tap.test('Layout() - setting a custom view template', async t => {
+tap.test('Layout() - setting a custom view template', async (t) => {
     const app = express();
 
     const layout = new Layout({
@@ -542,7 +616,7 @@ tap.test('Layout() - setting a custom view template', async t => {
     t.end();
 });
 
-tap.test('Layout() - request url parsing', async t => {
+tap.test('Layout() - request url parsing', async (t) => {
     const app = express();
 
     const layout = new Layout({
@@ -572,16 +646,25 @@ tap.test('Layout() - request url parsing', async t => {
 tap.test('Proxy - builds correct proxy url', async (t) => {
     // podlet with a simple api endpoint /api and name value in manifest.json of "podlet-manifest-name"
     const podletApp = express();
-    const podlet = new Podlet({ name: 'podlet-manifest-name', version: '1.0.0', pathname: '/' });
+    const podlet = new Podlet({
+        name: 'podlet-manifest-name',
+        version: '1.0.0',
+        pathname: '/',
+    });
     podletApp.use(podlet.middleware());
     podletApp.get('/manifest.json', (req, res) => res.send(podlet));
-    podletApp.get(podlet.proxy({ target: '/api', name: 'api' }), (req, res) => res.sendStatus(200));
+    podletApp.get(podlet.proxy({ target: '/api', name: 'api' }), (req, res) =>
+        res.sendStatus(200),
+    );
     const s1 = stoppable(podletApp.listen(5043), 0);
 
     // layout that register podlet with the name "podlet-registered-name"
     const app = express();
     const layout = new Layout({ name: 'my-layout', pathname: '/' });
-    const podletClient = layout.client.register({ name: 'podlet-registered-name', uri: 'http://0.0.0.0:5043/manifest.json' });
+    const podletClient = layout.client.register({
+        name: 'podlet-registered-name',
+        uri: 'http://0.0.0.0:5043/manifest.json',
+    });
     app.use(layout.middleware());
     app.get('/', async (req, res) => {
         await podletClient.fetch(res.locals.podium);
@@ -593,10 +676,22 @@ tap.test('Proxy - builds correct proxy url', async (t) => {
     await fetch('http://0.0.0.0:5044/');
 
     let result;
-    result = await fetch('http://0.0.0.0:5044/podium-resource/podlet-registered-name/api');
-    t.equal(result.status, 200, 'proxy endpoint should use "name" supplied by layout.client.register');
-    result = await fetch('http://0.0.0.0:5044/podium-resource/podlet-manifest-name/api');
-    t.equal(result.status, 404, 'proxy endpoint should not use "name" supplied by podlet manifest file');
+    result = await fetch(
+        'http://0.0.0.0:5044/podium-resource/podlet-registered-name/api',
+    );
+    t.equal(
+        result.status,
+        200,
+        'proxy endpoint should use "name" supplied by layout.client.register',
+    );
+    result = await fetch(
+        'http://0.0.0.0:5044/podium-resource/podlet-manifest-name/api',
+    );
+    t.equal(
+        result.status,
+        404,
+        'proxy endpoint should not use "name" supplied by podlet manifest file',
+    );
 
     s1.stop();
     s2.stop();
