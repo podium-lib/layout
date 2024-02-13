@@ -1,3 +1,21 @@
+# [5.1.0](https://github.com/podium-lib/layout/compare/v5.0.11...v5.1.0) (2024-02-13)
+
+
+### Bug Fixes
+
+* .gitignore ([10eacc1](https://github.com/podium-lib/layout/commit/10eacc132c0b8eb892117beeebfe2485300d5225))
+* add types folder to package ([78e0725](https://github.com/podium-lib/layout/commit/78e07253d6c9a453c23b2880d313c3ecf832a671))
+* fix @types/readable-stream missing type in constructor ([a6dc40a](https://github.com/podium-lib/layout/commit/a6dc40a564c57bde6928ac0897251bd14675d232))
+* keep original type for middleware incoming.url ([1dc150a](https://github.com/podium-lib/layout/commit/1dc150afb539046ec9bc498b42b2fe6ebc5c4498))
+* no ts in tests ([1395258](https://github.com/podium-lib/layout/commit/13952586e44846aaf84988fb6e683ad2b46197ae))
+* remove old type file ([26d6c0e](https://github.com/podium-lib/layout/commit/26d6c0e3caa0ebec2d23df5dcc615a32507d05a2))
+
+
+### Features
+
+* created jsdoc, and setup type generation ([61ae410](https://github.com/podium-lib/layout/commit/61ae41043d9d029e26439c1dcd682f6dc34ed180))
+* type generation script ([8662636](https://github.com/podium-lib/layout/commit/86626364df8a1a897a39450185b4dc0a82c2e850))
+
 ## [5.0.11](https://github.com/podium-lib/layout/compare/v5.0.10...v5.0.11) (2024-02-05)
 
 
