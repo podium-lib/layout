@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/podium-lib/layout/compare/v5.1.0...v5.1.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* set res.locals on res.locals.podium.params ([#461](https://github.com/podium-lib/layout/issues/461)) ([32a11ae](https://github.com/podium-lib/layout/commit/32a11ae479ee880013455f0d5cfe036126a75f1d))
+
 # [5.1.0](https://github.com/podium-lib/layout/compare/v5.0.11...v5.1.0) (2024-02-13)
 
 
