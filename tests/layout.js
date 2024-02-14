@@ -526,6 +526,38 @@ tap.test(
     },
 );
 
+tap.test(
+    '.middleware() - includes on values set on res.locals in `incoming`',
+    async (t) => {
+        const app = express();
+
+        const layout = new Layout({
+            name: 'myLayout',
+            pathname: '/',
+        });
+
+        app.use((req, res, next) => {
+            res.locals.locale = 'sv';
+            next();
+        });
+
+        app.use(layout.middleware());
+
+        app.get('/', async (req, res) => {
+            res.send(res.locals.podium.params.locale);
+        });
+
+        const s1 = stoppable(app.listen(4009), 0);
+
+        const result = await request('http://0.0.0.0:4009').get('/');
+
+        t.match(result.text, 'sv');
+
+        s1.stop();
+        t.end();
+    },
+);
+
 tap.test('Layout() - rendering using a string', async (t) => {
     const app = express();
 
