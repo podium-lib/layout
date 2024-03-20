@@ -1,10 +1,15 @@
 {
   "name": "@podium/layout",
-  "version": "5.1.2",
+  "version": "5.2.0-beta.1",
   "type": "module",
   "description": "Module for composing full page layouts out of page fragments in a micro frontend architecture.",
   "license": "MIT",
-  "keywords": ["micro services", "micro frontend", "components", "podium"],
+  "keywords": [
+    "micro services",
+    "micro frontend",
+    "components",
+    "podium"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:podium-lib/layout.git"

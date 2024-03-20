@@ -1,3 +1,10 @@
+# [5.2.0-beta.1](https://github.com/podium-lib/layout/compare/v5.1.2...v5.2.0-beta.1) (2024-03-20)
+
+
+### Features
+
+* Update client and context to beta versions ([5db658a](https://github.com/podium-lib/layout/commit/5db658a3b4eb75791978cb5821ec17c5bf23a302))
+
 ## [5.1.2](https://github.com/podium-lib/layout/compare/v5.1.1...v5.1.2) (2024-03-04)
 
 
