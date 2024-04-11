@@ -1,3 +1,10 @@
+## [5.1.3](https://github.com/podium-lib/layout/compare/v5.1.2...v5.1.3) (2024-04-11)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([#469](https://github.com/podium-lib/layout/issues/469)) ([40bb4d5](https://github.com/podium-lib/layout/commit/40bb4d5337cb52c84f87d2beb1b465d06aaf493c))
+
 ## [5.1.2](https://github.com/podium-lib/layout/compare/v5.1.1...v5.1.2) (2024-03-04)
 
 
