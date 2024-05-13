@@ -32,25 +32,25 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "tap --disable-coverage --allow-empty-coverage",
+    "test": "tap --disable-coverage --allow-empty-coverage && tsc --project tsconfig.test.json",
     "test:snapshots": "tap --snapshot --disable-coverage --allow-empty-coverage",
     "types": "tsc --declaration --emitDeclarationOnly && ./fixup.sh"
   },
   "dependencies": {
     "@metrics/client": "2.5.2",
-    "@podium/client": "5.0.10",
-    "@podium/context": "5.0.4",
-    "@podium/proxy": "5.0.8",
-    "@podium/schemas": "5.0.0",
-    "@podium/utils": "5.0.3",
-    "abslog": "2.4.2",
+    "@podium/client": "5.0.21",
+    "@podium/context": "5.0.13",
+    "@podium/proxy": "5.0.16",
+    "@podium/schemas": "5.0.2",
+    "@podium/utils": "5.0.6",
+    "abslog": "2.4.4",
     "ajv": "8.12.0",
     "lodash.merge": "4.6.2",
     "objobj": "1.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.23.3",
-    "@podium/podlet": "5.1.2",
+    "@podium/podlet": "5.1.4",
     "@podium/test-utils": "2.5.2",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "11.1.0",

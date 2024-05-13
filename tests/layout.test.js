@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 /* eslint-disable no-param-reassign */
 
 import tap from 'tap';
@@ -244,6 +242,7 @@ tap.test('Layout() - metrics properly decorated', (t) => {
 tap.test('.css() - call method with no arguments - should throw', (t) => {
     const layout = new Layout(DEFAULT_OPTIONS);
     t.throws(() => {
+        // @ts-expect-error Testing bad input
         layout.css();
     }, 'Value for argument variable "value", "undefined", is not valid');
     t.end();
@@ -458,6 +457,7 @@ tap.test(
             {
                 value: '/foo/bar',
                 data: {
+                    // @ts-expect-error Testing conversion from older format
                     bar: 'a',
                     foo: 'b',
                 },

@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`tests/layout.js > TAP > Layout() - rendering using a string - with assets > must match snapshot 1`] = `
+exports[`tests/layout.test.js > TAP > Layout() - rendering using a string - with assets > must match snapshot 1`] = `
 <!doctype html>
 <html lang="en-US">
     <head>
@@ -25,6 +25,6 @@ exports[`tests/layout.js > TAP > Layout() - rendering using a string - with asse
 </html>
 `
 
-exports[`tests/layout.js > TAP > Layout() - setting a custom view template > must match snapshot 1`] = `
+exports[`tests/layout.test.js > TAP > Layout() - setting a custom view template > must match snapshot 1`] = `
 <html><head>extra head stuff</head><body><div>should be wrapped in a doc</div></body></html>
 `
