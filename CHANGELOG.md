@@ -1,3 +1,10 @@
+## [5.1.5](https://github.com/podium-lib/layout/compare/v5.1.4...v5.1.5) (2024-05-14)
+
+
+### Bug Fixes
+
+* update dependency typings ([#474](https://github.com/podium-lib/layout/issues/474)) ([be0ea39](https://github.com/podium-lib/layout/commit/be0ea39f7d2cfd7179e9cc3d45af079b72705e52))
+
 ## [5.1.4](https://github.com/podium-lib/layout/compare/v5.1.3...v5.1.4) (2024-04-15)
 
 
