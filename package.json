@@ -44,7 +44,7 @@
     "@podium/schemas": "5.0.2",
     "@podium/utils": "5.0.6",
     "abslog": "2.4.4",
-    "ajv": "8.12.0",
+    "ajv": "8.13.0",
     "lodash.merge": "4.6.2",
     "objobj": "1.0.0"
   },
