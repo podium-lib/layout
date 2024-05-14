@@ -4,7 +4,7 @@
 cat >> types/layout.d.ts <<!EOF
 declare global {
   namespace Express {
-    interface Response {
+    export interface Response {
       podiumSend(fragment: string, ...args: unknown[]): Response;
     }
   }
