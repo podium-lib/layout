@@ -1,3 +1,10 @@
+## [5.1.6](https://github.com/podium-lib/layout/compare/v5.1.5...v5.1.6) (2024-05-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ajv to v8.13.0 ([d81e8f2](https://github.com/podium-lib/layout/commit/d81e8f22fac85f41b84b36f52326a9c7373828cd))
+
 ## [5.1.5](https://github.com/podium-lib/layout/compare/v5.1.4...v5.1.5) (2024-05-14)
 
 
