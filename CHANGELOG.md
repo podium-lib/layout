@@ -1,3 +1,10 @@
+## [5.1.7](https://github.com/podium-lib/layout/compare/v5.1.6...v5.1.7) (2024-05-15)
+
+
+### Bug Fixes
+
+* update podium/client ([86d14f6](https://github.com/podium-lib/layout/commit/86d14f6a91014f2acf4664efc9d3f30927400243))
+
 ## [5.1.6](https://github.com/podium-lib/layout/compare/v5.1.5...v5.1.6) (2024-05-14)
 
 
