@@ -39,7 +39,7 @@
   "dependencies": {
     "@metrics/client": "2.5.2",
     "@podium/client": "5.0.34",
-    "@podium/context": "5.0.17",
+    "@podium/context": "5.0.18",
     "@podium/proxy": "5.0.21",
     "@podium/schemas": "5.0.5",
     "@podium/utils": "5.0.7",
