@@ -305,7 +305,7 @@ const layout = new Layout({
 const app = express();
 
 app.get('/', (req, res) => {
-    const incoming = new HttpIncoming(req, res, res.locals)
+    const incoming = new HttpIncoming(req, res, res.locals);
     layout.render(incoming, '<div>content to render</div>');
 });
 ```
@@ -695,6 +695,6 @@ SOFTWARE.
 [@podium/context]: https://github.com/podium-lib/context '@podium/context'
 [@podium/client]: https://github.com/podium-lib/client '@podium/client'
 [@podium/proxy]: https://github.com/podium-lib/proxy '@podium/proxy'
-[httpincoming]: https://github.com/podium-lib/utils/blob/master/lib/http-incoming.js 'HttpIncoming'
+[httpincoming]: https://github.com/podium-lib/utils/blob/main/lib/http-incoming.js 'HttpIncoming'
 [@metrics/metric]: https://github.com/metrics-js/metric '@metrics/metric'
 [abslog]: https://github.com/trygve-lie/abslog 'abslog'
