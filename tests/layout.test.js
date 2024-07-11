@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import tap from 'tap';
 import { destinationObjectStream } from '@podium/test-utils';
 import { HttpIncoming, AssetJs, AssetCss } from '@podium/utils';
@@ -91,7 +89,7 @@ tap.test('Layout() - should collect metric with version info', (t) => {
     const dest = destinationObjectStream((arr) => {
         t.equal(arr[0].name, 'podium_layout_version_info');
         t.equal(arr[0].labels[0].name, 'version');
-        // eslint-disable-next-line global-require
+
         t.equal(arr[0].labels[0].value, pkg.version);
         t.equal(arr[0].labels[1].name, 'major');
         t.equal(arr[0].labels[2].name, 'minor');

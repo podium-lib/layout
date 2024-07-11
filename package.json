@@ -32,7 +32,9 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "tap --disable-coverage --allow-empty-coverage && tsc --project tsconfig.test.json",
+    "test": "run-s test:*",
+    "test:unit": "tap --disable-coverage --allow-empty-coverage",
+    "test:types": "tsc --project tsconfig.test.json",
     "test:snapshots": "tap --snapshot --disable-coverage --allow-empty-coverage",
     "types": "tsc --declaration --emitDeclarationOnly && ./fixup.sh"
   },
@@ -49,7 +51,6 @@
     "objobj": "1.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.23.3",
     "@podium/podlet": "5.1.8",
     "@podium/test-utils": "2.5.2",
     "@semantic-release/changelog": "6.0.3",
@@ -58,20 +59,20 @@
     "@semantic-release/github": "9.2.6",
     "@semantic-release/npm": "11.0.3",
     "@semantic-release/release-notes-generator": "12.1.0",
-    "@types/node": "^20.10.5",
-    "@types/readable-stream": "^4.0.10",
-    "eslint": "8.54.0",
-    "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-import": "2.29.0",
-    "eslint-plugin-prettier": "5.0.1",
+    "@types/node": "20.14.10",
+    "@types/readable-stream": "4.0.15",
+    "eslint": "9.6.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-prettier": "5.1.3",
     "express": "4.19.2",
+    "globals": "15.8.0",
     "hbs": "4.2.0",
+    "npm-run-all": "4.1.5",
     "prettier": "3.1.0",
     "semantic-release": "22.0.12",
     "stoppable": "1.1.0",
     "supertest": "6.3.4",
     "tap": "18.8.0",
-    "typescript": "^5.3.3"
+    "typescript": "5.5.3"
   }
 }

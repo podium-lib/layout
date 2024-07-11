@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
 import express from 'express';
 import Layout from '../../lib/layout.js';
 import template from './views/template.js';
@@ -41,7 +39,7 @@ const app = express();
 
 app.use(layout.pathname(), layout.middleware());
 
-app.get(`${layout.pathname()}/:bar?`,async (req, res, next) => {
+app.get(`${layout.pathname()}/:bar?`, async (req, res) => {
     const incoming = res.locals.podium;
     const podlets = await Promise.all([
         header.fetch(incoming),

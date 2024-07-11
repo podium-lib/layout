@@ -20,5 +20,5 @@ const template = (podlets = []) => {
                 </div>
             </div>
         </div>`;
-}
+};
 export default template;
