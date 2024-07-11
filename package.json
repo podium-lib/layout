@@ -32,7 +32,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "run-s test:*",
+    "test": "run-s test:unit test:types",
     "test:unit": "tap --disable-coverage --allow-empty-coverage",
     "test:types": "tsc --project tsconfig.test.json",
     "test:snapshots": "tap --snapshot --disable-coverage --allow-empty-coverage",
