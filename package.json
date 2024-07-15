@@ -42,13 +42,13 @@
   },
   "dependencies": {
     "@metrics/client": "2.5.2",
-    "@podium/client": "5.1.0",
-    "@podium/context": "5.0.19",
-    "@podium/proxy": "5.0.21",
-    "@podium/schemas": "5.0.5",
+    "@podium/client": "5.1.1",
+    "@podium/context": "5.0.24",
+    "@podium/proxy": "5.0.22",
+    "@podium/schemas": "5.0.6",
     "@podium/utils": "5.0.7",
     "abslog": "2.4.4",
-    "ajv": "8.16.0",
+    "ajv": "8.17.1",
     "lodash.merge": "4.6.2",
     "objobj": "1.0.0"
   },
