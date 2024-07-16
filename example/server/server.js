@@ -1,5 +1,5 @@
 /// <reference path="../../types/layout.d.ts" />
-
+import { Readable } from 'node:stream';
 import express from 'express';
 import Layout from '../../lib/layout.js';
 import template from './views/template.js';
@@ -37,7 +37,7 @@ const app = express();
 
 app.use(layout.pathname(), layout.middleware());
 
-app.get(`${layout.pathname()}/:bar?`, async (req, res) => {
+app.get(layout.pathname(), async (req, res) => {
     const incoming = res.locals.podium;
     const podlets = await Promise.all([
         header.fetch(incoming),
@@ -54,6 +54,20 @@ app.get(`${layout.pathname()}/:bar?`, async (req, res) => {
 
     const markup = template(podlets);
     res.status(200).podiumSend(markup);
+});
+
+app.get(`${layout.pathname()}/stream`, async (req, res) => {
+    const incoming = res.locals.podium;
+    incoming.view = {
+        title: 'Example application',
+    };
+    const document = Readable.from([template()]);
+    document.pipe(res);
+
+    const headerStream = header.stream(incoming);
+    const menuStream = menu.stream(incoming);
+    const contentStream = content.stream(incoming);
+    const footerStream = footer.stream(incoming);
 });
 
 app.use(`${layout.pathname()}/assets`, express.static('assets'));
