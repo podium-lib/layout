@@ -1,36 +1,34 @@
+/// <reference path="../../types/layout.d.ts" />
+
 import express from 'express';
 import Layout from '../../lib/layout.js';
 import template from './views/template.js';
 
 const layout = new Layout({
-    pathname: '/foo',
+    pathname: '/',
     logger: console,
     name: 'demo',
 });
 
+// These are the podlets from https://github.com/podium-lib/podlet/tree/main/example
 const content = layout.client.register({
     name: 'content',
     uri: 'http://localhost:7100/manifest.json',
-    // throwable: true,
-    resolveCss: true,
 });
 
 const header = layout.client.register({
     name: 'header',
     uri: 'http://localhost:7200/header/manifest.json',
-    resolveCss: true,
 });
 
 const menu = layout.client.register({
     name: 'menu',
     uri: 'http://localhost:7200/menu/manifest.json',
-    resolveCss: true,
 });
 
 const footer = layout.client.register({
     name: 'footer',
     uri: 'http://localhost:7200/footer/manifest.json',
-    resolveCss: true,
 });
 
 layout.css({ value: '/foo/assets/grid.css' });
@@ -69,5 +67,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(7000, () => {
-    console.log(`layout server running at http://localhost:7000`);
+    console.log(`Layout server running at http://localhost:7000/`);
 });

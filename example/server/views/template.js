@@ -1,3 +1,7 @@
+/**
+ * @param {import("@podium/client").PodiumClientResponse[]} podlets
+ * @returns {string}
+ */
 const template = (podlets = []) => {
     return `
         <div class="container">
@@ -21,4 +25,5 @@ const template = (podlets = []) => {
             </div>
         </div>`;
 };
+
 export default template;
