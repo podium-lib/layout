@@ -56,6 +56,31 @@ app.get(layout.pathname(), async (req, res) => {
     res.status(200).podiumSend(markup);
 });
 
+/**
+
+I'm trying to grok the streams API in Podium, but I'm having a hard time piecing together a finished document in a layout using streams as a noob.
+
+I'm assuming we want to begin piping the document template as a stream to the response as soon as possible, ideally even before we start streaming podlets.
+
+For that to work, it looks like to me that we need:
+- Podlets wrapped in declarative shadow DOM so they're web components.
+- We need to know the name for that component ahead of time so it can be part of the document template stream right away.
+- Podlets that stream in pop into place when the declaration of the web component gets streamed in.
+
+Might be I'm just not aware how streaming HTML works. Let me RTFM.
+
+If I'm right and we don't have that web component setup, I'm thinking we need to do something like this:
+
+- Create a readable stream for the document up until the first podlet.
+- Create a readable stream for the first podlet.
+- Create a readable stream for the document up until the second podlet.
+
+And keep doing that until we have streams for the whole document. Then, make a pipeline for all those streams, and pipe that to the response. Clunky!
+
+A document template could perhaps be a generator function that would yield a readable stream up to a known slot for each call 🤔
+
+*/
+
 app.get(`${layout.pathname()}/stream`, async (req, res) => {
     const incoming = res.locals.podium;
     incoming.view = {
