@@ -6,7 +6,8 @@ let module = path.join(process.cwd(), 'types', 'layout.d.ts');
 fs.writeFileSync(
     module,
     /* ts */ `
-import type { PodiumClientResource, HttpIncoming } from "@podium/client";
+import type { PodiumClientResource } from "@podium/client";
+import type { HttpIncoming } from "@podium/utils";
 
 declare global {
   namespace Express {
