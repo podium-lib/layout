@@ -113,8 +113,6 @@ app.get(`${layout.pathname()}stream`, async (req, res) => {
     // 1. Start streaming the podlets so we can get them all to emit beforeStream for us to populate JS and CSS lists.
     // Do we need a ReadableStream wrapper around all the podlets that emits "beforeStreamEnd"?
 
-    res.contentType('text/html');
-    res.status(200);
     res.podiumStream(
         [header, menu, content, footer],
         `<template shadowrootmode="open">
