@@ -56,62 +56,12 @@ app.get(layout.pathname(), async (req, res) => {
     res.status(200).podiumSend(markup);
 });
 
-/**
-
-I'm trying to grok the streams API in Podium, but I'm having a hard time piecing together a finished document in a layout using streams as a noob.
-
-I'm assuming we want to begin piping the document template as a stream to the response as soon as possible, ideally before the podlets are done fetching.
-I'm also assuming we want to get the podlets themselves using streams, not fetch.
-
-First, let me RTFM:
-- https://frontendmasters.com/blog/streaming-html/
-- https://dev.to/tigt/the-weirdly-obscure-art-of-streamed-html-4gc2
-- https://lamplightdev.com/blog/2024/01/10/streaming-html-out-of-order-without-javascript/
-- https://podium-lib.io/docs/api/layout#streamhttpincoming-options
-
-So for the HTML we can:
-- In the layout, declare the layout using declarative shadow DOM and slots.
-- Wrap the response from podlets in their respective slots as they come in, and they'll pop into place regardless of where the markup is in the response.
-
-Aside: can we integrate Marko with Podium? `<@async>` for fetching podlets seems pretty sweet? Not web components tho.
-- https://markojs.com/docs/10-awesome-marko-features/#9-async-rendering-with-the-await-tag
-
-Still a question: how do we handle JS and CSS assets from the podlets if we start streaming the document (`<head>`) before they all emit `beforeStream`? I guess just don't start streaming before that? 🤷 How to make this ergonomic?
-
-`
-<template shadowrootmode="open">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <slot name="header"></slot>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <slot name="menu"></slot>
-            </div>
-            <div class="col-8">
-                <slot name="content"></slot>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <slot name="footer"></slot>
-            </div>
-        </div>
-    </div>
-</template>`
-*/
-
 app.get(`${layout.pathname()}stream`, async (req, res) => {
     /** @type {import("@podium/utils").HttpIncoming} */
     const incoming = res.locals.podium;
     incoming.view = {
         title: 'Example application',
     };
-
-    // 1. Start streaming the podlets so we can get them all to emit beforeStream for us to populate JS and CSS lists.
-    // Do we need a ReadableStream wrapper around all the podlets that emits "beforeStreamEnd"?
 
     res.podiumStream(
         [header, menu, content, footer],
