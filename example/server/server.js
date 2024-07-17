@@ -1,5 +1,4 @@
 /// <reference path="../../types/layout.d.ts" />
-import { pipeline, Readable } from 'node:stream';
 import express from 'express';
 import Layout from '../../lib/layout.js';
 import template from './views/template.js';
