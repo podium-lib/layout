@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/podium-lib/layout/compare/v5.1.20...v5.2.0) (2024-08-12)
+
+
+### Features
+
+* reexport types from podium/client ([#493](https://github.com/podium-lib/layout/issues/493)) ([709011c](https://github.com/podium-lib/layout/commit/709011c94f6b80e685d11f9b6723feae6f35fe90))
+
 ## [5.1.20](https://github.com/podium-lib/layout/compare/v5.1.19...v5.1.20) (2024-08-12)
 
 
