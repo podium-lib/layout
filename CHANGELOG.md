@@ -1,3 +1,10 @@
+## [5.2.1](https://github.com/podium-lib/layout/compare/v5.2.0...v5.2.1) (2024-08-12)
+
+
+### Bug Fixes
+
+* change to the expected PodiumClientResourceOptions ([4991964](https://github.com/podium-lib/layout/commit/49919640d4f66d239c15112654ab6bd42ac757dc))
+
 # [5.2.0](https://github.com/podium-lib/layout/compare/v5.1.20...v5.2.0) (2024-08-12)
 
 
