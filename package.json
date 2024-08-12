@@ -32,12 +32,11 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "run-s test:unit test:types",
-    "test:unit": "tap --disable-coverage --allow-empty-coverage",
-    "test:types": "tsc --project tsconfig.test.json",
+    "test": "tap --disable-coverage --allow-empty-coverage",
     "test:snapshots": "tap --snapshot --disable-coverage --allow-empty-coverage",
-    "types": "run-s types:tsc types:fixup",
+    "types": "run-s types:tsc types:fixup types:test",
     "types:tsc": "tsc --declaration --emitDeclarationOnly",
+    "types:test": "tsc --project tsconfig.test.json",
     "types:fixup": "node ./fixup.js"
   },
   "dependencies": {

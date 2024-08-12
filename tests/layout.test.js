@@ -143,12 +143,17 @@ tap.test('Layout() - metrics properly decorated', (t) => {
 
     app.use(layout.middleware());
 
-    const podletClient = layout.client.register({
+    /** @type {import('../lib/layout.js').RegisterOptions} */
+    const options = {
         uri: 'http://0.0.0.0:5021/manifest.json',
         name: 'myPodlet',
-    });
+    };
+
+    /** @type {import('../lib/layout.js').PodiumClientResource} */
+    const podletClient = layout.client.register(options);
 
     app.get('/', async (req, res) => {
+        /** @type {import('../lib/layout.js').PodiumClientResponse} */
         const response = await podletClient.fetch(res.locals.podium);
         res.send(response.content);
     });
