@@ -1,3 +1,10 @@
+## [5.2.3](https://github.com/podium-lib/layout/compare/v5.2.2...v5.2.3) (2024-08-25)
+
+
+### Bug Fixes
+
+* re-export types from podium/utils as well ([2ce9dd8](https://github.com/podium-lib/layout/commit/2ce9dd81be55441e82da38ff8fca1088e03647e5))
+
 ## [5.2.2](https://github.com/podium-lib/layout/compare/v5.2.1...v5.2.2) (2024-08-19)
 
 
