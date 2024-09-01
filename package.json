@@ -52,7 +52,7 @@
     "objobj": "1.0.0"
   },
   "devDependencies": {
-    "@podium/podlet": "5.1.10",
+    "@podium/podlet": "5.1.12",
     "@podium/test-utils": "2.5.2",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "11.1.0",
