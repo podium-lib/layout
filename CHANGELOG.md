@@ -1,3 +1,10 @@
+## [5.2.6-next.2](https://github.com/podium-lib/layout/compare/v5.2.6-next.1...v5.2.6-next.2) (2024-09-16)
+
+
+### Bug Fixes
+
+* update to Podium client v5.2.0-next.2 ([e00a42e](https://github.com/podium-lib/layout/commit/e00a42e1744526a981f03f2daf84e36e55f4bc41))
+
 ## [5.2.6-next.1](https://github.com/podium-lib/layout/compare/v5.2.5...v5.2.6-next.1) (2024-09-13)
 
 
