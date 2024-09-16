@@ -1,3 +1,11 @@
+## [5.2.7-next.1](https://github.com/podium-lib/layout/compare/v5.2.6...v5.2.7-next.1) (2024-09-16)
+
+
+### Bug Fixes
+
+* update @podium/layout to get support for 103 early hints ([10e62cb](https://github.com/podium-lib/layout/commit/10e62cb27e5dcddda896d1cf1bb52dbf74cf01c6))
+* update to Podium client v5.2.0-next.2 ([e00a42e](https://github.com/podium-lib/layout/commit/e00a42e1744526a981f03f2daf84e36e55f4bc41))
+
 ## [5.2.6](https://github.com/podium-lib/layout/compare/v5.2.5...v5.2.6) (2024-09-16)
 
 
