@@ -65,7 +65,7 @@
     "eslint": "9.6.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.1.3",
-    "express": "4.19.2",
+    "express": "4.20.0",
     "globals": "15.8.0",
     "hbs": "4.2.0",
     "npm-run-all2": "5.0.2",
