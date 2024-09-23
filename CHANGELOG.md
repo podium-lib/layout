@@ -1,3 +1,10 @@
+## [5.2.7](https://github.com/podium-lib/layout/compare/v5.2.6...v5.2.7) (2024-09-23)
+
+
+### Bug Fixes
+
+* add types for the context ([#505](https://github.com/podium-lib/layout/issues/505)) ([48ea2d4](https://github.com/podium-lib/layout/commit/48ea2d4cb525843203eca3f0f270e9df2aedcb79))
+
 ## [5.2.6](https://github.com/podium-lib/layout/compare/v5.2.5...v5.2.6) (2024-09-16)
 
 
