@@ -1,3 +1,10 @@
+## [5.2.9](https://github.com/podium-lib/layout/compare/v5.2.8...v5.2.9) (2024-09-24)
+
+
+### Bug Fixes
+
+* type export of PodiumClientResourceOptions ([c401ce8](https://github.com/podium-lib/layout/commit/c401ce8b9a43f5349e3a908901738a22f2e1d70b))
+
 ## [5.2.8](https://github.com/podium-lib/layout/compare/v5.2.7...v5.2.8) (2024-09-23)
 
 
