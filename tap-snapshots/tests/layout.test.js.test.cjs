@@ -7,21 +7,19 @@
 'use strict'
 exports[`tests/layout.test.js > TAP > Layout() - rendering using a string - with assets > must match snapshot 1`] = `
 <!doctype html>
-<html lang="en-US">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <link href="http://url.com/some/css" type="text/css" rel="stylesheet">
-        
-        <title>awesome page</title>
-        extra head stuff
-    </head>
-    <body>
-        <div>should be wrapped in a doc</div>
-        <script src="http://url.com/some/js"></script>
-        
-    </body>
+    <html lang="en-US">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+            <link href="http://url.com/some/css" type="text/css" rel="stylesheet">
+            
+            <title>awesome page</title>
+            extra head stuff
+        </head>
+        <body><div>should be wrapped in a doc</div><script src="http://url.com/some/js"></script>
+    
+</body>
 </html>
 `
 
