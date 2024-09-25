@@ -1,15 +1,11 @@
 import express from 'express';
 import Layout from '../../lib/layout.js';
-import { template } from './views/template.js';
 
 const layout = new Layout({
     pathname: '/foo',
     logger: console,
     name: 'demo',
 });
-
-// use our custom streaming template
-layout.view(template);
 
 const content = layout.client.register({
     name: 'content',
