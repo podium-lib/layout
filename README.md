@@ -613,6 +613,44 @@ app.get(layout.pathname(), (req, res) => {
 });
 ```
 
+### res.podiumStream(...templateArguments)
+
+Method on the `http.ServerResponse` object for streaming HTML to the browser. This function returns a `ResponseStream` object that can then be used to push out HTML to the browser in chunks using its .send() function. Once streaming is finished, the .done() function must be called to close the stream.
+
+```js
+const stream = res.podiumStream();
+stream.send(`<div>HTML chunk 1</div>`);
+stream.send(`<div>HTML chunk 2</div>`);
+stream.done();
+```
+
+The Podium document template will still be used. When you call res.podiumStream(), the document head will be sent to the browser immediately. Once the .done() function is called, the closing part of the template will be sent before the stream is closed out.
+
+Note that any arguments passed to .podiumStream(...args) will be passed on to the layout's document template.
+
+**Working with assets**
+
+When working with assets, its important to wait for podlets to have sent their assets to the layout via 103 early hints. Use the incoming.hints `complete` event for this. Wait for assets to be ready, set assets on the incoming object and then call res.podiumStream.
+
+```js
+const incoming = res.locals.podium;
+const headerFetch = p1Client.fetch(incoming);
+const footerFetch = p2Client.fetch(incoming);
+
+incoming.hints.on('complete', async ({ js, css }) => {
+    incoming.js = js;
+    incoming.css = css;
+
+    const stream = res.podiumStream();
+    const [header, footer] = await Promise.all([
+        headerFetch,
+        footerFetch,
+    ]);
+    stream.send(`<header>${header}</header>...<footer>${footer}</footer>`);
+    stream.done();
+});
+```
+
 ### .client
 
 A property that exposes an instance of the [@podium/client] for fetching content
