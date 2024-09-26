@@ -731,3 +731,133 @@ tap.test('Proxy - builds correct proxy url', async (t) => {
     s1.stop();
     s2.stop();
 });
+
+const podlet = (name, port, assets) => {
+    const app = express();
+    const podlet = new Podlet({
+        name,
+        version: '1.0.0',
+        pathname: '/',
+    });
+    if (assets && assets.js) {
+        podlet.js({ value: assets.js, type: 'module' });
+    }
+    if (assets && assets.css) {
+        podlet.css({ value: assets.css, rel: 'stylesheet', type: 'text/css' });
+    }
+    app.use(podlet.middleware());
+    app.get('/manifest.json', (req, res) => res.send(podlet));
+    app.get(podlet.content(), (req, res) => res.send(`<div>${name}</div>`));
+    return stoppable(app.listen(port), 0);
+};
+
+tap.test('HTTP Streaming', async (t) => {
+    const p1 = podlet('podlet-registered-name-1', 5053);
+    const p2 = podlet('podlet-registered-name-2', 5054);
+
+    const app = express();
+    const layout = new Layout({ name: 'my-layout', pathname: '/' });
+    const p1Client = layout.client.register({
+        name: 'podlet-registered-name-1',
+        uri: 'http://0.0.0.0:5053/manifest.json',
+    });
+    const p2Client = layout.client.register({
+        name: 'podlet-registered-name-2',
+        uri: 'http://0.0.0.0:5054/manifest.json',
+    });
+    app.use(layout.middleware());
+    app.get(layout.pathname(), async (req, res) => {
+        const incoming = res.locals.podium;
+        const p1fetch = p1Client.fetch(incoming);
+        const p2fetch = p2Client.fetch(incoming);
+
+        const stream = res.podiumStream();
+
+        const [p1Content, p2Content] = await Promise.all([p1fetch, p2fetch]);
+
+        stream.send(`<div>${p1Content}</div><div>${p2Content}</div>`);
+
+        stream.done();
+    });
+    const l1 = stoppable(app.listen(5064), 0);
+
+    const result = await fetch('http://0.0.0.0:5064');
+    const html = await result.text();
+    t.match(html, /<html lang="en-US">/);
+    t.match(html, /<\/html>/);
+    t.match(
+        html,
+        /<div><div>podlet-registered-name-1<\/div><\/div><div><div>podlet-registered-name-2<\/div><\/div>/,
+        '',
+    );
+
+    p1.stop();
+    p2.stop();
+    l1.stop();
+});
+
+tap.test('HTTP Streaming - with assets', async (t) => {
+    const p1 = podlet('podlet-registered-name-1', 5073, {
+        js: '/podlet-registered-name-1.js',
+        css: '/podlet-registered-name-1.css',
+    });
+    const p2 = podlet('podlet-registered-name-2', 5074, {
+        js: '/podlet-registered-name-2.js',
+        css: '/podlet-registered-name-2.css',
+    });
+
+    const app = express();
+    const layout = new Layout({ name: 'my-layout', pathname: '/' });
+    const p1Client = layout.client.register({
+        name: 'podlet-registered-name-1',
+        uri: 'http://0.0.0.0:5073/manifest.json',
+    });
+    const p2Client = layout.client.register({
+        name: 'podlet-registered-name-2',
+        uri: 'http://0.0.0.0:5074/manifest.json',
+    });
+    app.use(layout.middleware());
+    app.get(layout.pathname(), async (req, res) => {
+        const incoming = res.locals.podium;
+        const p1fetch = p1Client.fetch(incoming);
+        const p2fetch = p2Client.fetch(incoming);
+
+        incoming.hints.on('complete', async ({ js, css }) => {
+            incoming.js = js;
+            incoming.css = css;
+            const stream = res.podiumStream();
+            const [p1Content, p2Content] = await Promise.all([
+                p1fetch,
+                p2fetch,
+            ]);
+            stream.send(`<div>${p1Content}</div><div>${p2Content}</div>`);
+            stream.done();
+        });
+    });
+    const l1 = stoppable(app.listen(5075), 0);
+
+    const result = await fetch('http://0.0.0.0:5075');
+    const html = await result.text();
+
+    t.match(html, /<html lang="en-US">/);
+    t.match(
+        html,
+        /<link href="\/podlet-registered-name-1.css" type="text\/css" rel="stylesheet">/,
+    );
+    t.match(
+        html,
+        /<link href="\/podlet-registered-name-2.css" type="text\/css" rel="stylesheet">/,
+    );
+    t.match(
+        html,
+        /<div><div>podlet-registered-name-1<\/div><\/div><div><div>podlet-registered-name-2<\/div><\/div>/,
+        '',
+    );
+    t.match(html, /<script src="\/podlet-registered-name-1.js" type="module">/);
+    t.match(html, /<script src="\/podlet-registered-name-2.js" type="module">/);
+    t.match(html, /<\/html>/);
+
+    p1.stop();
+    p2.stop();
+    l1.stop();
+});
