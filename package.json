@@ -54,10 +54,9 @@
   "devDependencies": {
     "@podium/eslint-config": "1.0.0",
     "@podium/podlet": "5.1.12",
+    "@podium/semantic-release-config": "2.0.0",
     "@podium/test-utils": "2.5.2",
     "@podium/typescript-config": "1.0.0",
-    "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/git": "10.0.1",
     "@types/node": "20.14.10",
     "@types/readable-stream": "4.0.15",
     "eslint": "9.11.1",
