@@ -52,6 +52,7 @@
     "objobj": "1.0.0"
   },
   "devDependencies": {
+    "@podium/eslint-config": "1.0.0",
     "@podium/podlet": "5.1.12",
     "@podium/test-utils": "2.5.2",
     "@podium/typescript-config": "1.0.0",
@@ -60,10 +61,7 @@
     "@types/node": "20.14.10",
     "@types/readable-stream": "4.0.15",
     "eslint": "9.11.1",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-prettier": "5.2.1",
     "express": "4.20.0",
-    "globals": "15.8.0",
     "npm-run-all2": "6.2.3",
     "prettier": "3.3.3",
     "semantic-release": "24.1.1",
