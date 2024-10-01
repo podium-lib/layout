@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@podium/eslint-config": "1.0.0",
-    "@podium/podlet": "5.1.12",
+    "@podium/podlet": "5.1.17",
     "@podium/semantic-release-config": "2.0.0",
     "@podium/test-utils": "2.5.2",
     "@podium/typescript-config": "1.0.0",
