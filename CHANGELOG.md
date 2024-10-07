@@ -1,3 +1,10 @@
+## [5.2.10](https://github.com/podium-lib/layout/compare/v5.2.9...v5.2.10) (2024-10-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/context to v5.1.0 ([9128440](https://github.com/podium-lib/layout/commit/9128440d680b09758e82fc0288e3b494a22e861b))
+
 ## [5.2.9](https://github.com/podium-lib/layout/compare/v5.2.8...v5.2.9) (2024-09-24)
 
 
