@@ -1,3 +1,10 @@
+## [5.2.12](https://github.com/podium-lib/layout/compare/v5.2.11...v5.2.12) (2024-10-18)
+
+
+### Bug Fixes
+
+* update @podium/client to get timeout fix ([8490a2c](https://github.com/podium-lib/layout/commit/8490a2c576fe4f878d4a78b670512f495a5828c3))
+
 ## [5.2.11](https://github.com/podium-lib/layout/compare/v5.2.10...v5.2.11) (2024-10-14)
 
 
