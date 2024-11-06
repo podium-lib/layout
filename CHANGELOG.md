@@ -1,3 +1,10 @@
+## [5.2.13-next.3](https://github.com/podium-lib/layout/compare/v5.2.13-next.2...v5.2.13-next.3) (2024-11-06)
+
+
+### Bug Fixes
+
+* update [@podium](https://github.com/podium) libs to latest ([d81854a](https://github.com/podium-lib/layout/commit/d81854a710225d68f868d5c2a2ca7abc9d7ce7bd))
+
 ## [5.2.13-next.2](https://github.com/podium-lib/layout/compare/v5.2.13-next.1...v5.2.13-next.2) (2024-11-04)
 
 
