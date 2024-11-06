@@ -1,26 +1,9 @@
-## [5.2.13-next.3](https://github.com/podium-lib/layout/compare/v5.2.13-next.2...v5.2.13-next.3) (2024-11-06)
+## [5.2.13](https://github.com/podium-lib/layout/compare/v5.2.12...v5.2.13) (2024-11-04)
 
 
 ### Bug Fixes
 
-* update [@podium](https://github.com/podium) libs to latest ([d81854a](https://github.com/podium-lib/layout/commit/d81854a710225d68f868d5c2a2ca7abc9d7ce7bd))
-
-## [5.2.13-next.2](https://github.com/podium-lib/layout/compare/v5.2.13-next.1...v5.2.13-next.2) (2024-11-04)
-
-
-### Bug Fixes
-
-* update podium dependencies ([d259b2d](https://github.com/podium-lib/layout/commit/d259b2da3775d7dd99a1983a72e140ff4fc59ea4))
-
-## [5.2.13-next.1](https://github.com/podium-lib/layout/compare/v5.2.12...v5.2.13-next.1) (2024-10-22)
-
-
-### Bug Fixes
-
-* update @podium/client@next ([17ab58c](https://github.com/podium-lib/layout/commit/17ab58c763f713839bbe561d8509d557fbfb759a))
-* update @podium/layout to get support for 103 early hints ([10e62cb](https://github.com/podium-lib/layout/commit/10e62cb27e5dcddda896d1cf1bb52dbf74cf01c6))
-* update dependencies ([942caa4](https://github.com/podium-lib/layout/commit/942caa4b1954bf3c9ffc24c3027bf7a4b40c250f))
-* update to Podium client v5.2.0-next.2 ([e00a42e](https://github.com/podium-lib/layout/commit/e00a42e1744526a981f03f2daf84e36e55f4bc41))
+* **deps:** update dependency @podium/proxy to v5.0.29 ([2efd4d6](https://github.com/podium-lib/layout/commit/2efd4d694c3819afff8b320cc8a79e3af9a1d324))
 
 ## [5.2.12](https://github.com/podium-lib/layout/compare/v5.2.11...v5.2.12) (2024-10-18)
 
