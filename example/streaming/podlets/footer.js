@@ -32,8 +32,13 @@ app.get('/css', (req, res) => {
 	`);
 });
 
-app.get('/', (req, res) => {
-    res.send(`
+app.get('/', async (req, res) => {
+    // send headers
+    res.sendHeaders();
+
+    await new Promise((res) => setTimeout(res, 1250));
+
+    res.podiumSend(`
 			<footer>
 				footer content
 			</footer>	

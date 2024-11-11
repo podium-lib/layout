@@ -44,8 +44,14 @@ app.get('/css', (req, res) => {
 	`);
 });
 
-app.get('/', (req, res) => {
-    res.send(`
+app.get('/', async (req, res) => {
+    // send headers
+    res.sendHeaders();
+
+		// imagine this is your slow database call
+    await new Promise((res) => setTimeout(res, 1000));
+
+    res.podiumSend(`
 			<menu>
 				<ul>
 					<li><a href="/">Home</a></li>

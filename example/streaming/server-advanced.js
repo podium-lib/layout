@@ -1,10 +1,14 @@
 import express from 'express';
 import Layout from '../../lib/layout.js';
+import { timeout } from 'tap';
 
 const layout = new Layout({
     pathname: '/foo',
     logger: console,
     name: 'demo',
+    client: {
+        timeout: 5000,
+    }
 });
 
 const content = layout.client.register({
@@ -78,76 +82,89 @@ app.get(layout.pathname(), async (req, res) => {
         title: 'Example streaming application',
     };
 
-    const headerFetch = header.fetch(incoming);
-    const menuFetch = menu.fetch(incoming);
-    const contentFetch = content.fetch(incoming);
-    const footerFetch = footer.fetch(incoming);
+    // we start a stream for each podlet (instead of a fetch)
+    // this allows us to receive podlet meta including assets before the podlet body
+    const headerFetch = header.stream(incoming);
+    const menuFetch = menu.stream(incoming);
+    const contentFetch = content.stream(incoming);
+    const footerFetch = footer.stream(incoming);
 
-    incoming.hints.on('complete', async ({ js, css }) => {
-        // set the assets on httpincoming so that they are available in the document template
-        incoming.js = [...incoming.js, ...js];
-        incoming.css = [...incoming.css, ...css];
+    // we set up listeners to get notified with podlet metadata is ready
+    // this will occur before the podlet body content is sent.
+    headerFetch.once('beforeStream', ({ js, css }) => {
+        incoming.css.push(...css);
+    });
+    menuFetch.once('beforeStream', ({ js, css }) => {
+        incoming.css.push(...css);
+    });
+    contentFetch.once('beforeStream', ({ js, css }) => {
+        incoming.css.push(...css);
+    });
+    footerFetch.once('beforeStream', ({ js, css }) => {
+        incoming.css.push(...css);
+    });
 
-        // set up the stream which will send the document template head
-        const stream = res.podiumStream();
+    // we use an awkward wait function to ensure that all the assets are loaded
+    // before we start the stream (and flush the document head)
+    await new Promise((resolve) => {
+        function checkForAssets() {
+            if (incoming.css.length >= 5) {
+                resolve(true);
+            } else {
+                setTimeout(checkForAssets, 100);
+            }
+        }
+        checkForAssets();
+    });
 
-        // stream in the document body with slot placeholders for podlets
-        stream.send(`
-            <template shadowrootmode="open">
-                <link href="/foo/css" type="text/css" rel="stylesheet">
-                <div class="container">
+    // we kick off the stream, this automatically sends the document opening html including everything in the <head>
+    // as well as the openning <body> tag.
+    const stream = res.podiumStream();
+
+    // stream in the document body with slot skeleton screen placeholders for podlets
+    // these will be replaced once the podlets are loaded
+    stream.send(`
+        <template shadowrootmode="open">
+            <link href="/foo/css" type="text/css" rel="stylesheet">
+            <div class="container">
+                <div>
                     <div>
-                        <div>
-                            <slot name="header"><div class="skeleton header"></div></slot>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <slot name="menu"><div class="skeleton menu"></div></slot>
-                        </div>
-                        <div>
-                            <slot name="content"><div class="skeleton content"></div></slot>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <slot name="footer"><div class="skeleton footer"></div></slot>
-                        </div>
+                        <slot name="header"><div class="skeleton header"></div></slot>
                     </div>
                 </div>
-            </template>
-        `);
+                <div>
+                    <div>
+                        <slot name="menu"><div class="skeleton menu"></div></slot>
+                    </div>
+                    <div>
+                        <slot name="content"><div class="skeleton content"></div></slot>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <slot name="footer"><div class="skeleton footer"></div></slot>
+                    </div>
+                </div>
+            </div>
+        </template>
+    `);
 
-        // fake 1 second delay
-        await new Promise((res) => setTimeout(res, 1000));
-
-        // stream in podlet content when available...
-        headerFetch.then((content) => {
-            stream.send(`<div slot="header">${content}</div>`);
-        });
-
-        await new Promise((res) => setTimeout(res, 1000));
-
-        menuFetch.then((content) => {
-            stream.send(`<div slot="menu">${content}</div>`);
-        });
-
-        await new Promise((res) => setTimeout(res, 1000));
-
-        contentFetch.then((content) => {
-            stream.send(`<div slot="content">${content}</div>`);
-        });
-
-        await new Promise((res) => setTimeout(res, 1000));
-
-        footerFetch.then((content) => {
-            stream.send(`<div slot="footer">${content}</div>`);
-        });
-
-        // close out the dom and the stream
-        await Promise.all([headerFetch, menuFetch, contentFetch, footerFetch]);
-        stream.done();
+    const prom1 = headerFetch.toArray().then((data) => {
+        stream.send(`<div slot="header">${Buffer.concat(data).toString()}</div>`);
     });
+    const prom2 = menuFetch.toArray().then((data) => {
+        stream.send(`<div slot="menu">${Buffer.concat(data).toString()}</div>`);
+    });
+    const prom3 = contentFetch.toArray().then((data) => {
+        stream.send(`<div slot="content">${Buffer.concat(data).toString()}</div>`);
+    });
+    const prom4 = footerFetch.toArray().then((data) => {
+        stream.send(`<div slot="footer">${Buffer.concat(data).toString()}</div>`);
+    });
+
+    await Promise.all([prom1, prom2, prom3, prom4]);
+
+    stream.done();
 });
 
 app.use(`${layout.pathname()}/assets`, express.static('assets'));
