@@ -14,5 +14,6 @@ tmp/**/*
 .idea/**/*
 coverage
 dist
-types
+*.d.ts
+!podium.d.ts
 .tap

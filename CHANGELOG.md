@@ -1,10 +1,75 @@
-## [5.2.7-next.1](https://github.com/podium-lib/layout/compare/v5.2.6...v5.2.7-next.1) (2024-09-16)
+## [5.2.14](https://github.com/podium-lib/layout/compare/v5.2.13...v5.2.14) (2024-11-06)
 
 
 ### Bug Fixes
 
+* update [@podium](https://github.com/podium) libs to latest ([d81854a](https://github.com/podium-lib/layout/commit/d81854a710225d68f868d5c2a2ca7abc9d7ce7bd))
+* update @podium/client@next ([17ab58c](https://github.com/podium-lib/layout/commit/17ab58c763f713839bbe561d8509d557fbfb759a))
 * update @podium/layout to get support for 103 early hints ([10e62cb](https://github.com/podium-lib/layout/commit/10e62cb27e5dcddda896d1cf1bb52dbf74cf01c6))
+* update dependencies ([942caa4](https://github.com/podium-lib/layout/commit/942caa4b1954bf3c9ffc24c3027bf7a4b40c250f))
+* update podium dependencies ([d259b2d](https://github.com/podium-lib/layout/commit/d259b2da3775d7dd99a1983a72e140ff4fc59ea4))
 * update to Podium client v5.2.0-next.2 ([e00a42e](https://github.com/podium-lib/layout/commit/e00a42e1744526a981f03f2daf84e36e55f4bc41))
+
+## [5.2.14-next.1](https://github.com/podium-lib/layout/compare/v5.2.13...v5.2.14-next.1) (2024-11-06)
+
+
+### Bug Fixes
+
+* update [@podium](https://github.com/podium) libs to latest ([d81854a](https://github.com/podium-lib/layout/commit/d81854a710225d68f868d5c2a2ca7abc9d7ce7bd))
+* update @podium/client@next ([17ab58c](https://github.com/podium-lib/layout/commit/17ab58c763f713839bbe561d8509d557fbfb759a))
+* update @podium/layout to get support for 103 early hints ([10e62cb](https://github.com/podium-lib/layout/commit/10e62cb27e5dcddda896d1cf1bb52dbf74cf01c6))
+* update dependencies ([942caa4](https://github.com/podium-lib/layout/commit/942caa4b1954bf3c9ffc24c3027bf7a4b40c250f))
+* update podium dependencies ([d259b2d](https://github.com/podium-lib/layout/commit/d259b2da3775d7dd99a1983a72e140ff4fc59ea4))
+* update to Podium client v5.2.0-next.2 ([e00a42e](https://github.com/podium-lib/layout/commit/e00a42e1744526a981f03f2daf84e36e55f4bc41))
+
+## [5.2.13](https://github.com/podium-lib/layout/compare/v5.2.12...v5.2.13) (2024-11-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/proxy to v5.0.29 ([2efd4d6](https://github.com/podium-lib/layout/commit/2efd4d694c3819afff8b320cc8a79e3af9a1d324))
+
+## [5.2.12](https://github.com/podium-lib/layout/compare/v5.2.11...v5.2.12) (2024-10-18)
+
+
+### Bug Fixes
+
+* update @podium/client to get timeout fix ([8490a2c](https://github.com/podium-lib/layout/commit/8490a2c576fe4f878d4a78b670512f495a5828c3))
+
+## [5.2.11](https://github.com/podium-lib/layout/compare/v5.2.10...v5.2.11) (2024-10-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/client to v5.1.14 ([20186d0](https://github.com/podium-lib/layout/commit/20186d0059f4be6acd3ea9df6804f54b33a29f63))
+
+## [5.2.10](https://github.com/podium-lib/layout/compare/v5.2.9...v5.2.10) (2024-10-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/context to v5.1.0 ([9128440](https://github.com/podium-lib/layout/commit/9128440d680b09758e82fc0288e3b494a22e861b))
+
+## [5.2.9](https://github.com/podium-lib/layout/compare/v5.2.8...v5.2.9) (2024-09-24)
+
+
+### Bug Fixes
+
+* type export of PodiumClientResourceOptions ([c401ce8](https://github.com/podium-lib/layout/commit/c401ce8b9a43f5349e3a908901738a22f2e1d70b))
+
+## [5.2.8](https://github.com/podium-lib/layout/compare/v5.2.7...v5.2.8) (2024-09-23)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([26123be](https://github.com/podium-lib/layout/commit/26123be99889cc33a53f6b56750a027d55cfdf38))
+
+## [5.2.7](https://github.com/podium-lib/layout/compare/v5.2.6...v5.2.7) (2024-09-23)
+
+
+### Bug Fixes
+
+* add types for the context ([#505](https://github.com/podium-lib/layout/issues/505)) ([48ea2d4](https://github.com/podium-lib/layout/commit/48ea2d4cb525843203eca3f0f270e9df2aedcb79))
 
 ## [5.2.6](https://github.com/podium-lib/layout/compare/v5.2.5...v5.2.6) (2024-09-16)
 
