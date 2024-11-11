@@ -819,20 +819,45 @@ tap.test('HTTP Streaming - with assets', async (t) => {
     app.use(layout.middleware());
     app.get(layout.pathname(), async (req, res) => {
         const incoming = res.locals.podium;
-        const p1fetch = p1Client.fetch(incoming);
-        const p2fetch = p2Client.fetch(incoming);
+        const p1fetch = p1Client.stream(incoming);
+        const p2fetch = p2Client.stream(incoming);
 
-        incoming.hints.on('complete', async ({ js, css }) => {
-            incoming.js = js;
-            incoming.css = css;
-            const stream = res.podiumStream();
-            const [p1Content, p2Content] = await Promise.all([
-                p1fetch,
-                p2fetch,
-            ]);
-            stream.send(`<div>${p1Content}</div><div>${p2Content}</div>`);
-            stream.done();
+        p1fetch.once('beforeStream', ({ js, css }) => {
+            incoming.js.push(...js);
+            incoming.css.push(...css);
         });
+        p2fetch.once('beforeStream', ({ js, css }) => {
+            incoming.js.push(...js);
+            incoming.css.push(...css);
+        });
+
+        await new Promise((resolve) => {
+            function checkForAssets() {
+                if (incoming.js.length === 2 || incoming.css.length === 2) {
+                    resolve(true);
+                } else {
+                    setTimeout(checkForAssets, 100);
+                }
+            }
+            checkForAssets();
+        });
+
+        const stream = res.podiumStream();
+
+        const chunks1 = [];
+        for await (const chunk of p1fetch) {
+            chunks1.push(chunk);
+        }
+        const p1Content = Buffer.concat(chunks1).toString();
+
+        const chunks2 = [];
+        for await (const chunk of p2fetch) {
+            chunks2.push(chunk);
+        }
+        const p2Content = Buffer.concat(chunks2).toString();
+
+        stream.send(`<div>${p1Content}</div><div>${p2Content}</div>`);
+        stream.done();
     });
     const l1 = stoppable(app.listen(5075), 0);
 
