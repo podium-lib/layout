@@ -1,3 +1,10 @@
+## [5.2.15](https://github.com/podium-lib/layout/compare/v5.2.14...v5.2.15) (2024-11-13)
+
+
+### Bug Fixes
+
+* include layout_name in podium_layout_version_info ([#512](https://github.com/podium-lib/layout/issues/512)) ([9b9c531](https://github.com/podium-lib/layout/commit/9b9c5319e1470ecb9b16d9ab519d3d317cb21f8b))
+
 ## [5.2.14](https://github.com/podium-lib/layout/compare/v5.2.13...v5.2.14) (2024-11-06)
 
 
