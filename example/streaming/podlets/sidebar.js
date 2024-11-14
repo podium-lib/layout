@@ -48,7 +48,7 @@ app.get('/css', (req, res) => {
 });
 
 app.get('/', async (req, res) => {
-    // send headers
+    res.set('Content-Type', 'text/html');
     res.sendHeaders();
 
     await new Promise((res) => setTimeout(res, 3200));
