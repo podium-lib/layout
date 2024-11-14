@@ -69,7 +69,7 @@ app.get('/foo/css', (req, res) => {
 			box-sizing: border-box;
         }
         .skeleton--header {
-            height:600px;
+            height:79px;
         }
         .skeleton--menu {
             height:40px;
@@ -140,6 +140,11 @@ app.get(layout.pathname(), async (req, res) => {
     // as well as the openning <body> tag.
     const stream = await res.podiumStream();
 
+    const [headerContent, menuContent] = await Promise.all([
+        headerFetch,
+        menuFetch,
+    ]);
+
     // -----------------------------------------------------------------------
     // Immediately send the document structure and placeholders to the browser
     // -----------------------------------------------------------------------
@@ -151,12 +156,8 @@ app.get(layout.pathname(), async (req, res) => {
             <link href="/foo/css" type="text/css" rel="stylesheet">
             <div class="wrapper">
                 <section>
-                    <section>
-                        <slot name="menu"><div class="skeleton skeleton--menu"></div></slot>
-                    </section>
-                    <header>
-                        <slot name="header"><div class="skeleton skeleton--header"></div></slot>
-                    </header>
+                    <section class="">${menuContent}</section>
+                    <header>${headerContent}</header>
                 </section>
                 <main class="main container">
                     <div class="content">
@@ -177,18 +178,13 @@ app.get(layout.pathname(), async (req, res) => {
     // Option 1. Load podlets one at a time as they are fetched
     // ---------------------------------------------------------
 
-    const [headerData, menuData, contentData, footerData, sidebarData] =
-        await Promise.all([
-            headerFetch,
-            menuFetch,
-            contentFetch,
-            footerFetch,
-            sidebarFetch,
-        ]);
+    const [contentData, footerData, sidebarData] = await Promise.all([
+        contentFetch,
+        footerFetch,
+        sidebarFetch,
+    ]);
 
     stream.send(`
-        <div slot="header">${headerData}</div>
-        <div slot="menu">${menuData}</div>
         <div slot="content">${contentData}</div>
         <div slot="footer">${footerData}</div>
         <div slot="sidebar">${sidebarData}</div>

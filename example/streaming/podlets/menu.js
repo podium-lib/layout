@@ -2,12 +2,13 @@ import Podlet from '@podium/podlet';
 import express from 'express';
 
 const podlet = new Podlet({
-    name: 'menu',
+    name: 'menu-podlet',
     version: Date.now().toString(),
     pathname: '/',
+    useShadowDOM: true,
 });
 
-podlet.css({ value: 'http://localhost:6102/css' });
+podlet.css({ value: 'http://localhost:6102/css', strategy: 'shadow-dom' });
 
 const app = express();
 
@@ -20,27 +21,33 @@ app.get('/manifest.json', (req, res) => {
 app.get('/css', (req, res) => {
     res.set('Content-Type', 'text/css');
     res.send(`
-		menu {
-			border: 1px solid black;
-			border-radius: 5px;
-			width: 100%;
-			padding: 10px;
-			margin: 0;
-			margin-bottom: 20px;
-			box-sizing: border-box;
-		}
-		menu ul {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			display: flex;
-			justify-content: space-evenly;
-			align-items: center;
-		}
-		menu ul li {
-			margin: 0;
-			padding: 0;
-		}
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			.menu {
+				width: 100%;
+				background-color: #136C72;
+				padding: 1em 0;
+				font-family: Verdana, serif;
+				font-weight: 400;
+				font-style: normal;
+			}
+			.menu ul {
+				list-style: none;
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+			}
+			a {
+				text-transform: upper-case;
+				color: white;
+				text-decoration: none;
+			}
+			a:hover, a:active {
+				text-decoration: underline;
+			}
 	`);
 });
 
@@ -48,18 +55,19 @@ app.get('/', async (req, res) => {
     // send headers
     res.sendHeaders();
 
-		// imagine this is your slow database call
-    await new Promise((res) => setTimeout(res, 1000));
+    // imagine this is your slow database call
+    await new Promise((res) => setTimeout(res, 100));
 
     res.podiumSend(`
-			<menu>
+			<nav class="menu">
 				<ul>
-					<li><a href="/">Home</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/things">Things</a></li>
-					<li><a href="/stuff">Stuff</a></li>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Sign in</a></li>
+					<li><a href="#">Sign up</a></li>
 				</ul>
-			</menu>	
+			</nav>	
 		`);
 });
 

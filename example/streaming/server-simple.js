@@ -27,11 +27,40 @@ const footer = layout.client.register({
     uri: 'http://localhost:6104/manifest.json',
 });
 
-layout.css({ value: '/css' });
+const sidebar = layout.client.register({
+    name: 'sidebar',
+    uri: 'http://localhost:6105/manifest.json',
+});
+
+layout.css({ value: '/foo/css', strategy: 'shadow-dom' });
 
 const app = express();
 
 app.use(layout.pathname(), layout.middleware());
+
+app.get('/foo/css', (req, res) => {
+    res.set('Content-Type', 'text/css');
+    res.send(`
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .layout {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+        }
+        .content-area {
+            width: 75%;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1em;
+        }
+	`);
+});
 
 app.get(layout.pathname(), async (req, res) => {
     const incoming = res.locals.podium;
@@ -44,38 +73,40 @@ app.get(layout.pathname(), async (req, res) => {
     const menuFetch = menu.fetch(incoming);
     const contentFetch = content.fetch(incoming);
     const footerFetch = footer.fetch(incoming);
+    const sidebarFetch = sidebar.fetch(incoming);
 
-    incoming.hints.on('complete', async ({ js, css }) => {
-        // set the assets on httpincoming so that they are available in the document template
-        incoming.js = js;
-        incoming.css = css;
+    const stream = await res.podiumStream();
 
-        // set up the stream which will send the document template head
-        const stream = res.podiumStream();
+    const [
+        headerResult,
+        menuResult,
+        contentResult,
+        footerResult,
+        sidebarResult,
+    ] = await Promise.all([
+        headerFetch,
+        menuFetch,
+        contentFetch,
+        footerFetch,
+        sidebarFetch,
+    ]);
 
-        // pretend the podlets are slow to load
-        await new Promise((res) => setTimeout(res, 3000));
-
-        const [header, menu, content, footer] = await Promise.all([
-            headerFetch,
-            menuFetch,
-            contentFetch,
-            footerFetch,
-        ]);
-
-        // stream in the document body with slot placeholders for podlets
-        stream.send(`
-            <div class="container">
-                <div>${header}</div>
-                <div>
-                    <div>${menu}</div>
-                    <div>${content}</div>
-                </div>
-                <div>${footer}</div>
+    // stream in the document body with slot placeholders for podlets
+    stream.send(`
+        <div class="layout">
+            <link href="/foo/css" type="text/css" rel="stylesheet">
+            <div class="top-area">
+                <div>${menuResult}</div>
+                <div>${headerResult}</div>
             </div>
-        `);
-        stream.done();
-    });
+            <div class="content-area">
+                ${contentResult}
+                ${sidebarResult}
+            </div>
+            <div>${footerResult}</div>
+        </div>
+    `);
+    stream.done();
 });
 
 // eslint-disable-next-line no-unused-vars

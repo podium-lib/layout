@@ -2,12 +2,13 @@ import Podlet from '@podium/podlet';
 import express from 'express';
 
 const podlet = new Podlet({
-    name: 'content',
+    name: 'content-podlet',
     version: Date.now().toString(),
     pathname: '/',
+    useShadowDOM: true,
 });
 
-podlet.css({ value: 'http://localhost:6103/css' });
+podlet.css({ value: 'http://localhost:6103/css', strategy: 'shadow-dom' });
 
 const app = express();
 
@@ -20,15 +21,23 @@ app.get('/manifest.json', (req, res) => {
 app.get('/css', (req, res) => {
     res.set('Content-Type', 'text/css');
     res.send(`
-		.content {
-			border: 1px solid black;
-			border-radius: 5px;
-			width: 100%;
-			padding: 20px;
-			margin: 0;
-			margin-bottom: 20px;
-			box-sizing: border-box;
-		}
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			.content {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				gap: 1em;
+				font-family: Verdana, serif;
+				font-weight: 400;
+				font-style: normal;
+			}
+			h1 {
+				color: #136C72;
+			}
 	`);
 });
 
@@ -40,7 +49,9 @@ app.get('/', async (req, res) => {
 
     res.podiumSend(`
 			<section class="content">
-				main content goes here
+				<h1>Podlets fetched and composed, on demand, just for you</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
 			</section>	
 		`);
 });
