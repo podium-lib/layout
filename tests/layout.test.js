@@ -159,7 +159,11 @@ tap.test('Layout() - metrics properly decorated', (t) => {
     });
 
     layout.metrics.pipe(
-        destinationObjectStream((arr) => {
+        destinationObjectStream((items) => {
+            const arr = items.filter(
+                (i) => i.name !== 'http_client_request_duration',
+            );
+
             t.equal(arr[0].name, 'podium_layout_version_info');
             t.equal(arr[0].type, 1);
             t.equal(arr[0].value, 1);
