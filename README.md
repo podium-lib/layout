@@ -5,7 +5,6 @@ architecture.
 
 See the [official Podium documentation](https://podium-lib.io/) site.
 
-[![Dependencies](https://img.shields.io/david/podium-lib/layout.svg)](https://david-dm.org/podium-lib/layout)
 [![GitHub Actions status](https://github.com/podium-lib/layout/workflows/Run%20Lint%20and%20Tests/badge.svg)](https://github.com/podium-lib/layout/actions?query=workflow%3A%22Run+Lint+and+Tests%22)
 
 Module for building a layout server. A layout server is mainly responsible for
