@@ -1,3 +1,10 @@
+## [5.2.19-beta.2](https://github.com/podium-lib/layout/compare/v5.2.19-beta.1...v5.2.19-beta.2) (2025-01-13)
+
+
+### Bug Fixes
+
+* update @podium/client to 5.2.5-beta.3 ([423edc0](https://github.com/podium-lib/layout/commit/423edc0147dbc1720cbc2abffe6fd8e43f7ea9c8))
+
 ## [5.2.19-beta.1](https://github.com/podium-lib/layout/compare/v5.2.18...v5.2.19-beta.1) (2024-12-03)
 
 
