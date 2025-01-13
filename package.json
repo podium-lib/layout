@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@podium/podlet": "5.2.4",
-    "@podium/test-utils": "3.0.15",
+    "@podium/test-utils": "3.0.16",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/git": "10.0.1",
@@ -65,7 +65,7 @@
     "@podium/typescript-config": "1.0.0",
     "@types/node": "22.9.0",
     "eslint": "9.14.0",
-    "express": "4.21.1",
+    "express": "4.21.2",
     "@types/readable-stream": "4.0.18",
     "npm-run-all2": "6.2.3",
     "prettier": "3.3.3",
