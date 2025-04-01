@@ -63,7 +63,7 @@
     "@podium/eslint-config": "1.0.10",
     "@podium/semantic-release-config": "2.0.0",
     "@podium/typescript-config": "1.0.0",
-    "@types/node": "22.9.0",
+    "@types/node": "22.13.16",
     "eslint": "9.23.0",
     "express": "4.21.2",
     "@types/readable-stream": "4.0.18",
