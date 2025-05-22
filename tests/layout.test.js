@@ -160,64 +160,91 @@ tap.test('Layout() - metrics properly decorated', (t) => {
 
     layout.metrics.pipe(
         destinationObjectStream((arr) => {
-            t.equal(arr[0].name, 'podium_layout_version_info');
-            t.equal(arr[0].type, 1);
-            t.equal(arr[0].value, 1);
+            const podium_layout_version_info = arr.find(
+                (m) => m.name === 'podium_layout_version_info',
+            );
+            t.ok(podium_layout_version_info);
+            t.equal(podium_layout_version_info.type, 1);
+            t.equal(podium_layout_version_info.value, 1);
 
-            t.equal(arr[1].name, 'podium_context_process');
-            t.equal(arr[1].type, 5);
+            t.equal(
+                arr.filter((m) => m.name === 'podium_context_process')[0].type,
+                5,
+            );
+            t.equal(
+                arr.filter((m) => m.name === 'podium_proxy_process')[0].type,
+                5,
+            );
 
-            t.equal(arr[2].name, 'podium_proxy_process');
-            t.equal(arr[2].type, 5);
-
-            t.equal(arr[3].name, 'podium_client_resolver_manifest_resolve');
-            t.equal(arr[3].type, 5);
-            t.same(arr[3].labels[0], {
+            const podium_client_resolver_manifest_resolve = arr.find(
+                (m) => m.name === 'podium_client_resolver_manifest_resolve',
+            );
+            t.equal(podium_client_resolver_manifest_resolve.type, 5);
+            t.same(podium_client_resolver_manifest_resolve.labels[0], {
                 name: 'name',
                 value: 'myLayout',
             });
-            t.same(arr[3].meta, {
+            t.same(podium_client_resolver_manifest_resolve.meta, {
                 buckets: [0.001, 0.01, 0.1, 0.5, 1, 2, 10],
             });
 
-            t.equal(arr[4].name, 'podium_client_resolver_fallback_resolve');
-            t.equal(arr[4].type, 5);
-            t.same(arr[4].labels[0], {
+            const podium_client_resolver_fallback_resolve = arr.find(
+                (m) => m.name === 'podium_client_resolver_fallback_resolve',
+            );
+            t.equal(
+                podium_client_resolver_fallback_resolve.name,
+                'podium_client_resolver_fallback_resolve',
+            );
+            t.equal(podium_client_resolver_fallback_resolve.type, 5);
+            t.same(podium_client_resolver_fallback_resolve.labels[0], {
                 name: 'name',
                 value: 'myLayout',
             });
-            t.same(arr[4].meta, {
+            t.same(podium_client_resolver_fallback_resolve.meta, {
                 buckets: [0.001, 0.01, 0.1, 0.5, 1, 2, 10],
             });
 
-            t.equal(arr[5].name, 'podium_client_resolver_content_resolve');
-            t.equal(arr[5].type, 5);
-            t.same(arr[5].labels[0], {
+            const podium_client_resolver_content_resolve = arr.find(
+                (m) => m.name === 'podium_client_resolver_content_resolve',
+            );
+            t.equal(
+                podium_client_resolver_content_resolve.name,
+                'podium_client_resolver_content_resolve',
+            );
+            t.equal(podium_client_resolver_content_resolve.type, 5);
+            t.same(podium_client_resolver_content_resolve.labels[0], {
                 name: 'name',
                 value: 'myLayout',
             });
-            t.same(arr[5].meta, {
+            t.same(podium_client_resolver_content_resolve.meta, {
                 buckets: [0.001, 0.01, 0.1, 0.5, 1, 2, 10],
             });
 
-            t.equal(arr[6].name, 'podium_context_process');
-            t.equal(arr[6].type, 5);
-            t.same(arr[6].labels, [{ name: 'name', value: 'myLayout' }]);
-            t.same(arr[6].meta, {
+            const podium_context_process = arr.find(
+                (m) => m.name === 'podium_context_process',
+            );
+            t.equal(podium_context_process.type, 5);
+            t.same(podium_context_process.labels, [
+                { name: 'name', value: 'myLayout' },
+            ]);
+            t.same(podium_context_process.meta, {
                 buckets: [0.001, 0.01, 0.1, 0.5, 1],
             });
 
-            t.equal(arr[7].name, 'podium_proxy_process');
-            t.equal(arr[7].type, 5);
-            t.same(arr[7].labels, [
+            const podium_proxy_process = arr.filter(
+                (m) => m.name === 'podium_proxy_process',
+            )[1];
+            t.equal(podium_proxy_process.type, 5);
+            t.same(podium_proxy_process.labels, [
                 { name: 'name', value: 'myLayout' },
                 { name: 'podlet', value: 'myPodlet' },
                 { name: 'proxy', value: true },
                 { name: 'error', value: false },
             ]);
-            t.same(arr[7].meta, {
+            t.same(podium_proxy_process.meta, {
                 buckets: [0.001, 0.01, 0.1, 0.5, 1, 2, 10],
             });
+
             t.end();
         }),
     );
