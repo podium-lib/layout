@@ -23,10 +23,6 @@ _Note:_ Connect compatible middleware based frameworks (such as [Express]) are c
 first class in Podium so this module provides a `.middleware()` method for
 convenience.
 
-For writing layout servers with other HTTP frameworks the following modules exist:
-
--   [Hapi Layout Plugin]
-
 ## Installation
 
 ```bash
@@ -687,7 +683,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 [express]: https://expressjs.com/ 'Express'
-[hapi layout plugin]: https://github.com/podium-lib/hapi-layout 'Hapi Layout Plugin'
 [@podium/client constructor]: https://github.com/podium-lib/client#constructor '@podium/client constructor'
 [@podium/proxy constructor]: https://github.com/podium-lib/proxy#constructor '@podium/proxy constructor'
 [@podium/context]: https://github.com/podium-lib/context '@podium/context'
