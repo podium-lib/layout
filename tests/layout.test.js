@@ -8,7 +8,7 @@ import Podlet from '@podium/podlet';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import Layout from '../lib/layout.js';
+import Layout, { html } from '../lib/layout.js';
 
 const currentDirectory = dirname(fileURLToPath(import.meta.url));
 const pkgJson = fs.readFileSync(
@@ -613,6 +613,79 @@ tap.test('Layout() - rendering using a string', async (t) => {
     t.end();
 });
 
+tap.test('Layout() - rendering using the html tag', async (t) => {
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.podiumSend(html`<div>should be wrapped in a doc</div>`);
+    });
+
+    const s1 = stoppable(app.listen(40101), 0);
+
+    const result = await request('http://0.0.0.0:40101').get('/');
+
+    t.match(result.text, '<div>should be wrapped in a doc</div>');
+    t.match(result.text, '<html lang=');
+
+    s1.stop();
+    t.end();
+});
+
+tap.test('Layout() - the html tag does not escape podlets', async (t) => {
+    const podletApp = express();
+    const podlet = new Podlet({
+        name: 'my-podlet',
+        version: '1.0.0',
+        pathname: '/',
+        development: false,
+    });
+    podletApp.use(podlet.middleware());
+    podletApp.get('/manifest.json', (req, res) => {
+        res.send(podlet);
+    });
+    podletApp.get('/', (req, res) => {
+        res.send('<p>this is podlet content</p>');
+    });
+    const s1 = stoppable(podletApp.listen(15027), 0);
+
+    const app = express();
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+    const podletClient = layout.client.register({
+        name: 'my-podlet',
+        uri: 'http://0.0.0.0:15027/manifest.json',
+    });
+    app.use(layout.middleware());
+    app.get('/', async (req, res) => {
+        const podletRes = await podletClient.fetch(res.locals.podium);
+        res.podiumSend(
+            html`${podletRes}
+                <div>should be wrapped in a doc</div>`,
+        );
+    });
+
+    const s2 = stoppable(app.listen(40102), 0);
+
+    const result = await request('http://0.0.0.0:40102').get('/');
+
+    t.match(result.text, '<p>this is podlet content</p>');
+    t.match(result.text, '<div>should be wrapped in a doc</div>');
+    t.match(result.text, '<html lang=');
+
+    s1.stop();
+    s2.stop();
+    t.end();
+});
+
 tap.test('Layout() - rendering using a string - with assets', async (t) => {
     const app = express();
 
@@ -647,6 +720,40 @@ tap.test('Layout() - rendering using a string - with assets', async (t) => {
     t.end();
 });
 
+tap.test('Layout() - rendering using the html tag - with assets', async (t) => {
+    const app = express();
+
+    const layout = new Layout({
+        name: 'myLayout',
+        pathname: '/',
+    });
+
+    layout.js({ value: `http://url.com/some/js` });
+    layout.css({ value: `http://url.com/some/css` });
+
+    app.use(layout.middleware());
+
+    app.get('/', async (req, res) => {
+        res.locals.podium.view = {
+            title: 'awesome page',
+        };
+
+        const head = html`extra head stuff`;
+        const body = html`<div>should be wrapped in a doc</div>`;
+
+        res.podiumSend(body, head);
+    });
+
+    const s1 = stoppable(app.listen(40110), 0);
+
+    const result = await request('http://0.0.0.0:40110').get('/');
+
+    t.matchSnapshot(result.text);
+
+    s1.stop();
+    t.end();
+});
+
 tap.test('Layout() - setting a custom view template', async (t) => {
     const app = express();
 
@@ -663,8 +770,8 @@ tap.test('Layout() - setting a custom view template', async (t) => {
     app.use(layout.middleware());
 
     app.get('/', async (req, res) => {
-        const head = 'extra head stuff';
-        const body = '<div>should be wrapped in a doc</div>';
+        const head = html`extra head stuff`;
+        const body = html`<div>should be wrapped in a doc</div>`;
         res.podiumSend(body, head);
     });
 
