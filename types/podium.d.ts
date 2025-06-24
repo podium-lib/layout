@@ -66,7 +66,7 @@ declare global {
              *
              * @see https://podium-lib.io/docs/api/layout#respodiumsendfragment
              */
-            podiumSend(fragment: string, ...args: unknown[]): Response;
+            podiumSend(fragment: string | TemplateResult, ...args: unknown[]): Response;
         }
     }
 }

@@ -35,7 +35,7 @@ Build a simple layout server including a single podlet using [Express]:
 
 ```js
 import express from 'express';
-import Layout from '@podium/layout';
+import Layout, { html } from '@podium/layout';
 
 const layout = new Layout({
     name: 'myLayout',
@@ -53,7 +53,7 @@ app.use(layout.middleware());
 app.get('/', (req, res, next) => {
     const ctx = res.locals.podium.context;
     Promise.all([podlet.fetch(ctx)]).then((result) => {
-        res.status(200).send(`
+        res.status(200).send(html`
                 <html><body>
                     <section>${result[0]}</section>
                 </body></html>
@@ -288,7 +288,7 @@ An instance of the [HttpIncoming] class.
 
 ```js
 import { HttpIncoming } from '@podium/utils';
-import Layout from '@podium/layout';
+import Layout, { html } from '@podium/layout';
 import express from 'express';
 
 const layout = new Layout({
@@ -300,7 +300,7 @@ const app = express();
 
 app.get('/', (req, res) => {
     const incoming = new HttpIncoming(req, res, res.locals);
-    layout.render(incoming, '<div>content to render</div>');
+    layout.render(incoming, html`<div>content to render</div>`);
 });
 ```
 
@@ -316,10 +316,10 @@ An HTML string or an object with the following shape:
 -   `data.css` - CSS URL, will be used as an `href` value in a link tag
 -   `data.body` - HTML body markup to be rendered
 
-Using a string
+Using an HTML string
 
 ```js
-layout.render(incoming, '<div>content to render</div>');
+layout.render(incoming, html`<div>content to render</div>`);
 ```
 
 Using a data object
@@ -591,7 +591,7 @@ _Example of sending an HTML fragment:_
 
 ```js
 app.get(layout.pathname(), (req, res) => {
-    res.podiumSend('<h1>Hello World</h1>');
+    res.podiumSend(html`<h1>Hello World</h1>`);
 });
 ```
 
@@ -659,6 +659,52 @@ streams into one stream resulting in all metrics from all sub modules being
 exposed here.
 
 Please see [@metrics/metric] for full documentation.
+
+## html
+
+Tagged template literal that automatically escapes the different inputs to prevent XSS.
+
+There are two exceptions that do not get escaped:
+
+- [The result of a podlet `fetch`](https://github.com/podium-lib/client#fetchincoming-options).
+- [Strings wrapped in `DangerouslyIncludeUnescapedHTML`](#dangerouslyincludeunescapedhtml).
+
+Use with [podiumSend](#respodiumsendfragment).
+
+```js
+import { html } from "@podium/layout";
+```
+
+## escape
+
+The same escape function used by [`html`](#html) in case you want to escape something manually.
+
+```js
+import { escape } from "@podium/layout";
+```
+
+## DangerouslyIncludeUnescapedHTML
+
+Lets you opt a string you trust out of being escaped.
+
+**NB**: You don't need to escape podlets this way as long as you send in the whole response instead of just `podlet.content`.
+
+```js
+import { html, DangerouslyIncludeUnescapedHTML } from "@podium/layout";
+
+const greeting = new DangerouslyIncludeUnescapedHTML({ __content:  "<em>Howdy</em>" });
+const result = html`<p>${greeting} partner!</p>`
+```
+
+## TemplateResult
+
+This is the class type returned by the [`html`](#html) tagged template literal.
+You can use it for typing, or for advanced cases if `html` does not work for you.
+
+```js
+import { TemplateResult } from "@podium/layout";
+```
+
 
 ## License
 
