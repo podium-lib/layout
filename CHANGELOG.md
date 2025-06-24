@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/podium-lib/layout/compare/v5.2.20...v5.3.0) (2025-06-24)
+
+
+### Features
+
+* introduce the html tagged template literal ([#542](https://github.com/podium-lib/layout/issues/542)) ([0d8bc07](https://github.com/podium-lib/layout/commit/0d8bc07fc3db44fcb9883dee00860f871ac7e646))
+
 ## [5.2.20](https://github.com/podium-lib/layout/compare/v5.2.19...v5.2.20) (2025-05-23)
 
 
