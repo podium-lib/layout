@@ -1,3 +1,10 @@
+## [5.3.1](https://github.com/podium-lib/layout/compare/v5.3.0...v5.3.1) (2025-06-30)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (non-major) ([#544](https://github.com/podium-lib/layout/issues/544)) ([548abe1](https://github.com/podium-lib/layout/commit/548abe15239bc63b2a6f6b86154760eea4b0e989))
+
 # [5.3.0](https://github.com/podium-lib/layout/compare/v5.2.20...v5.3.0) (2025-06-24)
 
 This release introduces the html template literal, a safer way to use podiumSend.
