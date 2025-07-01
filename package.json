@@ -56,7 +56,7 @@
     "@podium/eslint-config": "1.0.14",
     "@podium/podlet": "5.2.4",
     "@podium/semantic-release-config": "2.0.0",
-    "@podium/test-utils": "3.0.18",
+    "@podium/test-utils": "3.0.19",
     "@podium/typescript-config": "1.0.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.1",
