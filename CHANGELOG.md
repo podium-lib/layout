@@ -1,3 +1,10 @@
+## [5.3.4](https://github.com/podium-lib/layout/compare/v5.3.3...v5.3.4) (2025-08-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @podium/context to v5.1.7 ([#553](https://github.com/podium-lib/layout/issues/553)) ([97f81c5](https://github.com/podium-lib/layout/commit/97f81c547a32ebe51c7590a190f697d53b888f97))
+
 ## [5.3.3](https://github.com/podium-lib/layout/compare/v5.3.2...v5.3.3) (2025-08-11)
 
 
