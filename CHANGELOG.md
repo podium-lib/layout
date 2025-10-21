@@ -439,6 +439,8 @@ Co-authored-by: Trygve Lie <trygve.lie@finn.no>
 This resolves https://github.com/podium-lib/issues/issues/23
 
 -   Only support node 12 and 14.
+-   fix: Remove original url module [#185](https://github.com/podium-lib/utils/pull/185)
+Co-authored-by: Trygve Lie <trygve.lie@finn.no>
 
 # [5.0.0-next.10](https://github.com/podium-lib/layout/compare/v5.0.0-next.9...v5.0.0-next.10) (2023-11-29)
 
