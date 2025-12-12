@@ -1,3 +1,10 @@
+## [5.3.6](https://github.com/podium-lib/layout/compare/v5.3.5...v5.3.6) (2025-12-12)
+
+
+### Bug Fixes
+
+* **deps:** update podium dependencies ([cfaa49f](https://github.com/podium-lib/layout/commit/cfaa49fb178564d05d5c066bf3d4baea30b2ba87))
+
 ## [5.3.5](https://github.com/podium-lib/layout/compare/v5.3.4...v5.3.5) (2025-09-15)
 
 
