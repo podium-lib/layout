@@ -1,72 +1,72 @@
 {
-  "name": "@podium/layout",
-  "version": "5.3.10",
-  "packageManager": "npm@11.4.1",
-  "type": "module",
-  "description": "Module for composing full page layouts out of page fragments in a micro frontend architecture.",
-  "license": "MIT",
-  "keywords": [
-    "micro services",
-    "micro frontend",
-    "components",
-    "podium"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:podium-lib/layout.git"
-  },
-  "bugs": {
-    "url": "https://github.com/podium-lib/issues"
-  },
-  "homepage": "https://podium-lib.io/",
-  "files": [
-    "package.json",
-    "CHANGELOG.md",
-    "README.md",
-    "LICENSE",
-    "types",
-    "dist",
-    "lib"
-  ],
-  "main": "./lib/layout.js",
-  "types": "./types/layout.d.ts",
-  "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "test": "tap --disable-coverage --allow-empty-coverage",
-    "test:snapshots": "tap --snapshot --disable-coverage --allow-empty-coverage",
-    "types": "run-s types:tsc types:fixup types:test",
-    "types:tsc": "tsc",
-    "types:test": "tsc --project tsconfig.test.json",
-    "types:fixup": "node ./fixup.js"
-  },
-  "dependencies": {
-    "@metrics/client": "2.5.5",
-    "@podium/client": "5.4.8",
-    "@podium/context": "5.1.9",
-    "@podium/proxy": "5.0.35",
-    "@podium/schemas": "5.1.2",
-    "@podium/utils": "5.5.0",
-    "abslog": "2.4.4",
-    "ajv": "8.18.0",
-    "objobj": "1.0.0"
-  },
-  "devDependencies": {
-    "@podium/eslint-config": "1.0.19",
-    "@podium/podlet": "5.3.4",
-    "@podium/semantic-release-config": "3.0.0",
-    "@podium/test-utils": "3.0.24",
-    "@podium/typescript-config": "1.0.0",
-    "@types/node": "24.10.1",
-    "@types/readable-stream": "4.0.22",
-    "eslint": "9.39.1",
-    "express": "5.2.1",
-    "npm-run-all2": "8.0.4",
-    "prettier": "3.7.3",
-    "semantic-release": "25.0.2",
-    "stoppable": "1.1.0",
-    "supertest": "7.1.4",
-    "tap": "21.0.1",
-    "typescript": "5.9.3"
-  }
+    "name": "@podium/layout",
+    "version": "5.3.10",
+    "packageManager": "npm@11.4.1",
+    "type": "module",
+    "description": "Module for composing full page layouts out of page fragments in a micro frontend architecture.",
+    "license": "MIT",
+    "keywords": [
+        "micro services",
+        "micro frontend",
+        "components",
+        "podium"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:podium-lib/layout.git"
+    },
+    "bugs": {
+        "url": "https://github.com/podium-lib/issues"
+    },
+    "homepage": "https://podium-lib.io/",
+    "files": [
+        "package.json",
+        "CHANGELOG.md",
+        "README.md",
+        "LICENSE",
+        "types",
+        "dist",
+        "lib"
+    ],
+    "main": "./lib/layout.js",
+    "types": "./types/layout.d.ts",
+    "scripts": {
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix .",
+        "test": "tap --disable-coverage --allow-empty-coverage",
+        "test:snapshots": "tap --snapshot --disable-coverage --allow-empty-coverage",
+        "types": "run-s types:tsc types:fixup types:test",
+        "types:tsc": "tsc",
+        "types:test": "tsc --project tsconfig.test.json",
+        "types:fixup": "node ./fixup.js"
+    },
+    "dependencies": {
+        "@metrics/client": "2.5.5",
+        "@podium/client": "5.4.8",
+        "@podium/context": "5.1.9",
+        "@podium/proxy": "5.0.35",
+        "@podium/schemas": "5.1.2",
+        "@podium/utils": "5.5.0",
+        "abslog": "2.4.4",
+        "ajv": "8.18.0",
+        "objobj": "1.0.0"
+    },
+    "devDependencies": {
+        "@podium/eslint-config": "2.0.2",
+        "@podium/podlet": "5.3.4",
+        "@podium/semantic-release-config": "3.0.0",
+        "@podium/test-utils": "3.0.24",
+        "@podium/typescript-config": "1.0.0",
+        "@types/node": "24.10.1",
+        "@types/readable-stream": "4.0.22",
+        "eslint": "9.39.1",
+        "express": "5.2.1",
+        "npm-run-all2": "8.0.4",
+        "prettier": "3.7.3",
+        "semantic-release": "25.0.2",
+        "stoppable": "1.1.0",
+        "supertest": "7.1.4",
+        "tap": "21.0.1",
+        "typescript": "5.9.3"
+    }
 }
