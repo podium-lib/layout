@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/podium-lib/layout/compare/v5.3.10...v5.4.0) (2026-04-07)
+
+
+### Features
+
+* add support for fetchpriority in podlet assets ([d8d3d8a](https://github.com/podium-lib/layout/commit/d8d3d8abe621c799a2061a479fd29f9a3550a82d))
+
 ## [5.3.10](https://github.com/podium-lib/layout/compare/v5.3.9...v5.3.10) (2026-03-16)
 
 
