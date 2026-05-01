@@ -55,7 +55,7 @@
         "@podium/eslint-config": "2.0.2",
         "@podium/podlet": "5.4.2",
         "@podium/semantic-release-config": "3.0.0",
-        "@podium/test-utils": "3.0.26",
+        "@podium/test-utils": "3.0.28",
         "@podium/typescript-config": "1.0.1",
         "@types/node": "24.10.1",
         "@types/readable-stream": "4.0.22",
