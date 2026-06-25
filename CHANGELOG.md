@@ -1,3 +1,10 @@
+## [5.4.5](https://github.com/podium-lib/layout/compare/v5.4.4...v5.4.5) (2026-06-25)
+
+
+### Bug Fixes
+
+* update podium/client to get DNS lookup cache ([#585](https://github.com/podium-lib/layout/issues/585)) ([5afd587](https://github.com/podium-lib/layout/commit/5afd58712928f95327d8b4faa29820af09355e4c))
+
 ## [5.4.4](https://github.com/podium-lib/layout/compare/v5.4.3...v5.4.4) (2026-06-22)
 
 
