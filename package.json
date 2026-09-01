@@ -63,7 +63,7 @@
         "express": "5.2.1",
         "npm-run-all2": "8.0.4",
         "prettier": "3.7.3",
-        "semantic-release": "25.0.8",
+        "semantic-release": "25.0.9",
         "stoppable": "1.1.0",
         "supertest": "7.1.4",
         "tap": "21.0.1",
